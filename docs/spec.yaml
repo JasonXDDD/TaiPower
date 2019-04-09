@@ -4,100 +4,368 @@ info:
   title: TaiPower Api
   description: 2019.03 NTUE DTD Taiwan Power Company Project
 servers:
-  - url: 
+  - url: X
 
 paths:
-  /pets:
-    get:
-      summary: List all pets
-      operationId: listPets
+  /api/user/login:
+    post:
+      summary: user login and get token
+      operationId: loginUser
       tags:
-        - pets
-      parameters:
-        - name: limit
-          in: query
-          description: How many items to return at one time (max 100)
-          required: false
-          schema:
-            type: integer
-            format: int32
+        - User
+      requestBody:
+        $ref: "#/components/requestBodies/LoginRequest"
       responses:
         '200':
-          description: A paged array of pets
-          headers:
-            x-next:
-              description: A link to the next page of responses
-              schema:
-                type: string
-          content:
-            application/json:    
-              schema:
-                $ref: "#/components/schemas/Pets"
-        default:
-          description: unexpected error
+          $ref: '#/components/responses/LoginSuccessResponse'
+        '403':
+          description: Email or Password is incorrect.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+                
+  /api/user:
     post:
-      summary: Create a pet
-      operationId: createPets
+      summary: create a user
+      operationId: RegisterUser
+      description: >
+        Create a user and response `AccessToken`.
+        <br>
+        All sensitive information will be removed in resopnse.
       tags:
-        - pets
+        - User
+      requestBody:
+        $ref: "#/components/requestBodies/RegisternRequest"
       responses:
-        '201':
-          description: Null response
-        default:
-          description: unexpected error
+        '200':
+          $ref: '#/components/responses/LoginSuccessResponse'
+        '403':
+          description: Email or Password is incorrect.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /pets/{petId}:
+    
     get:
-      summary: Info for a specific pet
-      operationId: showPetById
+      summary: get user list
+      operationId: UserList
+      description: >
+        `Admin` get all user list.
       tags:
-        - pets
+        - User
       parameters:
-        - name: petId
-          in: path
+        - name: Authorization
+          in: header
+          description: only `role === 'Admin'` can CRUD users.  
           required: true
-          description: The id of the pet to retrieve
           schema:
             type: string
       responses:
         '200':
-          description: Expected response to a valid request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Pets"
-        default:
-          description: unexpected error
+          $ref: '#/components/responses/UserResponse'
+  
+  /api/user/{user_id}:
+    patch:
+      summary: edit user information
+      operationId: EditUser
+      description: >
+        Only `Admin` can edit user information.
+      tags:
+        - User
+      parameters:
+        - name: Authorization
+          in: header
+          description: only `role === 'Admin'` can CRUD users. 
+          required: true
+          schema:
+            type: string
+            
+        - name: user_id
+          in: path
+          description: target user_id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        $ref: '#/components/requestBodies/EditUserRequest'
+        
+      responses:
+        '200':
+          $ref: '#/components/responses/UserResponse'
+                
+  /api/substation:
+    get:
+      summary: get substation information
+      operationId: SubstationInfo
+      description: >
+        **Wire argument** and **fault data** needs to get substation pairs first.
+      tags:
+        - Substation
+      parameters:
+        - description: which region of Taiwan you choose, if **no data** means all of Taiwan Substation.       
+          name: region
+          in: query
+          required: false
+          schema:
+            type: string
+        - description: type of substation. 2-end or 3-end
+          name: type
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: only `role === ''` can CRUD wire argument.
+          required: true
+          schema:
+            type: string
+     
+      responses:
+        '200':
+          $ref: '#/components/responses/SubstationResponse'
+        '204':
+          description: Search data is not found.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-
+          
+  
+  /api/fault:
+    post:
+      summary: upload fault data to calculate fault information
+      operationId: FaultUpload
+      description: >
+        Choose **2, 3** substations and upload fault data. 
+        <br>
+        Each substation has **3 kind of files** need to be uploaded.
+      tags:
+        - Fault Data
+      parameters:
+        - name: Authorization
+          in: header
+          description: only `role === ''` can CRUD wire argument. 
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/FaultUploadRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/LoginSuccessResponse'
+        '403':
+          description: Email or Password is incorrect.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+                
+  /api/wire:
+    get:
+      summary: get wire argument information
+      operationId: WireInformation
+      description: >
+        Choose **2, 3** end type of substations. And search its wire argunments.
+      tags:
+        - Wire Argument
+      parameters:
+        - description: from substation_id.       
+          name: from
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: to substation_id.
+          name: to
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: mid checkpoint substation_id, if choose 3-end type.
+          name: mid
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: Authorization
+          in: header
+          description: only `role === ''` can CRUD wire argument.  
+          required: true
+          schema:
+            type: string
+          
+      responses:
+        '200':
+          $ref: '#/components/responses/WireResponse'
+        '204':
+          description: Search data is not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+         
+  /api/wire/{wire_id}:       
+    patch:
+      summary: edit wire argument
+      operationId: WireArgumentEdit
+      description: >
+        Edit `wire_id` wire argunments.
+      tags:
+        - Wire Argument
+      parameters:
+        - description: select wire_id       
+          name: wire_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: Authorization
+          in: header
+          description: only `role === ''` can CRUD wire argument.  
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/WireArgumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/WireResponse'
+          
+      
 components:
+  requestBodies:
+    LoginRequest:
+      description: >
+        Put `email`, `password` to login account and response `accessToken`. 
+        <br>
+        You have to put `accessToken ` to request header as `Authorization` when querying APIs that needs authorization.
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+    
+    RegisternRequest:
+      description: >
+        Need `name`, `email`, `password` and response `accessToken`. 
+        
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+              password:
+                type: string
+    
+    EditUserRequest:
+      description: >
+        Only `password` cannot edit.
+        
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/User"
+                
+    FaultUploadRequest:
+      description: >
+        if `type == 2` means 2-end type, only `from`, `to` fileds
+        <br>
+        if `type == 3` means 3-end type, only `from`, `mid`, `to` fileds
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              type:
+                type: integer
+              from:
+                $ref: '#/components/schemas/FaultData'
+              to:
+                $ref: '#/components/schemas/FaultData'
+              mid:
+                $ref: '#/components/schemas/FaultData'
+                
+                
+    WireArgumentRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WireData'
+    
+  responses:
+    LoginSuccessResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+              user:
+                $ref: "#/components/schemas/User"
+                
+    UserResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              users:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+                
+                
+    SubstationResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              substation:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    from:
+                      $ref: '#/components/schemas/Substation'
+                    to:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Substation'
+                 
+    WireResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WireData'
+  
   schemas:
-    Pet:
-      required:
-        - id
-        - name
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        tag:
-          type: string
-    Pets:
-      type: array
-      items:
-        $ref: "#/components/schemas/Pet"
+  
     Error:
       required:
         - code
@@ -108,3 +376,86 @@ components:
           format: int32
         message:
           type: string
+  
+    User:
+      type: object
+      required:
+        - user_id
+        - role
+        - email
+        - password
+        - name
+        - create_on
+      properties:
+        user_id:
+          type: integer
+          format: int32
+          readOnly: true
+        role:
+          type: string
+          enum:
+            - "admin"
+            - "pending"
+            - "inspector"
+            - ""
+        email:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+        name:
+          type: string
+        create_on:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
+          readOnly: true
+    
+    Substation:
+      required:
+        - substation_id
+        - name
+      properties:
+        substation_id:
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+    
+    FaultData:
+      required:
+        - vendor
+        - type
+        - data1
+        - data2
+        - data3
+      properties:
+        vendor:
+          type: string
+          enum:
+            - ""
+        target_id:
+          type: integer
+          format: int32
+          description: means target substation_id        
+        data1:
+          type: string
+        data2:
+          type: string
+        data3:
+          type: string
+          
+    WireData:
+      properties:
+        wire_id:
+          type: integer
+          format: int32
+          readOnly: true
+    
+          
+          
+          
+          
+          
