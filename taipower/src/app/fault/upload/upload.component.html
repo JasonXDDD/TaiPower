@@ -1,3 +1,153 @@
-<p>
-  upload works!
-</p>
+<div class="header">
+  <div class="header_bar">
+    <div class="white_logo"><img src="assets/images/logo-white.png"></div>
+    <div class="current_state">供電線路智慧故障定位系統</div>
+    <div class="user_information"><span class="user_icon"><img src="assets/images/userhead.png" width="100%"></span>
+      <p class="user_name">taiwanpower</p><button class="sign_out">登出</button>
+    </div>
+  </div>
+  <div class="container">
+    <ul>
+      <li><a [routerLink]="[ '/fault/upload' ]" class="active">
+          <div class="speed-hover">上傳檔案</div>
+        </a></li>
+      <li><a [routerLink]="[ '/wire/argument' ]" class="">
+          <div class="speed-hover">查看線路</div>
+        </a></li>
+      <li><a [routerLink]="[ '/fault/result' ]" class="">
+          <div class="speed-hover">歷史資料</div>
+        </a></li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="step_box">
+    <div class="stepBar">
+      <p class="stepIcon">1</p><span class="stepTittle">上傳檔案</span>
+    </div>
+    <form enctype="multipart/form-data" action="">
+      <div class="stepFormBox"><span class="little_tittle">選擇端點數目</span>
+        <div class="dortNumer">
+          <div class="dortNumer_box"><span class="dortText">2端</span>
+            <div class="switch"><input id="switch-1" type="checkbox" class="switch-input"> <label for="switch-1"
+                class="switch-label">Switch</label></div><span class="dortText">3端</span>
+          </div><button class="research">搜尋</button>
+        </div>
+      </div>
+    </form>
+    <div class="stepFormBox">
+      <div class="little_bar"><span class="little_tittle">選擇廠商</span> <span class="little_tittle">選擇電驛站</span>
+        <span class="little_tittle">上傳檔案</span></div>
+      <ul class="upload_informationBox">
+        <li class="upload_information">
+          <p class="name">端點 1</p><select class="Vendor">
+            <option value="GE">GE</option>
+            <option value="BG">BG</option>
+            <option value="G8">G8</option>
+          </select> <select class="ElectricStation">
+            <option value="北投">北投</option>
+            <option value="基隆">基隆</option>
+            <option value="宜蘭">宜蘭</option>
+          </select>
+          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename1"
+              class="">select your file</span> <label for="file-upload1"><input type="file" id="file-upload1"></label>
+          </form>
+          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename2"
+              class="">select your file</span> <label for="file-upload2"><input type="file" id="file-upload2"></label>
+          </form>
+          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename3"
+              class="">select your file</span> <label for="file-upload3"><input type="file" id="file-upload3"></label>
+          </form>
+        </li>
+        <div class="line"></div>
+        <li class="upload_information">
+          <p class="name">端點 2</p><select class="Vendor">
+            <option value="GE">GE</option>
+            <option value="BG">BG</option>
+            <option value="G8">G8</option>
+          </select> <select class="ElectricStation">
+            <option value="北投">北投</option>
+            <option value="基隆">基隆</option>
+            <option value="宜蘭">宜蘭</option>
+          </select>
+          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename4"
+              class="Error_file">select your file</span> <label for="file-upload4"><input type="file"
+                id="file-upload4"></label></form>
+          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename5"
+              class="Error_file">select your file</span> <label for="file-upload5"><input type="file"
+                id="file-upload5"></label></form>
+          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename6"
+              class="Error_file">select your file</span> <label for="file-upload6"><input type="file"
+                id="file-upload6"></label></form>
+        </li>
+        <div class="line"></div>
+        <li class="upload_information">
+          <p class="name">端點 3</p><select class="Vendor">
+            <option value="GE">GE</option>
+            <option value="BG">BG</option>
+            <option value="G8">G8</option>
+          </select> <select class="ElectricStation">
+            <option value="北投">北投</option>
+            <option value="基隆">基隆</option>
+            <option value="宜蘭">宜蘭</option>
+          </select>
+          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename7"
+              class="">select your file</span> <label for="file-upload7"><input type="file" id="file-upload7"></label>
+          </form>
+          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename8"
+              class="">select your file</span> <label for="file-upload8"><input type="file" id="file-upload8"></label>
+          </form>
+          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename9"
+              class="">select your file</span> <label for="file-upload9"><input type="file" id="file-upload9"></label>
+          </form>
+        </li>
+      </ul>
+    </div>
+    <div class="calculationBox"><button class="calculation">計算</button></div>
+  </div>
+  <div class="step_box">
+    <div class="stepBar">
+      <p class="stepIcon">2</p><span class="stepTittle">確認並推播</span>
+    </div>
+    <div class="mapBox">
+      <div class="map"><iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.31470750783!2d121.5431559146227!3d25.023391844871423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a908a8232611%3A0xeebfb2d71a5025c7!2z5ZyL56uL6Ie65YyX5pWZ6IKy5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1559065833722!5m2!1szh-TW!2stw"
+          frameborder="0" style="border:0" allowfullscreen></iframe></div>
+      <div class="map_information stepFormBox">
+        <div class="little_bar">
+          <p>故障資訊</p>
+        </div>
+        <ul class="malfunction">
+          <li class="malfunction_information">
+            <p class="tittle">故障位置</p>
+            <p class="context">39C8+72 台北</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">與電驛站相距</p>
+            <div class="distance">
+              <p class="context">距北投 2 km</p>
+              <p class="context">距深坑 3 km</p>
+              <p class="context">距五股 5 km</p>
+            </div>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">故障狀況</p>
+            <p class="context">供電時常短路</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">故障原因</p>
+            <p class="context">不明</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">故障日期</p>
+            <p class="context">2019.04.18</p>
+          </li>
+        </ul>
+      </div>
+    </div><button class="push">推播</button>
+  </div>
+</div>

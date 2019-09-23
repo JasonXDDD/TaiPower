@@ -1,3 +1,195 @@
-<p>
-  argument works!
-</p>
+<div class="header">
+  <div class="header_bar">
+    <div class="white_logo"><img src="assets/images/logo-white.png"></div>
+    <div class="current_state">供電線路智慧故障定位系統</div>
+    <div class="user_information"><span class="user_icon"><img src="assets/images/userhead.png" width="100%"></span>
+      <p class="user_name">taiwanpower</p><button class="sign_out">登出</button>
+    </div>
+  </div>
+  <div class="container">
+    <ul>
+      <li><a [routerLink]="[ '/fault/upload' ]" class="">
+          <div class="speed-hover">上傳檔案</div>
+        </a></li>
+      <li><a [routerLink]="[ '/wire/argument' ]" class="active">
+          <div class="speed-hover">查看線路</div>
+        </a></li>
+      <li><a [routerLink]="[ '/fault/result' ]" class="">
+          <div class="speed-hover">歷史資料</div>
+        </a></li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="step_box StepResearch">
+    <div class="stepBar">
+      <p class="stepIcon">1</p><span class="stepTittle">搜尋</span>
+    </div>
+    <form enctype="multipart/form-data" action="">
+      <div class="stepFormBox"><span class="little_tittle">選擇端點數目</span>
+        <div class="dortNumer">
+          <div class="dortNumer_box"><span class="dortText">2端</span>
+            <div class="switch"><input id="switch-1" type="checkbox" class="switch-input"> <label for="switch-1"
+                class="switch-label">Switch</label></div><span class="dortText">3端</span>
+          </div><button class="research">搜尋</button>
+        </div>
+      </div>
+    </form>
+    <form enctype="multipart/form-data" action="">
+      <div class="stepFormBox research_stepFormBox"><span class="little_tittle">選擇電驛站</span>
+        <div class="dortNumer_box ElectricStationBox_dortNumer">
+          <div class="ElectricStationBox"><span class="dortText ElectricStationText">電驛站１</span> <select>
+              <option value="北投">北投</option>
+              <option value="基隆">基隆</option>
+              <option value="宜蘭">宜蘭</option>
+            </select></div>
+          <div class="ElectricStationBox"><span class="dortText ElectricStationText">電驛站２</span> <select>
+              <option value="北投">北投</option>
+              <option value="基隆">基隆</option>
+              <option value="宜蘭">宜蘭</option>
+            </select></div>
+          <div class="ElectricStationBox"><span class="dortText ElectricStationText">電驛站３</span> <select>
+              <option value="北投">北投</option>
+              <option value="基隆">基隆</option>
+              <option value="宜蘭">宜蘭</option>
+            </select></div>
+        </div><button class="research">搜尋</button>
+      </div>
+    </form>
+  </div>
+  <div class="step_box">
+    <div class="stepBar">
+      <p class="stepIcon">2</p><span class="stepTittle">線路資訊</span>
+    </div>
+    <div class="mapBox checkLineBox">
+      <div class="map_information LineInformation">
+        <div class="little_bar">
+          <p>電驛站1</p>
+        </div>
+        <ul class="malfunction">
+          <li class="malfunction_information">
+            <p class="tittle">端點位置</p>
+            <p class="context">39C8+72 台北</p>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">與電驛站相距</p>
+            <div class="distance">
+              <p class="context">距北投 2 km</p>
+              <p class="context">距深坑 3 km</p>
+              <p class="context">距五股 5 km</p>
+            </div>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">線路狀況</p>
+            <p class="context">供電時常短路</p>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">項目４</p>
+            <p class="context">不明</p>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">項目５</p>
+            <p class="context">2019.04.18</p>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="map_information LineInformation">
+        <div class="little_bar">
+          <p>電驛站2</p>
+        </div>
+        <ul class="malfunction">
+          <li class="malfunction_information">
+            <p class="tittle">端點位置</p>
+            <p class="context">39C8+72 台北</p>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">與電驛站相距</p>
+            <div class="distance">
+              <p class="context">距北投 2 km</p>
+              <p class="context">距深坑 3 km</p>
+              <p class="context">距五股 5 km</p>
+            </div>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">線路狀況</p>
+            <p class="context">供電時常短路</p>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">項目４</p>
+            <p class="context">不明</p>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">項目５</p>
+            <p class="context">2019.04.18</p>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">項目５</p>
+            <p class="context">2019.04.18</p>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="map_information LineInformation">
+        <div class="little_bar">
+          <p>電驛站2</p>
+        </div>
+        <ul class="malfunction">
+          <li class="malfunction_information">
+            <p class="tittle">端點位置</p>
+            <p class="context">39C8+72 台北</p>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">與電驛站相距</p>
+            <div class="distance">
+              <p class="context">距北投 2 km</p>
+              <p class="context">距深坑 3 km</p>
+              <p class="context">距五股 5 km</p>
+            </div>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">線路狀況</p>
+            <p class="context">供電時常短路</p>
+            <div class="editBox"><button class="editButton edit"></button> <button class="editButton delete"></button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
