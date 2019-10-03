@@ -3,6 +3,7 @@ import { SwPush } from '@angular/service-worker';
 import * as firebase from 'firebase/app';
 import 'firebase/messaging';
 import { environment } from '@env/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
 
   token: string;
 
-  constructor(private swPush: SwPush) { }
+  constructor(private swPush: SwPush, private http: HttpClient) { }
   ngOnInit() {
     let self = this;
 
@@ -23,7 +24,6 @@ export class AppComponent implements OnInit {
       messagingSenderId: environment.firebase.messagingSenderId
     });
     const messaging = firebase.messaging();
-
 
     navigator.serviceWorker.ready.then(registration => {
       if (
@@ -39,6 +39,7 @@ export class AppComponent implements OnInit {
           .then(token => {
             console.log('Permission granted!', token)
             self.token = token
+            self.addToTopic(token)
           });
       } else {
         console.warn(
@@ -50,6 +51,27 @@ export class AppComponent implements OnInit {
     this.swPush.messages.subscribe(msg => {
       console.log(msg);
     });
-
   }
+
+  addToTopic(token) {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': environment.firebase.fcm_key
+    })
+    this.http.post("https://iid.googleapis.com/iid/v1:batchAdd",
+      JSON.stringify({
+        "to": "/topics/taipower",
+        "registration_tokens": [token]
+      }),
+      { headers }).subscribe(
+        res => {
+          console.log(res)
+        },
+
+        error => {
+          console.log(error)
+        }
+      )
+  }
+
 }
