@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: "", pathMatch: 'full', redirectTo: "/account/login"},
-  { path: "account", loadChildren: "app/account/account.module#AccountModule" },
-  { path: "fault", loadChildren: "app/fault/fault.module#FaultModule" },
-  { path: "wire", loadChildren: "app/wire/wire.module#WireModule" }
+  { path: "account", loadChildren: () => import('app/account/account.module').then(m => m.AccountModule) },
+  { path: "fault", loadChildren: () => import('app/fault/fault.module').then(m => m.FaultModule) },
+  { path: "wire", loadChildren: () => import('app/wire/wire.module').then(m => m.WireModule) }
 ];
 
 @NgModule({
