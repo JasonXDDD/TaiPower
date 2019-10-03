@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { ServiceWorkerModule, SwUpdate } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 @NgModule({
   declarations: [
@@ -17,4 +17,15 @@ import { environment } from '../environments/environment';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(private swUpdate: SwUpdate) {
+    if (swUpdate.isEnabled) {
+      swUpdate.available.subscribe(() => {
+        if (confirm("New version available. Load New Version?")) {
+          window.location.reload();
+        }
+      });
+    }
+  }
+}
