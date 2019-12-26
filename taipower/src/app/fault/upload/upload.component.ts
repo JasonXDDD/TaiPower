@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UploadAjaxService } from './upload-ajax.service';
 
 declare var $;
 declare var L;
@@ -9,11 +10,14 @@ declare var L;
 })
 export class UploadComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private ajax: UploadAjaxService
+  ) { }
 
   ngOnInit() {
     this.init()
     this.mapInit()
+    this.ajax.getLineInfo()
   }
 
   init() {
@@ -100,7 +104,6 @@ export class UploadComponent implements OnInit {
       [51.51, -0.047]
     ]).addTo(mymap);
 
-		{"towerE": [], "towerN": []
 
     // create a red polyline from an array of LatLng points
     var latlngs = [
@@ -135,5 +138,7 @@ export class UploadComponent implements OnInit {
     // zoom the mymap to the polyline
     mymap.fitBounds(polyline.getBounds());
   }
+
+  //AJAX
 
 }

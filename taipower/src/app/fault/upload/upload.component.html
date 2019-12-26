@@ -1,104 +1,206 @@
-<div class="header">
+<!-- <div class="header">
   <div class="header_bar">
-    <div class="white_logo"><img src="assets/images/logo-white.png"></div>
+    <div class="white_logo"><img src="assets/images/logo-white.png" /></div>
     <div class="current_state">供電線路智慧故障定位系統</div>
-    <div class="user_information"><span class="user_icon"><img src="assets/images/userhead.png" width="100%"></span>
-      <p class="user_name">taiwanpower</p><button class="sign_out">登出</button>
+    <div class="user_information">
+      <span class="user_icon"
+        ><img src="assets/images/userhead.png" width="100%"
+      /></span>
+      <p class="user_name">taiwanpower</p>
+      <button class="sign_out">登出</button>
     </div>
   </div>
   <div class="container">
     <ul>
-      <li><a [routerLink]="[ '/fault/upload' ]" class="active">
+      <li>
+        <a [routerLink]="[ '/fault/upload' ]" class="active">
           <div class="speed-hover">上傳檔案</div>
-        </a></li>
-      <li><a [routerLink]="[ '/wire/argument' ]" class="">
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="[ '/wire/argument' ]" class="">
           <div class="speed-hover">查看線路</div>
-        </a></li>
-      <li><a [routerLink]="[ '/fault/result' ]" class="">
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="[ '/fault/result' ]" class="">
           <div class="speed-hover">歷史資料</div>
-        </a></li>
+        </a>
+      </li>
     </ul>
   </div>
-</div>
+</div> -->
+
+
 <div class="container">
   <div class="step_box">
     <div class="stepBar">
-      <p class="stepIcon">1</p><span class="stepTittle">上傳檔案</span>
+      <p class="stepIcon">1</p>
+      <span class="stepTittle">上傳檔案</span>
     </div>
     <form enctype="multipart/form-data" action="">
-      <div class="stepFormBox"><span class="little_tittle">選擇端點數目</span>
+      <div class="stepFormBox">
+        <span class="little_tittle">選擇端點數目</span>
         <div class="dortNumer">
-          <div class="dortNumer_box"><span class="dortText">2端</span>
-            <div class="switch"><input id="switch-1" type="checkbox" class="switch-input"> <label for="switch-1"
-                class="switch-label">Switch</label></div><span class="dortText">3端</span>
-          </div><button class="research">搜尋</button>
+          <div class="dortNumer_box">
+            <span class="dortText">2端</span>
+            <div class="switch">
+              <input id="switch-1" type="checkbox" class="switch-input" />
+              <label for="switch-1" class="switch-label">Switch</label>
+            </div>
+            <span class="dortText">3端</span>
+          </div>
+          <button class="research">搜尋</button>
         </div>
       </div>
     </form>
+
+
     <div class="stepFormBox">
-      <div class="little_bar"><span class="little_tittle">選擇廠商</span> <span class="little_tittle">選擇電驛站</span>
-        <span class="little_tittle">上傳檔案</span></div>
+      <div class="little_bar">
+        <span class="little_tittle">選擇廠商</span>
+        <span class="little_tittle">選擇電驛站</span>
+        <span class="little_tittle">上傳檔案</span>
+      </div>
       <ul class="upload_informationBox">
         <li class="upload_information">
-          <p class="name">端點 1</p><select class="Vendor">
+          <p class="name">端點 1</p>
+          <select class="Vendor">
             <option value="GE">GE</option>
             <option value="BG">BG</option>
             <option value="G8">G8</option>
-          </select> <select class="ElectricStation">
+          </select>
+          <select class="ElectricStation">
             <option value="北投">北投</option>
             <option value="基隆">基隆</option>
             <option value="宜蘭">宜蘭</option>
           </select>
-          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename1"
-              class="">select your file</span> <label for="file-upload1"><input type="file" id="file-upload1"></label>
+          <form
+            method="post"
+            enctype="multipart/form-data"
+            action=""
+            class="uploadData"
+          >
+            <span id="filename1" class="">select your file</span>
+            <label for="file-upload1"
+              ><input type="file" id="file-upload1"
+            /></label>
           </form>
-          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename2"
-              class="">select your file</span> <label for="file-upload2"><input type="file" id="file-upload2"></label>
+          <form
+            method="post"
+            enctype="multipart/form-data"
+            action=""
+            class="uploadData"
+          >
+            <span id="filename2" class="">select your file</span>
+            <label for="file-upload2"
+              ><input type="file" id="file-upload2"
+            /></label>
           </form>
-          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename3"
-              class="">select your file</span> <label for="file-upload3"><input type="file" id="file-upload3"></label>
+          <form
+            method="post"
+            enctype="multipart/form-data"
+            action=""
+            class="uploadData"
+          >
+            <span id="filename3" class="">select your file</span>
+            <label for="file-upload3"
+              ><input type="file" id="file-upload3"
+            /></label>
           </form>
         </li>
         <div class="line"></div>
         <li class="upload_information">
-          <p class="name">端點 2</p><select class="Vendor">
+          <p class="name">端點 2</p>
+          <select class="Vendor">
             <option value="GE">GE</option>
             <option value="BG">BG</option>
             <option value="G8">G8</option>
-          </select> <select class="ElectricStation">
+          </select>
+          <select class="ElectricStation">
             <option value="北投">北投</option>
             <option value="基隆">基隆</option>
             <option value="宜蘭">宜蘭</option>
           </select>
-          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename4"
-              class="Error_file">select your file</span> <label for="file-upload4"><input type="file"
-                id="file-upload4"></label></form>
-          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename5"
-              class="Error_file">select your file</span> <label for="file-upload5"><input type="file"
-                id="file-upload5"></label></form>
-          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename6"
-              class="Error_file">select your file</span> <label for="file-upload6"><input type="file"
-                id="file-upload6"></label></form>
+          <form
+            method="post"
+            enctype="multipart/form-data"
+            action=""
+            class="uploadData"
+          >
+            <span id="filename4" class="Error_file">select your file</span>
+            <label for="file-upload4"
+              ><input type="file" id="file-upload4"
+            /></label>
+          </form>
+          <form
+            method="post"
+            enctype="multipart/form-data"
+            action=""
+            class="uploadData"
+          >
+            <span id="filename5" class="Error_file">select your file</span>
+            <label for="file-upload5"
+              ><input type="file" id="file-upload5"
+            /></label>
+          </form>
+          <form
+            method="post"
+            enctype="multipart/form-data"
+            action=""
+            class="uploadData"
+          >
+            <span id="filename6" class="Error_file">select your file</span>
+            <label for="file-upload6"
+              ><input type="file" id="file-upload6"
+            /></label>
+          </form>
         </li>
         <div class="line"></div>
         <li class="upload_information">
-          <p class="name">端點 3</p><select class="Vendor">
+          <p class="name">端點 3</p>
+          <select class="Vendor">
             <option value="GE">GE</option>
             <option value="BG">BG</option>
             <option value="G8">G8</option>
-          </select> <select class="ElectricStation">
+          </select>
+          <select class="ElectricStation">
             <option value="北投">北投</option>
             <option value="基隆">基隆</option>
             <option value="宜蘭">宜蘭</option>
           </select>
-          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename7"
-              class="">select your file</span> <label for="file-upload7"><input type="file" id="file-upload7"></label>
+          <form
+            method="post"
+            enctype="multipart/form-data"
+            action=""
+            class="uploadData"
+          >
+            <span id="filename7" class="">select your file</span>
+            <label for="file-upload7"
+              ><input type="file" id="file-upload7"
+            /></label>
           </form>
-          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename8"
-              class="">select your file</span> <label for="file-upload8"><input type="file" id="file-upload8"></label>
+          <form
+            method="post"
+            enctype="multipart/form-data"
+            action=""
+            class="uploadData"
+          >
+            <span id="filename8" class="">select your file</span>
+            <label for="file-upload8"
+              ><input type="file" id="file-upload8"
+            /></label>
           </form>
-          <form method="post" enctype="multipart/form-data" action="" class="uploadData"><span id="filename9"
-              class="">select your file</span> <label for="file-upload9"><input type="file" id="file-upload9"></label>
+          <form
+            method="post"
+            enctype="multipart/form-data"
+            action=""
+            class="uploadData"
+          >
+            <span id="filename9" class="">select your file</span>
+            <label for="file-upload9"
+              ><input type="file" id="file-upload9"
+            /></label>
           </form>
         </li>
       </ul>
@@ -107,7 +209,8 @@
   </div>
   <div class="step_box">
     <div class="stepBar">
-      <p class="stepIcon">2</p><span class="stepTittle">確認並推播</span>
+      <p class="stepIcon">2</p>
+      <span class="stepTittle">確認並推播</span>
     </div>
     <div class="mapBox">
       <div class="map">
@@ -148,6 +251,7 @@
           </li>
         </ul>
       </div>
-    </div><button class="push">推播</button>
+    </div>
+    <button class="push">推播</button>
   </div>
 </div>
