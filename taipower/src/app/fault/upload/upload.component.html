@@ -55,7 +55,7 @@
 
           <div *ngIf="towerList.length > 0">
             <span class="little_title" style="margin-left: 3rem; margin-right: 1rem; text-align: center; height: fit-content;">選擇電驛站</span>
-            <select class="Vendor" name="selectTower" [(ngModel)]="selectTower" (change)="show(selectTower)">
+            <select class="Vendor" name="selectTower" [(ngModel)]="selectTower" (change)="doGetLinePos(selectTower.linenum)">
               <option value="" disabled>選擇電驛站</option>
               <option *ngFor="let item of towerList" [ngValue]="item">{{ item.linename }}</option>
             </select>
@@ -125,7 +125,9 @@
           </ng-container>
         </ul>
       </div>
-      <div class="calculationBox"><button class="calculation">計算</button></div>
+      <div class="calculationBox">
+        <button class="calculation">計算</button>
+      </div>
     </ng-container>
 
   </div>

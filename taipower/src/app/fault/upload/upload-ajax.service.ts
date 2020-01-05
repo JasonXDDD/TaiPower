@@ -16,4 +16,9 @@ export class UploadAjaxService {
     let a = await this.server.doGetRequest(this.url.lineInfoAPI.get, data)
     return a
   }
+
+  async getLinePos(data){
+    let a = await this.server.doGetRequest(this.url.linePosAPI.get, data)
+    return a
+  }
 }
