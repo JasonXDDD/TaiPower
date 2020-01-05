@@ -94,9 +94,9 @@ select { background: url(/assets/images/selectBG.png) no-repeat 100% 100%; backg
 .step_box .stepFormBox:nth-child(1) { height: 69.5px; }
 .step_box .stepFormBox:nth-child(2) { padding-top: 38px; }
 .step_box .stepFormBox { margin: 12px; border: 1px solid #DBDFE5; padding: 0px 30px; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; position: relative; }
-.step_box .stepFormBox span.little_tittle { color: #ACACAC; font-size: 15px; font-weight: 300; padding-left: 13px; width: 112px; }
-.step_box .stepFormBox span.little_tittle:before { content: " "; position: absolute; width: 10px; height: 10px; background-color: #35b7fc; border-radius: 100%; margin: 5px 0px 0px -13px; }
-@media (max-width: 1260px) { .step_box .stepFormBox span.little_tittle { display: none; } }
+.step_box .stepFormBox span.little_title { color: #ACACAC; font-size: 15px; font-weight: 300; padding-left: 13px; width: 112px; position: relative; }
+.step_box .stepFormBox span.little_title:before { content: " "; position: absolute; top: -0.5px; width: 10px; height: 10px; background-color: #35b7fc; border-radius: 100%; margin: 5px 0px 0px -13px; }
+@media (max-width: 1260px) { .step_box .stepFormBox span.little_title { display: none; } }
 .step_box .stepFormBox .switch { position: relative; display: inline-block; }
 .step_box .stepFormBox .switch-input { display: none; }
 .step_box .stepFormBox .switch-label { display: block; -webkit-transform: translateY(5px); -ms-transform: translateY(5px); transform: translateY(5px); width: 38px; height: 17px; text-indent: -150%; clip: rect(0 0 0 0); color: transparent; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
@@ -106,33 +106,33 @@ select { background: url(/assets/images/selectBG.png) no-repeat 100% 100%; backg
 .step_box .stepFormBox .switch-input:checked + .switch-label:before { background-color: rgba(53, 183, 252, 0.3); }
 .step_box .stepFormBox .switch-input:checked + .switch-label:after { left: 13px; }
 .step_box .dortNumer { position: relative; width: 100%; height: 34px; display: -webkit-box; display: -ms-flexbox; display: flex; }
-.step_box .dortNumer .dortNumer_box { padding-top: 5px; display: -webkit-box; display: -ms-flexbox; display: flex; }
+.step_box .dortNumer .dortNumer_box { display: -webkit-box; display: -ms-flexbox; display: flex; }
 .step_box .dortNumer .dortNumer_box span.dortText { padding: 0px 12px; letter-spacing: 5px; font-size: 15px; font-weight: bold; }
 .step_box .dortNumer .dortNumer_box span.ElectricStationText { letter-spacing: 0px; }
-.step_box .dortNumer button.research { position: absolute; right: 0; }
+/* .step_box .dortNumer button.research { position: absolute; right: 0; } */
 .step_box .little_bar { position: absolute; width: 100%; left: 0; background-color: #F0F1F5; top: 0; height: 38px; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
 @media (max-width: 1260px) { .step_box .little_bar { display: none; } }
-.step_box .little_bar span:nth-child(1) { padding-left: 114px; }
+.step_box .little_bar span:nth-child(1) { padding-left: 150px; }
 .step_box .little_bar span:nth-child(2) { padding: 0px 62px; }
 .step_box ul.upload_informationBox { margin-top: 38px; }
 @media (max-width: 1260px) { .step_box ul.upload_informationBox { margin-top: 30px; margin-bottom: 30px; width: 100%; } }
 @media (max-width: 1260px) { .step_box ul.upload_informationBox .line { margin: 12px 0px 24px 0px; } }
 .step_box ul.upload_informationBox li.upload_information { height: 57px; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -webkit-box-align: center; -ms-flex-align: center; align-items: center; width: 100%; }
 @media (max-width: 1260px) { .step_box ul.upload_informationBox li.upload_information { -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; height: 100%; width: 100%; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; } }
-.step_box ul.upload_informationBox li.upload_information p.name { font-size: 15px; font-weight: bold; width: 45px; margin-right: 25px; }
+.step_box ul.upload_informationBox li.upload_information p.name { font-size: 15px; font-weight: bold; width: 80px; margin-right: 25px; }
 @media (max-width: 1260px) { .step_box ul.upload_informationBox li.upload_information p.name { margin-bottom: 12px; } }
 .step_box ul.upload_informationBox li.upload_information select.Vendor { margin-right: 70px; }
 .step_box ul.upload_informationBox li.upload_information select.ElectricStation { margin-right: 90px; }
 .step_box .calculationBox { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: reverse; -ms-flex-direction: row-reverse; flex-direction: row-reverse; }
 .step_box .calculationBox button.calculation { margin: 12px 40px 24px 40px; }
 
-#file-upload1 { position: absolute; left: -9999px; }
+.file-upload { position: absolute; left: -9999px; }
 
-label[for="file-upload1"] { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
+.file-name+label { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
 
-#filename1 { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; }
+.file-name { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; }
 
-#file-upload2 { position: absolute; left: -9999px; }
+/* #file-upload2 { position: absolute; left: -9999px; }
 
 label[for="file-upload2"] { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
 
@@ -178,12 +178,12 @@ label[for="file-upload8"] { display: inline-block; background: url(/assets/image
 
 label[for="file-upload9"] { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
 
-#filename9 { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; }
+#filename9 { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; } */
 
 form.uploadData { position: relative; width: 260px; overflow: hidden; }
 @media (max-width: 1260px) { form.uploadData { margin-bottom: 12px; } }
-form.uploadData span.Error_file { border: 1px solid #FF7E8D !important; border-right: 0px !important; background-color: #FFE0E4; }
-form.uploadData span.Error_file:before { content: "檔案格式錯誤"; position: absolute; margin: 3px 0px 0px 125px; margin-top: 2px; color: #FF7E8D; font-size: 12px; }
+form.uploadData span.error-file { border: 1px solid #FF7E8D !important; border-right: 0px !important; background-color: #FFE0E4; }
+form.uploadData span.error-file:before { content: "檔案格式錯誤"; position: absolute; margin: 3px 0px 0px 125px; margin-top: 2px; color: #FF7E8D; font-size: 12px; }
 
 .mapBox { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; padding: 12px; -ms-flex-wrap: wrap; flex-wrap: wrap; }
 @media (max-width: 1260px) { .mapBox { -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; } }

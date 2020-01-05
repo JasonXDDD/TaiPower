@@ -12,8 +12,8 @@ export class UploadAjaxService {
     private server: ServerService
   ) { }
 
-  async getLineInfo(){
-    let a = await this.server.doGetRequest(this.url.lineInfoAPI.get)
-    console.log(a)
+  async getLineInfo(data){
+    let a = await this.server.doGetRequest(this.url.lineInfoAPI.get, data)
+    return a
   }
 }
