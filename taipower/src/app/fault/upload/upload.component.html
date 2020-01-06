@@ -1,10 +1,13 @@
 
 <div class="container">
+  <!-- <img [src]="src" alt=""> -->
+
   <div class="step_box">
     <div class="stepBar">
       <p class="stepIcon">1</p>
       <span class="stepTittle">上傳檔案</span>
     </div>
+
 
     <form enctype="multipart/form-data" action="">
       <div class="stepFormBox">
@@ -93,12 +96,14 @@
         </ul>
       </div>
       <div class="calculationBox">
-        <button class="calculation">計算</button>
+        <button class="calculation" (click)="showResult = !showResult">計算</button>
       </div>
     </ng-container>
 
   </div>
-  <div class="step_box">
+
+
+  <div class="step_box" [ngStyle]="{'display': showResult? 'block': 'none'}">
     <div class="stepBar">
       <p class="stepIcon">2</p>
       <span class="stepTittle">確認並推播</span>

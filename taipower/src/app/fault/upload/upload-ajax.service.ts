@@ -21,4 +21,9 @@ export class UploadAjaxService {
     let a = await this.server.doGetRequest(this.url.linePosAPI.get, data)
     return a
   }
+
+  async getPhoto(){
+    let a = await this.server.doGetRequest(this.url.photoAPI.get)
+    return a
+  }
 }

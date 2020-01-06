@@ -23,11 +23,14 @@ export class UploadComponent implements OnInit {
   map: any;
   layerGroup: any;
 
+  showResult: boolean = false;
+
   constructor (private ajax: UploadAjaxService) {}
 
   ngOnInit () {
     // this.init()
     this.mapInit()
+    this.doGetPhoto()
   }
 
   init () {
@@ -89,6 +92,14 @@ export class UploadComponent implements OnInit {
 
 
   //AJAX
+
+  src: string = "";
+
+  async doGetPhoto(){
+    let res = await this.ajax.getPhoto()
+    this.src = res.data[0].photo
+  }
+
   async doSearchTower () {
     if (this.isTTypeTerminal) this.terminal = 3
     else this.terminal = 2
