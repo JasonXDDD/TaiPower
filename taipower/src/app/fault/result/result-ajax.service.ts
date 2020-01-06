@@ -5,21 +5,21 @@ import { ServerService } from '@app/core/services/server.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UploadAjaxService {
+export class ResultAjaxService {
 
   constructor(
     private url: server_url,
     private server: ServerService
   ) { }
 
-  async getLineInfo(data){
-    let a = await this.server.doGetRequest(this.url.lineInfoAPI.get, data)
+  async getEvent(){
+    let a = await this.server.doGetRequest(this.url.histroyAPI.event)
     return a
   }
 
-  async getLinePos(data){
-    let a = await this.server.doGetRequest(this.url.linePosAPI.get, data)
+
+  async getPhoto(){
+    let a = await this.server.doGetRequest(this.url.histroyAPI.photo)
     return a
   }
-
 }

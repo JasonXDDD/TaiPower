@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { UploadAjaxService } from './upload-ajax.service'
+import { server_url } from '@app/core/data/server_url';
 
 declare var $
 declare var L
@@ -24,82 +25,26 @@ export class UploadComponent implements OnInit {
   layerGroup: any;
 
   showResult: boolean = false;
+  apiUrl: any;
 
-  constructor (private ajax: UploadAjaxService) {}
+  constructor (private ajax: UploadAjaxService, private url: server_url) {}
 
   ngOnInit () {
     // this.init()
+    this.apiUrl = this.url
     this.mapInit()
-    this.doGetPhoto()
   }
 
-  init () {
-    $('#file-upload1').change(function () {
-      var filepath = this.value
-      var m = filepath.match(/([^\/\\]+)$/)
-      var filename = m[1]
-      $('#filename1').html(filename)
-    })
-    $('#file-upload2').change(function () {
-      var filepath = this.value
-      var m = filepath.match(/([^\/\\]+)$/)
-      var filename = m[1]
-      $('#filename2').html(filename)
-    })
-    $('#file-upload3').change(function () {
-      var filepath = this.value
-      var m = filepath.match(/([^\/\\]+)$/)
-      var filename = m[1]
-      $('#filename3').html(filename)
-    })
-    $('#file-upload4').change(function () {
-      var filepath = this.value
-      var m = filepath.match(/([^\/\\]+)$/)
-      var filename = m[1]
-      $('#filename4').html(filename)
-    })
-    $('#file-upload5').change(function () {
-      var filepath = this.value
-      var m = filepath.match(/([^\/\\]+)$/)
-      var filename = m[1]
-      $('#filename5').html(filename)
-    })
-    $('#file-upload6').change(function () {
-      var filepath = this.value
-      var m = filepath.match(/([^\/\\]+)$/)
-      var filename = m[1]
-      $('#filename6').html(filename)
-    })
-    $('#file-upload7').change(function () {
-      var filepath = this.value
-      var m = filepath.match(/([^\/\\]+)$/)
-      var filename = m[1]
-      $('#filename7').html(filename)
-    })
-    $('#file-upload8').change(function () {
-      var filepath = this.value
-      var m = filepath.match(/([^\/\\]+)$/)
-      var filename = m[1]
-      $('#filename8').html(filename)
-    })
-    $('#file-upload9').change(function () {
-      var filepath = this.value
-      var m = filepath.match(/([^\/\\]+)$/)
-      var filename = m[1]
-      $('#filename9').html(filename)
-    })
+  changeFile(event){
+    let target = $(event.target).parents('form').children('.file-name')[0]
+    let filepath = event.target.value
+    let m = filepath.match(/([^\/\\]+)$/)
+    let filename = m[1]
+    $(target).html(filename)
   }
 
 
   //AJAX
-
-  src: string = "";
-
-  async doGetPhoto(){
-    let res = await this.ajax.getPhoto()
-    this.src = res.data[0].photo
-  }
-
   async doSearchTower () {
     if (this.isTTypeTerminal) this.terminal = 3
     else this.terminal = 2

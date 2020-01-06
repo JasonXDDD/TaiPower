@@ -1,7 +1,5 @@
 
 <div class="container">
-  <!-- <img [src]="src" alt=""> -->
-
   <div class="step_box">
     <div class="stepBar">
       <p class="stepIcon">1</p>
@@ -60,14 +58,17 @@
               <form
                 method="post"
                 enctype="multipart/form-data"
-                action=""
+                [action]="apiUrl.uploadAPI.post"
                 class="uploadData"
               >
-                <span class="file-name error-file">select your file</span>
+                <span class="file-name error-file">{{'select your file'}}</span>
                 <label>
-                  <input type="file" class="file-upload"/>
+                  <input type="file" class="file-upload" name="file" (change)="changeFile($event)"/>
+                  <input type="hidden" name="description" />
                 </label>
+                <input type="submit" value="Go" />
               </form>
+
               <form
                 method="post"
                 enctype="multipart/form-data"

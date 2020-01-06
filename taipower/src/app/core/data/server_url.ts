@@ -8,7 +8,10 @@ export class server_url{
   private lineInfo = "/api/lineinfo";
   private linePos = "/api/towerpos";
 
+  private event = "/api/eventdata";
   private photo = "/api/photo";
+
+  private upload = "/api/uploadfile";
 
   readonly lineInfoAPI = {
     get: this.base + this.lineInfo
@@ -18,7 +21,12 @@ export class server_url{
     get: this.base + this.linePos
   }
 
-  readonly photoAPI = {
-    get: this.base + this.photo
+  readonly histroyAPI = {
+    event: this.base + this.event,
+    photo: this.base + this.photo
+  }
+
+  readonly uploadAPI = {
+    post: this.base + this.upload
   }
 }
