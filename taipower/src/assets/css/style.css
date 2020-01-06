@@ -50,7 +50,7 @@ select { background: url(/assets/images/selectBG.png) no-repeat 100% 100%; backg
 .header .header_bar .user_information span.user_icon { width: 25px; height: 25px; }
 .header .header_bar .user_information p.user_name { font-size: 15px; color: #fff; font-weight: 300; padding: 10px 16px 10px 10px; border-right: 1px solid #fff; }
 .header .header_bar .user_information button.sign_out { margin: 0px 24px 0px 16px; -webkit-box-shadow: 3px 3px 3px #4a4a4a; box-shadow: 3px 3px 3px #4a4a4a; }
-.header ul { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; }
+.header ul { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-around; }
 @media (max-width: 1260px) { .header ul { overflow: hidden; } }
 .header ul a.active { color: #fff; font-weight: initial; }
 .header ul a.active .speed-hover { color: #000000; font-weight: 500; }
