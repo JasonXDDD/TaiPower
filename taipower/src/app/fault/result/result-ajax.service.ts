@@ -13,13 +13,13 @@ export class ResultAjaxService {
   ) { }
 
   async getEvent(){
-    let a = await this.server.doGetRequest(this.url.histroyAPI.event)
+    let a = await this.server.doGetRequest(this.url.historyAPI.event)
     return a
   }
 
 
   async getPhoto(){
-    let a = await this.server.doGetRequest(this.url.histroyAPI.photo)
+    let a = await this.server.doGetRequest(this.url.historyAPI.photo)
     return a
   }
 }

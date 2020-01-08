@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren } from '@angular/core';
 import { ResultAjaxService } from './result-ajax.service';
 
 declare var $;
@@ -10,15 +10,29 @@ declare var _;
   templateUrl: './result.component.html',
   styles: []
 })
-export class ResultComponent implements OnInit {
+export class ResultComponent implements OnInit, AfterViewInit {
 
   eventList: any[] = []
   layerGroup: any;
 
+  @ViewChildren('history') history: any;
+
   constructor(private ajax: ResultAjaxService) { }
 
-  ngOnInit() {
-    this.doGetEvent()
+  async ngOnInit() {
+    await this.doGetEvent()
+
+  }
+
+  ngAfterViewInit(): void {
+    let self = this
+
+    // this.history.changes.subscribe(t => {
+      // self.eventList.forEach((ele, id) => {
+      //   self.mapInit(id)
+      // })
+      // self.mapInit(0)
+    // })
   }
 
   openCollapse(event){
@@ -27,25 +41,40 @@ export class ResultComponent implements OnInit {
     $(event.target).toggleClass('activeCollapse').next().slideToggle("fast");
   }
 
-  // openMap(index){
-  //   this.mapList.forEach((ele, id) => {
-  //     if(!(_.isEqual(ele, {}))) this.mapDestroy(id)
-  //   })
+  openMap(index){
+    this.eventList.forEach((ele, id) => {
+      if(!(_.isEqual(ele.map, {}))) this.mapDestroy(id)
+    })
 
-  //   this.mapInit(index)
-  // }
+    this.mapInit(index)
+  }
 
   mapInit(id) {
-    var mymap = L.map('mapid'+id).setView([51.505, -0.09], 13);
+    let maymap = L.map('mapid'+id).setView([25.0799179, 121.4042816], 13)
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       maxZoom: 18,
       id: 'mapbox.streets'
-    }).addTo(mymap);
+    }).addTo(maymap);
 
-    this.layerGroup = L.layerGroup().addTo(mymap);
 
-    return mymap
+    this.layerGroup = L.layerGroup().addTo(maymap);
+
+    this.eventList[id].map = maymap
+  }
+
+  mapDestroy(id){
+    this.eventList[id].map.remove()
+    this.eventList[id].map = {}
+  }
+
+  addSomething(){
+    var circle = L.circle([25.0799179, 121.4042816], {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+      radius: 500
+    }).addTo(this.layerGroup)
   }
 
   counter(num) {
@@ -62,9 +91,11 @@ export class ResultComponent implements OnInit {
   }
 
   async doGetEvent(){
-    let res = await this.ajax.getEvent()
-    console.log(res.data)
-    this.eventList = res.data.map((ele, id) => ele['map'] = this.mapInit(id))
+    let self = this
+    var res = await this.ajax.getEvent()
+
+    this.eventList = _.cloneDeep(res.data)
+    this.eventList.forEach(ele => ele['map']={})
   }
 
 }

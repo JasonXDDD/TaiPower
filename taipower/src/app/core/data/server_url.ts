@@ -21,7 +21,7 @@ export class server_url{
     get: this.base + this.linePos
   }
 
-  readonly histroyAPI = {
+  readonly historyAPI = {
     event: this.base + this.event,
     photo: this.base + this.photo
   }
