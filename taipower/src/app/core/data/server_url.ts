@@ -10,8 +10,10 @@ export class server_url{
 
   private event = "/api/eventdata";
   private photo = "/api/photo";
+  private result = "/api/calresult";
 
   private upload = "/api/uploadfile";
+
 
   readonly lineInfoAPI = {
     get: this.base + this.lineInfo
@@ -23,7 +25,8 @@ export class server_url{
 
   readonly historyAPI = {
     event: this.base + this.event,
-    photo: this.base + this.photo
+    photo: this.base + this.photo,
+    result: this.base + this.result
   }
 
   readonly uploadAPI = {

@@ -10,12 +10,21 @@ declare var _;
   templateUrl: './result.component.html',
   styles: []
 })
-export class ResultComponent implements OnInit, AfterViewInit {
+export class ResultComponent implements OnInit {
 
   eventList: any[] = []
   layerGroup: any;
 
-  @ViewChildren('history') history: any;
+  eventResult = {
+    eventid: 0,
+    ref_sub: "",
+    ref_length: "",
+    dis_to_sub: "",
+    est_long: "",
+    est_lati: "",
+    towerN: 0,
+    towerN_2: 0
+  }
 
   constructor(private ajax: ResultAjaxService) { }
 
@@ -24,23 +33,9 @@ export class ResultComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngAfterViewInit(): void {
-    let self = this
 
-    // this.history.changes.subscribe(t => {
-      // self.eventList.forEach((ele, id) => {
-      //   self.mapInit(id)
-      // })
-      // self.mapInit(0)
-    // })
-  }
 
-  openCollapse(event){
-    var notthis = $('.activeCollapse').not(event.target);
-    notthis.toggleClass('activeCollapse').next('.faqanswer').slideToggle(300);
-    $(event.target).toggleClass('activeCollapse').next().slideToggle("fast");
-  }
-
+  // MAP
   openMap(index){
     this.eventList.forEach((ele, id) => {
       if(!(_.isEqual(ele.map, {}))) this.mapDestroy(id)
@@ -50,17 +45,16 @@ export class ResultComponent implements OnInit, AfterViewInit {
   }
 
   mapInit(id) {
-    let maymap = L.map('mapid'+id).setView([25.0799179, 121.4042816], 13)
+    let mymap = L.map('mapid'+id).setView([25.0799179, 121.4042816], 13)
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       maxZoom: 18,
       id: 'mapbox.streets'
-    }).addTo(maymap);
+    }).addTo(mymap);
 
 
-    this.layerGroup = L.layerGroup().addTo(maymap);
-
-    this.eventList[id].map = maymap
+    this.layerGroup = L.featureGroup().addTo(mymap);
+    this.eventList[id].map = mymap
   }
 
   mapDestroy(id){
@@ -77,10 +71,50 @@ export class ResultComponent implements OnInit, AfterViewInit {
     }).addTo(this.layerGroup)
   }
 
+  markerEvent(lat, lng){
+    var marker = L.marker([lat, lng]).addTo(this.layerGroup)
+  }
+
+
+  // VIEW
+  async openPane(item, index, event){
+    this.resetResult()
+
+    // do AJAX
+    let isResult = await this.doGetEventResult(item.eventid)
+
+    // do VIEW
+
+    this.openCollapse(event)
+    this.openMap(index)
+    if(isResult){
+      this.markerEvent(this.eventResult.est_lati, this.eventResult.est_long)
+      this.eventList[index].map.fitBounds(this.layerGroup.getBounds())
+    }
+  }
+
   counter(num) {
     return new Array(parseInt(num));
   }
 
+  openCollapse(event){
+    var notthis = $('.activeCollapse').not(event.target);
+    notthis.toggleClass('activeCollapse').next('.faqanswer').slideToggle(300);
+    $(event.target).toggleClass('activeCollapse').next().slideToggle("fast");
+  }
+
+  resetResult(){
+    this.eventResult = {
+      eventid: 0,
+      ref_sub: "",
+      ref_length: "",
+      dis_to_sub: "",
+      est_long: "",
+      est_lati: "",
+      towerN: 0,
+      towerN_2: 0
+    }
+  }
 
   // AJAX
   src: string = "";
@@ -91,11 +125,22 @@ export class ResultComponent implements OnInit, AfterViewInit {
   }
 
   async doGetEvent(){
-    let self = this
     var res = await this.ajax.getEvent()
 
     this.eventList = _.cloneDeep(res.data)
     this.eventList.forEach(ele => ele['map']={})
+
+    // console.log(this.eventList)
+  }
+
+  async doGetEventResult(id){
+    let res = await this.ajax.getResult({eventid: id})
+    console.log(res)
+    if(res.data.length > 0){
+      this.eventResult = res.data[0]
+      return true
+    }
+    else return false
   }
 
 }

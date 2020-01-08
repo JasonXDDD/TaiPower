@@ -5,7 +5,7 @@
   <div class="collapse">
 
     <div class="historyBox" *ngFor="let item of eventList; let id = index; let last = last" #history>
-      <div class="togglefaq" (click)="openCollapse($event); openMap(id)">
+      <div class="togglefaq" (click)="openPane(item, id, $event)">
         <p class="date">{{ item.create_date }}</p>
         <p class="location">{{ item.linename }}</p>
       </div>
@@ -22,18 +22,22 @@
             <ul class="malfunction">
               <li class="malfunction_information">
                 <p class="tittle">故障位置</p>
-                <p class="context">39C8+72 台北</p>
+                <p class="context">
+                  經度：{{ eventResult.est_long }},<br>
+                  緯度：{{ eventResult.est_lati }}
+                </p>
               </li>
               <div class="line"></div>
               <li class="malfunction_information">
                 <p class="tittle">與電驛站相距</p>
                 <div class="distance">
-                  <p class="context">距北投 2 km</p>
-                  <p class="context">距深坑 3 km</p>
-                  <p class="context">距五股 5 km</p>
+                  <p class="context">
+                    距{{ eventResult.ref_sub }} {{ eventResult.ref_length }} km<br>
+                    距{{ eventResult.ref_sub }}變電所，第 {{ eventResult.towerN }} 與 {{ eventResult.towerN_2 }} 電塔之間
+                  </p>
                 </div>
               </li>
-              <div class="line"></div>
+              <!-- <div class="line"></div>
               <li class="malfunction_information">
                 <p class="tittle">故障狀況</p>
                 <p class="context">供電時常短路</p>
@@ -42,11 +46,11 @@
               <li class="malfunction_information">
                 <p class="tittle">故障原因</p>
                 <p class="context">不明</p>
-              </li>
+              </li> -->
               <div class="line"></div>
               <li class="malfunction_information">
                 <p class="tittle">故障日期</p>
-                <p class="context">2019.04.18</p>
+                <p class="context">{{ item.create_date }}</p>
               </li>
             </ul>
           </div>
