@@ -14,6 +14,7 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'taipower';
+  hide: boolean = false;
 
   token: string;
   deviceInfo: any;
@@ -24,9 +25,7 @@ export class AppComponent implements OnInit {
     let self = this;
 
     //init firebase
-    firebase.initializeApp({
-      messagingSenderId: environment.firebase.messagingSenderId
-    });
+    firebase.initializeApp(environment.firebase);
     const messaging = firebase.messaging();
 
     navigator.serviceWorker.ready.then(registration => {
@@ -57,34 +56,38 @@ export class AppComponent implements OnInit {
     });
 
     // do route if mobile
-    if(this.deviceService.isMobile()){
-      this.router.navigate(['/mobile/index'])
-    }
+    this.checkRoute(this.router.url)
     this.router.events.subscribe(async evt => {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
       else {
-        if(this.deviceService.isMobile() && evt.url.split('/')[1] !== 'mobile'){
-          this.openHeader = false
-          this.router.navigate(['/mobile/index'])
-        }
-        else {
-          if(evt.url.split('/')[1] !== 'mobile'){
-            this.openHeader = true
-          }
-          else {
-            this.openHeader = false
-          }
-        }
+        self.checkRoute(evt.url)
       }
     })
+  }
+
+  checkRoute(url){
+    if(url === '/') return;
+
+    if(this.deviceService.isMobile() && url.split('/')[1] !== 'mobile'){
+      this.openHeader = false
+      this.router.navigate(['/mobile/index'])
+    }
+    else {
+      if(url.split('/')[1] !== 'mobile'){
+        this.openHeader = true
+      }
+      else {
+        this.openHeader = false
+      }
+    }
   }
 
   addToTopic(token) {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': environment.firebase.fcm_key
+      'Authorization': environment.fcm_key
     })
     this.http.post("https://iid.googleapis.com/iid/v1:batchAdd",
       JSON.stringify({
