@@ -5,7 +5,7 @@ import 'firebase/messaging';
 import { environment } from '@env/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
 
   token: string;
   deviceInfo: any;
+  openHeader: boolean = true;
 
   constructor(private swPush: SwPush, private http: HttpClient, private deviceService: DeviceDetectorService, private router: Router) { }
   ngOnInit() {
@@ -59,6 +60,25 @@ export class AppComponent implements OnInit {
     if(this.deviceService.isMobile()){
       this.router.navigate(['/mobile/index'])
     }
+    this.router.events.subscribe(async evt => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      else {
+        if(this.deviceService.isMobile() && evt.url.split('/')[1] !== 'mobile'){
+          this.openHeader = false
+          this.router.navigate(['/mobile/index'])
+        }
+        else {
+          if(evt.url.split('/')[1] !== 'mobile'){
+            this.openHeader = true
+          }
+          else {
+            this.openHeader = false
+          }
+        }
+      }
+    })
   }
 
   addToTopic(token) {

@@ -7,7 +7,7 @@
 
 .mobile button, .mobile input { outline: none; align-items: flex-start; text-align: center; cursor: pointer; color: rgba(255, 255, 255, 0); background-color: rgba(255, 255, 255, 0); box-sizing: initial; padding: 0; border-width: 0px; border-style: none; font-size: 2.5rem; border-radius: 0; -webkit-appearance: none; }
 
-.mobile #loading { background-image: url("../images/landscape.png"); background-repeat: no-repeat; width: 100%; height: 100vh; background-size: cover; background-position: top right; position: absolute; top: 0; left: 0; z-index: 99999999; }
+.mobile #loading { background-image: url("../images/mobile/landscape.png"); background-repeat: no-repeat; width: 100%; height: 100vh; background-size: cover; background-position: top right; position: absolute; top: 0; left: 0; z-index: 99999999; }
 .mobile #loading::after { content: " "; position: absolute; opacity: 0.5; top: 0; left: 0; width: 100%; height: 100vh; background: linear-gradient(to right, #7e79db, #83b4dd); }
 .mobile #loading .logo { position: absolute; width: 120px; height: 120px; z-index: 999; left: 50%; top: 40%; transform: translateX(-50%) translateY(-40%); }
 
