@@ -1,0 +1,61 @@
+<!-- <input type="file" accept="image/*" capture> -->
+<!-- <a href="https://www.google.com/maps/place/%E8%87%BA%E5%8C%97%E5%A4%A7%E5%AE%89%E9%81%8B%E5%8B%95%E4%B8%AD%E5%BF%83/@25.0206288,121.5457421,18.78z/data=!4m5!3m4!1s0x3442aa2f7891f2f7:0xc8a9c8385d06362a!8m2!3d25.0207388!4d121.5457579" target="_blank">Map</a> -->
+<div class="container">
+  <div class="collapse">
+
+    <div class="historyBox" *ngFor="let item of eventList; let id = index; let last = last" #history>
+      <div class="togglefaq" (click)="openPane(item, id, $event)">
+        <p class="date">{{ item.create_date }}</p>
+        <p class="location">{{ item.linename }}</p>
+      </div>
+
+      <div class="faqanswer">
+        <div class="mapBox">
+          <div class="map">
+            <div class="idMap" [id]="'mapid' + id"></div>
+          </div>
+          <div class="map_information stepFormBox">
+            <div class="little_bar">
+              <p>故障資訊</p>
+            </div>
+            <ul class="malfunction">
+              <li class="malfunction_information">
+                <p class="tittle">故障位置</p>
+                <p class="context">
+                  經度：{{ eventResult.est_long }},<br>
+                  緯度：{{ eventResult.est_lati }}
+                </p>
+              </li>
+              <div class="line"></div>
+              <li class="malfunction_information">
+                <p class="tittle">與電驛站相距</p>
+                <div class="distance">
+                  <p class="context">
+                    距{{ eventResult.ref_sub }} {{ eventResult.ref_length }} km<br>
+                    距{{ eventResult.ref_sub }}變電所，第 {{ eventResult.towerN }} 與 {{ eventResult.towerN_2 }} 電塔之間
+                  </p>
+                </div>
+              </li>
+              <!-- <div class="line"></div>
+              <li class="malfunction_information">
+                <p class="tittle">故障狀況</p>
+                <p class="context">供電時常短路</p>
+              </li>
+              <div class="line"></div>
+              <li class="malfunction_information">
+                <p class="tittle">故障原因</p>
+                <p class="context">不明</p>
+              </li> -->
+              <div class="line"></div>
+              <li class="malfunction_information">
+                <p class="tittle">故障日期</p>
+                <p class="context">{{ item.create_date }}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

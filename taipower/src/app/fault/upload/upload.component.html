@@ -1,0 +1,154 @@
+
+<div class="container">
+  <div class="step_box">
+    <div class="stepBar">
+      <p class="stepIcon">1</p>
+      <span class="stepTittle">上傳檔案</span>
+    </div>
+
+
+    <form enctype="multipart/form-data" action="">
+      <div class="stepFormBox">
+        <span class="little_title">選擇端點數目</span>
+        <div class="dortNumer" style="align-items: center;">
+          <div class="dortNumer_box" style="align-items: center;">
+            <span class="dortText">2端</span>
+            <div class="switch" style="height: 26px;">
+              <input id="switch-1" type="checkbox" class="switch-input" name="terminal" [(ngModel)]="isTTypeTerminal"/>
+              <label for="switch-1" class="switch-label">Switch</label>
+            </div>
+            <span class="dortText">3端</span>
+          </div>
+          <button class="research" (click)="doSearchTower()">搜尋</button>
+
+          <div *ngIf="towerList.length > 0">
+            <span class="little_title" style="margin-left: 3rem; margin-right: 1rem; text-align: center; height: fit-content;">選擇電驛站</span>
+            <select class="Vendor" name="selectTower" [(ngModel)]="selectTower" (change)="doGetLinePos(selectTower.linenum)">
+              <option value="" disabled>選擇電驛站</option>
+              <option *ngFor="let item of towerList" [ngValue]="item">{{ item.linename }}</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+    </form>
+
+
+    <ng-container *ngIf="selectTower.linenum != 0">
+      <div class="stepFormBox">
+        <div class="little_bar">
+          <span class="little_title">選擇廠商</span>
+          <span class="little_title">上傳檔案</span>
+        </div>
+        <ul class="upload_informationBox">
+          <ng-container *ngFor="let item of counter(terminal); let id = index; let start = first; let last = last">
+
+            <li class="upload_information">
+              <p class="name">{{ start? selectTower.startpos: (last? selectTower.stoppos: "端點" + id)}}</p>
+              <select class="Vendor">
+                <option value="GE">GE</option>
+                <option value="BG">BG</option>
+                <option value="G8">G8</option>
+              </select>
+              <!-- <select class="ElectricStation">
+                <option value="北投">北投</option>
+                <option value="基隆">基隆</option>
+                <option value="宜蘭">宜蘭</option>
+              </select> -->
+              <form
+                method="post"
+                enctype="multipart/form-data"
+                [action]="apiUrl.uploadAPI.post"
+                class="uploadData"
+              >
+                <span class="file-name error-file">{{'select your file'}}</span>
+                <label>
+                  <input type="file" class="file-upload" name="file" (change)="changeFile($event)"/>
+                  <input type="hidden" name="description" />
+                </label>
+                <!-- <input type="submit" value="Go" /> -->
+              </form>
+
+              <form
+                method="post"
+                enctype="multipart/form-data"
+                action=""
+                class="uploadData"
+              >
+                <span class="file-name error-file">select your file</span>
+                <label>
+                  <input type="file" class="file-upload"/>
+                </label>
+              </form>
+              <form
+                method="post"
+                enctype="multipart/form-data"
+                action=""
+                class="uploadData"
+              >
+                <span class="file-name">select your file</span>
+                <label>
+                  <input type="file" class="file-upload"/>
+                </label>
+              </form>
+            </li>
+            <div *ngIf="!last" class="line"></div>
+          </ng-container>
+        </ul>
+      </div>
+      <div class="calculationBox">
+        <button class="calculation" (click)="showResult = !showResult">計算</button>
+      </div>
+    </ng-container>
+
+  </div>
+
+
+  <div class="step_box" [ngStyle]="{'display': showResult? 'block': 'none'}">
+    <div class="stepBar">
+      <p class="stepIcon">2</p>
+      <span class="stepTittle">確認並推播</span>
+    </div>
+    <div class="mapBox">
+      <div class="map">
+        <div class="idMap" id="mapid"></div>
+      </div>
+      <div class="map_information stepFormBox">
+        <div class="little_bar">
+          <p>故障資訊</p>
+        </div>
+        <ul class="malfunction">
+          <li class="malfunction_information">
+            <p class="tittle">故障位置</p>
+            <p class="context">39C8+72 台北</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">與電驛站相距</p>
+            <div class="distance">
+              <p class="context">距北投 2 km</p>
+              <p class="context">距深坑 3 km</p>
+              <p class="context">距五股 5 km</p>
+            </div>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">故障狀況</p>
+            <p class="context">供電時常短路</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">故障原因</p>
+            <p class="context">不明</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">故障日期</p>
+            <p class="context">2019.04.18</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <button class="push">推播</button>
+  </div>
+</div>

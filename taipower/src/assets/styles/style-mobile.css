@@ -1,0 +1,88 @@
+.mobile a { text-decoration: none; color: #000; transition: all 0.3s; }
+.mobile a:hover { color: #1ea0c3; }
+
+.mobile img { border: 0; display: inline-block; }
+
+.mobile body { font-family: "Microsoft JhengHei;"; margin: 0; padding: 0; background-attachment: fixed; background-color: #f0f1f5; overflow-x: hidden; }
+
+.mobile button, .mobile input { outline: none; align-items: flex-start; text-align: center; cursor: pointer; color: rgba(255, 255, 255, 0); background-color: rgba(255, 255, 255, 0); box-sizing: initial; padding: 0; border-width: 0px; border-style: none; font-size: 2.5rem; border-radius: 0; -webkit-appearance: none; }
+
+.mobile #loading { background-image: url("../images/mobile/landscape.png"); background-repeat: no-repeat; width: 100%; height: 100vh; background-size: cover; background-position: top right; position: absolute; top: 0; left: 0; z-index: 99999999; }
+.mobile #loading::after { content: " "; position: absolute; opacity: 0.5; top: 0; left: 0; width: 100%; height: 100vh; background: linear-gradient(to right, #7e79db, #83b4dd); }
+.mobile #loading .logo { position: absolute; width: 120px; height: 120px; z-index: 999; left: 50%; top: 40%; transform: translateX(-50%) translateY(-40%); }
+
+.mobile .middle { width: 300px; margin-left: auto; margin-right: auto; position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); }
+
+.mobile .loginInformation { margin: 2%; text-align: center; overflow-x: hidden; }
+.mobile .loginInformation .tittle { width: 180px; }
+
+.mobile .formBOx { padding-top: 50px; }
+.mobile .formBOx .Error input { border-bottom: 2px solid #ff7e8d; }
+.mobile .formBOx .Error span.error_message:after { content: "密碼錯誤，請再試一次"; background-color: #ff7e8d; color: #fff; font-size: 12px; height: auto; padding: 15px; position: absolute; font-weight: 100; box-shadow: 1px 3px 5px #acacac; border-radius: 1px; bottom: -50px; width: 150px; left: 0px; }
+.mobile .formBOx .Error span.error_message:before { content: " "; width: 0; height: 0; border-style: solid; border-width: 0 10px 10px 10px; border-color: transparent transparent #ff7e8d transparent; position: absolute; bottom: -10px; left: 22px; }
+.mobile .formBOx input { border-left: 0px; border-right: 0px; border-top: 0px; border-bottom: 1px solid #acacac; padding: 0px 0px 0px 50px; width: 100%; font-size: 15px; height: 49px; color: #acacac; text-align: left; margin: 8px 0px; }
+.mobile .formBOx input:focus { border-left: 0px; border-right: 0px; border-top: 0px; border-bottom: 2px solid; border-image: linear-gradient(to right, #35b7fc, #b992f9) 10 10; outline: none; color: #000; }
+.mobile .formBOx input.login { margin-top: 80px; height: 56px; outline: none; align-items: flex-start; text-align: center; cursor: pointer; color: #fff; background: linear-gradient(to right, #b992f9, #35b7fc); box-sizing: border-box; font-size: 17px; padding: 0; border-radius: 4px; font-weight: bold; -webkit-appearance: none; }
+@media (max-width: 767px) { .mobile .formBOx input.login { height: 45px; } }
+.mobile .formBOx input.login:hover { border-width: 2px; border-style: solid; border-color: #35b7fc; border-image: 0; background: #fff; transition: 0.3s all; color: #35b7fc; }
+.mobile .formBOx .user, .mobile .formBOx .password { text-align: left; margin-bottom: 16px; }
+.mobile .formBOx .inputBox { position: relative; }
+.mobile .formBOx .inputBox span.representative { position: absolute; top: 50%; transform: translateY(-50%); left: 0px; padding-right: 10px; border-right: 1px solid #acacac; }
+.mobile .formBOx .inputBox span.confirm { position: absolute; top: 50%; transform: translateY(-50%); right: 15px; }
+
+.mobile .header_bar { background-color: #525077; display: flex; flex-direction: row; justify-content: center; align-items: center; height: 56px; box-shadow: 0px 3px 5px #b5b5b5; }
+.mobile .header_bar .white_logo { position: absolute; left: 0; height: 56px; width: 65px; text-align: center; display: flex; align-items: center; justify-content: center; }
+.mobile .header_bar .white_logo img { width: 33px; height: auto; }
+.mobile .header_bar .current_state { color: white; font-size: 17px; }
+.mobile .header_bar .user_information { position: absolute; right: 15px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; }
+.mobile .header_bar .user_information a, .mobile .header_bar .user_information .fa-location-arrow { color: #35b7fc; }
+.mobile .header_bar .user_information span.user_icon { width: 33px; height: 33px; }
+
+.mobile .navigation { position: fixed; bottom: 0; display: flex; flex-direction: row; align-items: center; justify-content: space-around; height: 50px; width: 100%; box-shadow: 0px 3px 10px 0px; z-index: 999; background: #ffffff; }
+.mobile .navigation::before { content: "|"; position: absolute; color: #dbdfe5; }
+.mobile .navigation .here { color: #35b7fc !important; }
+.mobile .navigation .twenty-eight { font-size: 28px; color: #acacac; }
+.mobile .navigation .twenty-eight:hover { color: #35b7fc; }
+.mobile .navigation .twenty-six { font-size: 26px; color: #acacac; }
+.mobile .navigation .twenty-six:hover { color: #35b7fc; }
+.mobile .navigation .camera { position: absolute; width: 50px; height: 50px; border-radius: 50%; background-color: #35b7fc; color: #ffffff; bottom: 25px; box-shadow: 0px 2px 10px rgba(128, 128, 128, 0.5); }
+.mobile .navigation .camera .fa-2x { position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-size: 26px; }
+
+.mobile .notification i, .mobile .notification span, .mobile .notification p { color: #525077; font-size: 15px; }
+.mobile .notification li:nth-child(odd) { background-color: #dff3fd; }
+.mobile .notification li { height: 86px; }
+.mobile .notification li .notification_inner { width: 250px; margin: auto; }
+.mobile .notification li .notification_inner p { font-size: 12px; color: #acacac; padding-left: 20px; padding-top: 5px; }
+
+.mobile .mapBox { width: 95%; margin: 10px auto 60px auto; box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: #fff; padding: 10px 0px; }
+.mobile .mapBox .map { width: 95%; margin: auto; padding: 10px 0px; }
+.mobile .mapBox .detail { width: 95%; margin: 0px auto 0px auto; border: 1px solid #dbdfe5; font-size: 15px; }
+.mobile .mapBox .detail p.title { font-weight: bold; color: #464453; height: 50px; display: flex; align-items: center; margin: 0px 15px; border-bottom: 0px solid #dbdfe5; white-space: nowrap; }
+.mobile .mapBox .detail p:nth-last-child(1) { border-bottom: 0px solid #dbdfe5; }
+.mobile .mapBox .detail p, .mobile .mapBox .detail .distance { font-weight: bold; color: #464453; height: 50px; display: flex; align-items: center; margin: 0px 15px; border-bottom: 1px solid #dbdfe5; white-space: nowrap; }
+.mobile .mapBox .detail p span, .mobile .mapBox .detail .distance span { color: #7c80aa; padding-left: 15px; font-weight: 400; }
+.mobile .mapBox .detail .distance ul { padding-left: 15px; color: #7c80aa; font-weight: 400; }
+
+.mobile .collapse { margin: 20px 0px; }
+
+.mobile .historyBox { margin-bottom: 12px; }
+
+.mobile .togglefaq { box-shadow: 0px 0px 5px 2px #dcdcdc; position: relative; height: 56px; background-color: #fff; display: flex; align-items: center; transition: 0.35s all; color: #525077; }
+.mobile .togglefaq:hover { background-color: #7c80aa; color: #fff; }
+.mobile .togglefaq p.date { font-size: 15px; font-weight: bold; margin: 0px 60px 0px 30px; }
+.mobile .togglefaq p.location { font-size: 15px; }
+
+.mobile .history-container { width: 90%; margin: 0px auto 70px auto; }
+
+.mobile .reminder { position: relative; }
+.mobile .reminder::after { content: " "; position: absolute; width: 5px; height: 5px; border-radius: 50%; background-color: #35b7fc; }
+
+.mobile .inDetail { display: flex; }
+.mobile .inDetail p.textareaTitle { width: 20%; font-weight: bold; color: #464453; height: 50px; display: flex; align-items: center; margin: 0px 15px; border-bottom: 0px solid #dbdfe5; white-space: nowrap; }
+.mobile .inDetail textarea { width: 80%; margin: 15px; height: 90px; font-size: 15px; border: 1px solid #dbdfe5; overflow-y: scroll; }
+
+.mobile .photo { display: flex; flex-wrap: wrap; justify-content: space-evenly; align-items: center; }
+.mobile .photo .picture { position: relative; width: 45%; padding-bottom: 5px; }
+.mobile .photo .picture .close { position: absolute; right: -5px; top: -5px; }
+
+/*# sourceMappingURL=style.css.map */

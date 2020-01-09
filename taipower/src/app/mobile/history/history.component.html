@@ -1,0 +1,16 @@
+
+
+<div class="history-container">
+  <div class="collapse">
+
+    <div class="historyBox" *ngFor="let item of counter(5)">
+      <a [routerLink]="['/mobile/history-item']">
+        <div class="togglefaq">
+          <p class="date">2019.04.18</p>
+          <p class="location">北投-深坑</p>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>

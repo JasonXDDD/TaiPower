@@ -1,0 +1,35 @@
+<div class="header_bar" style="position: fixed; width: 100%; top: 0;">
+  <div class="white_logo">
+    <ng-container *ngIf="nowRoute == '' || nowRoute == 'notion' || nowRoute == 'history'; else backImg">
+      <a [routerLink]="['/mobile/history']">
+        <img src="/assets/images/mobile/LOGO.png" />
+      </a>
+    </ng-container>
+    <ng-template #backImg>
+      <a (click)="goBack()">
+        <img src="assets/images/mobile/back.png"/>
+      </a>
+    </ng-template>
+
+  </div>
+
+  <div class="current_state">{{ nowTitle }}</div>
+
+  <div class="user_information" [ngSwitch]="nowRoute">
+
+    <a [routerLink]="['/mobile/report']" *ngSwitchCase="'history-item'">回報紀錄</a>
+    <a [routerLink]="['/mobile/report']" *ngSwitchCase="'notification'">回報</a>
+
+    <span class="fa-stack" style="vertical-align: top; color: white" *ngSwitchCase="'report'">
+      <i class="far fa-circle fa-stack-2x"></i>
+      <i class="fas fa-location-arrow fa-stack-1x"></i>
+    </span>
+
+    <span class="fa-stack" style="vertical-align: top; color: white" *ngSwitchDefault>
+      <i class="far fa-circle fa-stack-2x"></i>
+      <i class="fas fa-user fa-stack-1x"></i>
+    </span>
+  </div>
+</div>
+
+<div style="height: 56px;"></div>
