@@ -51,7 +51,7 @@
 .mobile .notification i, .mobile .notification span, .mobile .notification p { color: #525077; font-size: 15px; }
 .mobile .notification li:nth-child(odd) { background-color: #dff3fd; }
 .mobile .notification li { height: 86px; }
-.mobile .notification li .notification_inner { width: 250px; margin: auto; padding: 27px 0px; }
+.mobile .notification li .notification_inner { width: 250px; margin: auto; }
 .mobile .notification li .notification_inner p { font-size: 12px; color: #acacac; padding-left: 20px; padding-top: 5px; }
 
 .mobile .mapBox { width: 95%; margin: 10px auto 60px auto; box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: #fff; padding: 10px 0px; }

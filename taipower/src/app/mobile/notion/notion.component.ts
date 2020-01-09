@@ -12,4 +12,8 @@ export class NotionComponent implements OnInit {
   ngOnInit() {
   }
 
+  counter(num) {
+    return new Array(parseInt(num));
+  }
+
 }

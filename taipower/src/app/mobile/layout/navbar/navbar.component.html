@@ -1,67 +1,35 @@
-<!-- <div class="header_bar">
+<div class="header_bar" style="position: fixed; width: 100%; top: 0;">
   <div class="white_logo">
-    <img src="/assets/images/mobile/LOGO.png" />
-  </div>
-  <div class="current_state">歷史資料</div>
-  <div class="user_information">
-    <span class="user_icon"
-      ><img src="/assets/images/mobile/userhead.png" width="100%"
-    /></span>
-  </div>
-</div> -->
+    <ng-container *ngIf="nowRoute == '' || nowRoute == 'notion' || nowRoute == 'history'; else backImg">
+      <a [routerLink]="['/mobile/history']">
+        <img src="/assets/images/mobile/LOGO.png" />
+      </a>
+    </ng-container>
+    <ng-template #backImg>
+      <a (click)="goBack()">
+        <img src="assets/images/mobile/back.png"/>
+      </a>
+    </ng-template>
 
-<!-- app-history-item -->
-<!-- <ng-container>
-
-<div class="header_bar">
-  <div class="white_logo">
-    <img src="assets/images/mobile/back.png" />
   </div>
-  <div class="current_state">108.04.18 北投-深坑</div>
-  <div class="user_information">
-    <a href="/">回報紀錄</a>
+
+  <div class="current_state">{{ nowTitle }}</div>
+
+  <div class="user_information" [ngSwitch]="nowRoute">
+
+    <a [routerLink]="['/mobile/report']" *ngSwitchCase="'history-item'">回報紀錄</a>
+    <a [routerLink]="['/mobile/report']" *ngSwitchCase="'notification'">回報</a>
+
+    <span class="fa-stack" style="vertical-align: top; color: white" *ngSwitchCase="'report'">
+      <i class="far fa-circle fa-stack-2x"></i>
+      <i class="fas fa-location-arrow fa-stack-1x"></i>
+    </span>
+
+    <span class="fa-stack" style="vertical-align: top; color: white" *ngSwitchDefault>
+      <i class="far fa-circle fa-stack-2x"></i>
+      <i class="fas fa-user fa-stack-1x"></i>
+    </span>
   </div>
 </div>
 
-</ng-container> -->
-
-<!-- app-notification -->
-<!-- <ng-container>
-  <div class="header_bar">
-    <div class="white_logo">
-      <img src="/assets/images/mobile/back.png" />
-    </div>
-    <div class="current_state">北投-深坑</div>
-    <div class="user_information">
-      <a href="/">回報</a>
-    </div>
-  </div>
-</ng-container> -->
-
-<!-- app-notion -->
-<!-- <ng-container>
-  <div class="header_bar">
-    <div class="white_logo">
-      <img src="/assets/images/mobile/LOGO.png" />
-    </div>
-    <div class="current_state">通知</div>
-    <div class="user_information">
-      <span class="user_icon"
-        ><img src="/assets/images/mobile/userhead.png" width="100%"
-      /></span>
-    </div>
-  </div>
-</ng-container> -->
-
-<!-- app-report -->
-<ng-container>
-  <div class="header_bar">
-    <div class="white_logo">
-      <img src="/assets/images/mobile/back.png" />
-    </div>
-    <div class="current_state">回報</div>
-    <div class="user_information">
-      <i class="fa fa-location-arrow fa-2x" aria-hidden="true"></i>
-    </div>
-  </div>
-</ng-container>
+<div style="height: 56px;"></div>

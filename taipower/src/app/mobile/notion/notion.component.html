@@ -1,7 +1,7 @@
 <div class="notification">
   <ul>
-    <li>
-      <a href="notification.html">
+    <li *ngFor="let item of counter(10)">
+      <a [routerLink]="['/mobile/notification']" style="display: flex; align-items: center; height: 100%;">
         <div class="notification_inner">
           <i class="fa fa-exclamation-triangle"></i>
           <span class="push_title">北投-深坑</span>
@@ -10,35 +10,6 @@
         </div>
       </a>
     </li>
-    <li>
-      <a href="notification.html">
-        <div class="notification_inner">
-          <i class="fa fa-exclamation-triangle"></i>
-          <span class="push_title">北投-深坑</span>
-          <span class="push_text">發生異常短路</span>
-          <p class="time">5分鐘前</p>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a href="notification.html">
-        <div class="notification_inner">
-          <i class="fa fa-exclamation-triangle"></i>
-          <span class="push_title">北投-深坑</span>
-          <span class="push_text">發生異常短路</span>
-          <p class="time">5分鐘前</p>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a href="notification.html">
-        <div class="notification_inner">
-          <i class="fa fa-exclamation-triangle"></i>
-          <span class="push_title">北投-深坑</span>
-          <span class="push_text">發生異常短路</span>
-          <p class="time">5分鐘前</p>
-        </div>
-      </a>
-    </li>
+
   </ul>
 </div>

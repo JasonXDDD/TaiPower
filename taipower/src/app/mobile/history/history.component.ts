@@ -12,4 +12,7 @@ export class HistoryComponent implements OnInit {
   ngOnInit() {
   }
 
+  counter(num) {
+    return new Array(parseInt(num));
+  }
 }
