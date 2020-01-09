@@ -1,7 +1,7 @@
 <div class="mobile">
-  <app-navbar></app-navbar>
+  <app-navbar *ngIf="!(nowRoute == 'index')"></app-navbar>
 
   <router-outlet></router-outlet>
 
-  <app-tabbar></app-tabbar>
+  <app-tabbar *ngIf="!(nowRoute == 'index')"></app-tabbar>
 </div>

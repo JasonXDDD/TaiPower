@@ -4,6 +4,8 @@ import * as firebase from 'firebase/app';
 import 'firebase/messaging';
 import { environment } from '@env/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +16,9 @@ export class AppComponent implements OnInit {
   title = 'taipower';
 
   token: string;
+  deviceInfo: any;
 
-  constructor(private swPush: SwPush, private http: HttpClient) { }
+  constructor(private swPush: SwPush, private http: HttpClient, private deviceService: DeviceDetectorService, private router: Router) { }
   ngOnInit() {
     let self = this;
 
@@ -51,6 +54,11 @@ export class AppComponent implements OnInit {
     this.swPush.messages.subscribe(msg => {
       console.log(msg);
     });
+
+    // do route if mobile
+    if(this.deviceService.isMobile()){
+      this.router.navigate(['/mobile/index'])
+    }
   }
 
   addToTopic(token) {

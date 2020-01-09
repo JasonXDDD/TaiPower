@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { CoreModule } from './core/core.module';
 import { server_url } from './core/data/server_url';
 import { HeaderComponent } from './layout/header/header.component';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { HeaderComponent } from './layout/header/header.component';
     AppRoutingModule,
     FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    DeviceDetectorModule.forRoot(),
     HttpClientModule,
     CoreModule
   ],
