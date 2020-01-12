@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core'
 import { UploadAjaxService } from './upload-ajax.service'
 import { server_url } from '@app/core/data/server_url';
 
-declare var $
-declare var L
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',

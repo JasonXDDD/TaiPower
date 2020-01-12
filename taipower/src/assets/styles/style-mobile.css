@@ -67,9 +67,9 @@
 
 .mobile .historyBox { margin-bottom: 12px; }
 
-.mobile .togglefaq { box-shadow: 0px 0px 5px 2px #dcdcdc; position: relative; height: 56px; background-color: #fff; display: flex; align-items: center; transition: 0.35s all; color: #525077; }
+.mobile .togglefaq { box-shadow: 0px 0px 5px 2px #dcdcdc; position: relative; height: 56px; background-color: #fff; display: flex; align-items: center; justify-content: space-around; transition: 0.35s all; color: #525077; }
 .mobile .togglefaq:hover { background-color: #7c80aa; color: #fff; }
-.mobile .togglefaq p.date { font-size: 15px; font-weight: bold; margin: 0px 60px 0px 30px; }
+.mobile .togglefaq p.date { font-size: 15px; font-weight: bold; margin: 0px; }
 .mobile .togglefaq p.location { font-size: 15px; }
 
 .mobile .history-container { width: 90%; margin: 0px auto 70px auto; }

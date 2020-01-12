@@ -11,6 +11,7 @@ export class server_url{
   private event = "/api/eventdata";
   private photo = "/api/photo";
   private result = "/api/calresult";
+  private report = "/api/report";
 
   private upload = "/api/uploadfile";
 
@@ -26,7 +27,8 @@ export class server_url{
   readonly historyAPI = {
     event: this.base + this.event,
     photo: this.base + this.photo,
-    result: this.base + this.result
+    result: this.base + this.result,
+    report: this.base + this.report
   }
 
   readonly uploadAPI = {

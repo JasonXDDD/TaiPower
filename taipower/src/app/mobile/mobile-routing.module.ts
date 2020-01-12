@@ -12,8 +12,10 @@ import { MobileComponent } from './mobile.component';
 const routes: Routes = [
   { path: "", component: MobileComponent, children: [
     { path: "index", component: IndexComponent },
-    { path: "history", component: HistoryComponent },
-    { path: "history-item", component: HistoryItemComponent },
+    { path: "history", children: [
+      { path: "", component: HistoryComponent },
+      { path: ":id", component: HistoryItemComponent }
+    ]},
     { path: "notification", component: NotificationComponent },
     { path: "notion", component: NotionComponent },
     { path: "report", component: ReportComponent }

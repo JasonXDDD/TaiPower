@@ -1,10 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChildren } from '@angular/core';
 import { ResultAjaxService } from './result-ajax.service';
 
-declare var $;
-declare var L;
-declare var _;
-
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
