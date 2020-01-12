@@ -20,10 +20,12 @@
     <a [routerLink]="['/mobile/report/'+eventId+'_'+nowTitle]" *ngSwitchCase="'history-item'">回報紀錄</a>
     <a [routerLink]="['/mobile/report/'+eventId+'_'+nowTitle]" *ngSwitchCase="'notification'">回報</a>
 
-    <span class="fa-stack" style="vertical-align: top; color: white" *ngSwitchCase="'report'">
+    <!-- <span class="fa-stack" style="vertical-align: top; color: white" *ngSwitchCase="'report'">
       <i class="far fa-circle fa-stack-2x"></i>
       <i class="fas fa-location-arrow fa-stack-1x"></i>
-    </span>
+    </span> -->
+
+    <div *ngSwitchCase="'report'"></div>
 
     <span class="fa-stack" style="vertical-align: top; color: white" *ngSwitchDefault>
       <i class="far fa-circle fa-stack-2x"></i>

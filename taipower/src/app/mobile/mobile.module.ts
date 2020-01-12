@@ -11,12 +11,14 @@ import { ReportComponent } from './report/report.component';
 import { TabbarComponent } from './layout/tabbar/tabbar.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { MobileComponent } from './mobile.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [IndexComponent, HistoryComponent, HistoryItemComponent, NotificationComponent, NotionComponent, ReportComponent, TabbarComponent, NavbarComponent, MobileComponent],
   imports: [
     CommonModule,
-    MobileRoutingModule
+    MobileRoutingModule,
+    FormsModule
   ]
 })
 export class MobileModule { }

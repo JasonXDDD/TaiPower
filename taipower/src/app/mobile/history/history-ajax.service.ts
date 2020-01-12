@@ -32,7 +32,7 @@ export class HistoryAjaxService {
   }
 
   async getReport(){
-    let a = await this.server.doGetRequest(this.url.historyAPI.report)
+    let a = await this.server.doGetRequest(this.url.reportAPI.report)
     return a
   }
 

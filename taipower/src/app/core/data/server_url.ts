@@ -27,7 +27,11 @@ export class server_url{
   readonly historyAPI = {
     event: this.base + this.event,
     photo: this.base + this.photo,
-    result: this.base + this.result,
+    result: this.base + this.result
+  }
+
+
+  readonly reportAPI = {
     report: this.base + this.report
   }
 

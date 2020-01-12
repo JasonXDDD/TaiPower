@@ -3,34 +3,51 @@
     <div class="description">
       <div class="inDetail">
         <p class="textareaTitle">故障描述</p>
-        <textarea style="padding: .5rem;">小鳥寶寶被電擊卡在電纜上，使電流無法正確傳輸，於是移除鳥寶寶屍體以確保電流通行順暢。</textarea>
+        <textarea style="padding: .5rem;"
+        [disabled]="report.description !== ''" name="description" [(ngModel)]="report.description"></textarea>
       </div>
       <div class="inDetail">
         <p class="textareaTitle">備註</p>
-        <textarea style="padding: .5rem;">鳥媽媽找不到小孩在附近盤旋，有可能在遭遇事故，請循線人員多加注意</textarea>
+        <textarea style="padding: .5rem;"
+        [disabled]="report.opinion !== ''" name="opinion" [(ngModel)]="report.opinion"></textarea>
       </div>
 
       <div class="photo">
         <div class="picture">
-          <i class="far fa-times-circle fa-2x close" style="color: #ff7575"></i>
+          <a *ngIf="!isReport">
+            <i class="far fa-times-circle fa-2x close" style="color: #ff7575"></i>
+          </a>
           <div class="image" [ngStyle]="{'backgroundImage': 'url(/assets/images/mobile/1.png)'}"></div>
         </div>
         <div class="picture">
-          <i class="far fa-times-circle fa-2x close" style="color: #ff7575"></i>
+          <a *ngIf="!isReport">
+            <i class="far fa-times-circle fa-2x close" style="color: #ff7575"></i>
+          </a>
           <div class="image" [ngStyle]="{'backgroundImage': 'url(/assets/images/mobile/2.png)'}"></div>
         </div>
         <div class="picture">
-          <i class="far fa-times-circle fa-2x close" style="color: #ff7575"></i>
+          <a *ngIf="!isReport">
+            <i class="far fa-times-circle fa-2x close" style="color: #ff7575"></i>
+          </a>
           <div class="image" [ngStyle]="{'backgroundImage': 'url(/assets/images/mobile/3.png)'}"></div>
         </div>
 
-        <div class="picture">
-          <div class="image" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="picture" *ngIf="isReport">
+          <input type="file" accept="image/*" capture style="display: none;" #cameraImage>
+          <a class="image"
+          style="display: flex; flex-direction: column; align-items: center; justify-content: center;"
+          (click)="cameraImage.click()">
             <i class="fas fa-camera-retro fa-3x" style="color: #aaa; padding-bottom: .5rem;"></i>
             <p style="color: #aaa;">新增照片</p>
-          </div>
+          </a>
         </div>
 
+      </div>
+
+      <div style="margin: .5rem;" *ngIf="!isReport">
+        <button style="display: block; width: 100%; background-color: #35b7fc; border-radius: 4px; color: white; font-size: 15px;">
+          送出
+        </button>
       </div>
     </div>
   </div>
