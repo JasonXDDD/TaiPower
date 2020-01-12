@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HistoryAjaxService } from './history-ajax.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-history',
@@ -7,12 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor() { }
+  eventList: any[] = [];
+  constructor(private router: Router, private ajax: HistoryAjaxService) {
+
+  }
 
   ngOnInit() {
+    this.doGetEventAndReport()
   }
 
   counter(num) {
     return new Array(parseInt(num));
+  }
+
+  routeToItem(item){
+    this.router.navigate([`/mobile/history/${item.eventid}_${item.linenum}_${item.create_date}_${item.linename}_${item.report.length}`])
+  }
+
+  // AJAX
+  async doGetEventAndReport(){
+    var res = await this.ajax.getEvent()
+    var reportRes = await this.ajax.getReport()
+
+    this.eventList = _.cloneDeep(res.data)
+    this.eventList.forEach(ele => {
+      ele['report'] = reportRes.data.filter(report => report.eventid === ele.eventid)
+    })
+
+    console.log(this.eventList)
   }
 }

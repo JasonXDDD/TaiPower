@@ -1,10 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChildren } from '@angular/core';
 import { ResultAjaxService } from './result-ajax.service';
 
-declare var $;
-declare var L;
-declare var _;
-
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -23,7 +19,12 @@ export class ResultComponent implements OnInit {
     est_long: "",
     est_lati: "",
     towerN: 0,
-    towerN_2: 0
+    towerN_2: 0,
+    report: {
+      eventid: 0,
+      description: "",
+      opinion: ""
+    }
   }
 
   constructor(private ajax: ResultAjaxService) { }
@@ -112,7 +113,12 @@ export class ResultComponent implements OnInit {
       est_long: "",
       est_lati: "",
       towerN: 0,
-      towerN_2: 0
+      towerN_2: 0,
+      report: {
+        eventid: 0,
+        description: "",
+        opinion: ""
+      }
     }
   }
 
@@ -128,6 +134,7 @@ export class ResultComponent implements OnInit {
     var res = await this.ajax.getEvent()
 
     this.eventList = _.cloneDeep(res.data)
+    // console.log(this.eventList)
     this.eventList.forEach(ele => ele['map']={})
 
     // console.log(this.eventList)
@@ -135,9 +142,17 @@ export class ResultComponent implements OnInit {
 
   async doGetEventResult(id){
     let res = await this.ajax.getResult({eventid: id})
-    console.log(res)
+    var reportRes = await this.ajax.getReport({eventid: id})
+
     if(res.data.length > 0){
       this.eventResult = res.data[0]
+      if(reportRes.data.length > 0) this.eventResult.report = reportRes.data[0]
+      else this.eventResult.report =  {
+        eventid: 0,
+        description: "",
+        opinion: ""
+      }
+
       return true
     }
     else return false

@@ -185,13 +185,13 @@ form.uploadData { position: relative; width: 260px; overflow: hidden; }
 form.uploadData span.error-file { border: 1px solid #FF7E8D !important; border-right: 0px !important; background-color: #FFE0E4; }
 form.uploadData span.error-file:before { content: "檔案格式錯誤"; position: absolute; margin: 3px 0px 0px 125px; margin-top: 2px; color: #FF7E8D; font-size: 12px; }
 
-.mapBox { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; padding: 12px; -ms-flex-wrap: wrap; flex-wrap: wrap; }
+.mapBox { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; padding: 12px; -ms-flex-wrap: nowrap; flex-wrap: nowrap; }
 @media (max-width: 1260px) { .mapBox { -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; } }
 .mapBox .map { margin-right: 12px; }
 @media (max-width: 1260px) { .mapBox .map { margin-right: 0px; } }
 .mapBox .map .idMap { width: 468px; height: 400px; }
 @media (max-width: 1260px) { .mapBox .map .idMap { width: 100%; height: 300px; } }
-.mapBox .map_information { margin: 0px; width: 56%; height: 290px; overflow: hidden; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; }
+.mapBox .map_information { margin: 0px; width: 56%; overflow: hidden; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; }
 @media (max-width: 1260px) { .mapBox .map_information { width: 100%; margin: 12px 0px 0px 0px; height: auto; padding: 38px 0px 0px 0px; } }
 .mapBox .map_information .little_bar { font-size: 15px; color: #b2b2b2; }
 @media (max-width: 1260px) { .mapBox .map_information .little_bar { display: -webkit-box; display: -ms-flexbox; display: flex; } }
@@ -241,13 +241,13 @@ button.push { position: absolute; bottom: 30px; right: 30px; }
 .collapse { margin: 20px 0px; }
 
 .faqanswer { display: none; width: 100%; -webkit-box-shadow: 1px 7px 5px 2px #dcdcdc; box-shadow: 1px 7px 5px 2px #dcdcdc; margin-bottom: 12px; }
-.faqanswer .mapBox { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; padding: 0px 12px 12px 12px; -ms-flex-wrap: wrap; flex-wrap: wrap; }
+.faqanswer .mapBox { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; padding: 0px 12px 12px 12px; -ms-flex-wrap: nowrap; flex-wrap: nowrap; }
 @media (max-width: 1260px) { .faqanswer .mapBox { -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; } }
 .faqanswer .mapBox .map { margin-right: 12px; }
 @media (max-width: 1260px) { .faqanswer .mapBox .map { margin-right: 0px; } }
 .faqanswer .mapBox .map .idMap { width: 468px; height: 400px; }
 @media (max-width: 1260px) { .faqanswer .mapBox .map .idMap { width: 100%; height: 300px; } }
-.faqanswer .mapBox .map_information { margin: 0px; width: 56%; height: 290px; overflow: hidden; border: 1px solid #DBDFE5; padding: 30px 30px 0px 30px; position: relative; }
+.faqanswer .mapBox .map_information { margin: 0px; width: 100%; overflow: hidden; border: 1px solid #DBDFE5; padding: 30px 30px 0px 30px; position: relative; }
 @media (max-width: 1260px) { .faqanswer .mapBox .map_information { width: 100%; margin: 12px 0px 0px 0px; height: auto; padding: 38px 0px 0px 0px; } }
 .faqanswer .mapBox .map_information .little_bar { position: absolute; top: 0; left: 0px; width: 100%; height: 38px; background-color: #F0F1F5; color: #ACACAC; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
 @media (max-width: 1260px) { .faqanswer .mapBox .map_information .little_bar { display: -webkit-box; display: -ms-flexbox; display: flex; } }

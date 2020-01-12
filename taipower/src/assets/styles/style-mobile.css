@@ -54,7 +54,7 @@
 .mobile .notification li .notification_inner { width: 250px; margin: auto; }
 .mobile .notification li .notification_inner p { font-size: 12px; color: #acacac; padding-left: 20px; padding-top: 5px; }
 
-.mobile .mapBox { width: 95%; margin: 10px auto 60px auto; box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: #fff; padding: 10px 0px; }
+.mobile .mapBox { width: 95%; margin: 10px auto; box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: #fff; padding: 10px 0px; }
 .mobile .mapBox .map { width: 95%; margin: auto; padding: 10px 0px; }
 .mobile .mapBox .detail { width: 95%; margin: 0px auto 0px auto; border: 1px solid #dbdfe5; font-size: 15px; }
 .mobile .mapBox .detail p.title { font-weight: bold; color: #464453; height: 50px; display: flex; align-items: center; margin: 0px 15px; border-bottom: 0px solid #dbdfe5; white-space: nowrap; }
@@ -67,9 +67,9 @@
 
 .mobile .historyBox { margin-bottom: 12px; }
 
-.mobile .togglefaq { box-shadow: 0px 0px 5px 2px #dcdcdc; position: relative; height: 56px; background-color: #fff; display: flex; align-items: center; transition: 0.35s all; color: #525077; }
+.mobile .togglefaq { box-shadow: 0px 0px 5px 2px #dcdcdc; position: relative; height: 56px; background-color: #fff; display: flex; align-items: center; justify-content: space-around; transition: 0.35s all; color: #525077; }
 .mobile .togglefaq:hover { background-color: #7c80aa; color: #fff; }
-.mobile .togglefaq p.date { font-size: 15px; font-weight: bold; margin: 0px 60px 0px 30px; }
+.mobile .togglefaq p.date { font-size: 15px; font-weight: bold; margin: 0px; }
 .mobile .togglefaq p.location { font-size: 15px; }
 
 .mobile .history-container { width: 90%; margin: 0px auto 70px auto; }
@@ -81,8 +81,9 @@
 .mobile .inDetail p.textareaTitle { width: 20%; font-weight: bold; color: #464453; height: 50px; display: flex; align-items: center; margin: 0px 15px; border-bottom: 0px solid #dbdfe5; white-space: nowrap; }
 .mobile .inDetail textarea { width: 80%; margin: 15px; height: 90px; font-size: 15px; border: 1px solid #dbdfe5; overflow-y: scroll; }
 
-.mobile .photo { display: flex; flex-wrap: wrap; justify-content: space-evenly; align-items: center; }
-.mobile .photo .picture { position: relative; width: 45%; padding-bottom: 5px; }
-.mobile .photo .picture .close { position: absolute; right: -5px; top: -5px; }
+.mobile .photo { display: flex; flex-wrap: wrap; justify-content: space-evenly; align-items: center; margin-top: 15px; }
+.mobile .photo .picture { position: relative; width: 45%; height: 130px; padding-bottom: 10px; }
+.mobile .photo .picture .image { width: 100%; height: 100%; background-color: #e5e5e5; border-radius: .5rem; background-position: center center; background-repeat: no-repeat; background-size: cover; }
+.mobile .photo .picture .close { position: absolute; right: -8px; top: -8px; }
 
 /*# sourceMappingURL=style.css.map */

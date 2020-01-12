@@ -5,30 +5,15 @@ import { ServerService } from '@app/core/services/server.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ResultAjaxService {
+export class ReportAjaxService {
 
   constructor(
     private url: server_url,
     private server: ServerService
   ) { }
 
-  async getResult(data){
-    let a = await this.server.doGetRequest(this.url.historyAPI.result, data)
-    return a
-  }
-
-  async getEvent(){
-    let a = await this.server.doGetRequest(this.url.historyAPI.event)
-    return a
-  }
-
   async getReport(data){
     let a = await this.server.doGetRequest(this.url.reportAPI.report, data)
-    return a
-  }
-
-  async getPhoto(){
-    let a = await this.server.doGetRequest(this.url.historyAPI.photo)
     return a
   }
 }

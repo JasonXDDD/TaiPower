@@ -1,7 +1,11 @@
 
 <div style="height: 50px;"></div>
 <div class="navigation">
-  <div class="camera" *ngIf="nowRoute == 'report'"><i class="fas fa-camera-retro fa-2x"></i></div>
+
+  <div class="camera" *ngIf="nowRoute == 'report'">
+    <i class="fas fa-camera-retro fa-2x"></i>
+    <input type="file" accept="image/*" capture style="opacity: 0;">
+  </div>
 
   <a [routerLink]="['/mobile/notion']">
     <i class="far fa-bell twenty-six reminder" [ngClass]="{'here': nowRoute == 'notion' || nowRoute == 'notification'}" aria-hidden="true"></i>
