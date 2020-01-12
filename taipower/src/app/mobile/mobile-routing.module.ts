@@ -18,7 +18,9 @@ const routes: Routes = [
     ]},
     { path: "notification", component: NotificationComponent },
     { path: "notion", component: NotionComponent },
-    { path: "report", component: ReportComponent }
+    { path: "report", children: [
+      { path: ":id", component: ReportComponent }
+    ]}
   ]}
 ];
 

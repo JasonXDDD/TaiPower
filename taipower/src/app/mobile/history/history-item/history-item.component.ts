@@ -27,7 +27,7 @@ export class HistoryItemComponent implements OnInit {
       self.eventId = params["id"].split("_")[0];
       self.lineNum = params["id"].split("_")[1];
       self.eventDate = params["id"].split("_")[2];
-      self.eventLine = params["id"].split("_")[3];
+      self.eventLine = decodeURI(params["id"].split("_")[3]);
 
       self.doGetResult(self.eventId, self.lineNum);
     });
