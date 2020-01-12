@@ -17,8 +17,7 @@
 
   <div class="user_information" [ngSwitch]="nowRoute">
 
-    <a [routerLink]="['/mobile/report/'+eventId+'_'+nowTitle]" *ngSwitchCase="'history-item'">回報紀錄</a>
-    <a [routerLink]="['/mobile/report/'+eventId+'_'+nowTitle]" *ngSwitchCase="'notification'">回報</a>
+    <a [routerLink]="['/mobile/report/'+eventId+'_'+nowTitle]" *ngSwitchCase="'history-item'">{{ reportNum>0? '回報紀錄': '回報' }}</a>
 
     <!-- <span class="fa-stack" style="vertical-align: top; color: white" *ngSwitchCase="'report'">
       <i class="far fa-circle fa-stack-2x"></i>

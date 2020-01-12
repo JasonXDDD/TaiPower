@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
   nowTitle: string = '回報系統'
 
   eventId: number = 0
+  reportNum: number = 0
 
   constructor (private router: Router, private location: Location) {}
 
@@ -32,16 +33,17 @@ export class NavbarComponent implements OnInit {
 
     if (token.length == 3 && token[2] == 'history') {
       this.nowRoute = 'history'
-      this.nowTitle = '歷史資料'
+      this.nowTitle = '台電回報系統'
       sessionStorage.clear()
     } else if (token.length == 4 && token[2] == 'history') {
       this.nowRoute = 'history-item'
       this.nowTitle = decodeURI(token[3].split("_")[3]);
-      this.eventId = token[3].split("_")[0];
+      this.eventId = Number(token[3].split("_")[0]);
+      this.reportNum = Number(token[3].split("_")[4]);
     } else if (token.length == 4 && token[2] == 'report') {
       this.nowRoute = 'report'
       this.nowTitle = '回報: ' + decodeURI(token[3].split("_")[1]);
-      this.eventId = token[3].split("_")[0];
+      this.eventId = Number(token[3].split("_")[0]);
     } else {
       this.nowRoute = ''
       this.nowTitle = '台電回報系統'
