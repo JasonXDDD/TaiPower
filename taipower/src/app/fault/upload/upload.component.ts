@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { UploadAjaxService } from './upload-ajax.service'
 import { server_url } from '@app/core/data/server_url';
-
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -23,25 +24,76 @@ export class UploadComponent implements OnInit {
   layerGroup: any;
 
   brandList: any[] = [
-    {name: 'Toshiba', file: ['.osc']},
-    {name: 'GE', file: ['.hdr', '.cfg', '.dat']},
-    {name: 'SEL', file: ['.cev']},
+    { name: 'Toshiba', file: [
+      { type: '.osc', isUpload: 'none' }
+    ]},
+    { name: 'GE', file: [
+      { type: '.hdr', isUpload: 'none' },
+      { type: '.cfg', isUpload: 'none' },
+      { type: '.dat', isUpload: 'none' }
+    ]},
+    { name: 'SEL', file: [
+      { type: '.cev', isUpload: 'none' }
+    ]},
   ];
+
+  calData: any = {
+    file: []
+  }
+
   selectBrand: string = "";
 
   showResult: boolean = false;
   apiUrl: any;
 
-  constructor (private ajax: UploadAjaxService, private url: server_url) {}
+  uploadForm: FormGroup;
+
+  constructor (private formBuilder: FormBuilder, private http: HttpClient, private ajax: UploadAjaxService, private url: server_url) {}
 
   ngOnInit () {
     // this.init()
 
     this.apiUrl = this.url
     this.mapInit()
+
+    this.uploadForm = this.formBuilder.group({
+      file: [''],
+      description: ['']
+    })
   }
 
-  changeFile(event){
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.uploadForm.get('file').setValue(file);
+      this.uploadForm.get('description').setValue(file.name);
+    }
+  }
+
+  onSubmit(event, id, fileId) {
+    let self = this
+    this.changeFileName(event);
+    this.onFileSelect(event)
+
+    const formData = new FormData();
+    formData.append('file', this.uploadForm.get('file').value);
+    formData.append('description', this.uploadForm.get('description').value);
+
+
+    console.log(formData)
+    this.http.post<any>("http://140.112.20.123:22810/api/uploadfile", formData).subscribe(
+      (res) => {
+        console.log(res)
+        self.calData.file[id].data[fileId].isUpload = 'sucess'
+      },
+      (err) => {
+        console.log(err)
+        self.calData.file[id].data[fileId].isUpload = 'error'
+      }
+    );
+  }
+
+  changeFileName(event){
     let target = $(event.target).parents('form').children('.file-name')[0]
     let filepath = event.target.value
     let m = filepath.match(/([^\/\\]+)$/)
@@ -94,6 +146,15 @@ export class UploadComponent implements OnInit {
     let item = this.brandList.filter(ele => ele.name === target)
     if(item.length > 0) return item[0].file
     else return []
+  }
+
+  setCalData(){
+    for(let i = 0; i < this.terminal; i++){
+      this.calData.file.push({
+        terminal: i,
+        data: _.cloneDeep(this.getFile(this.selectBrand))
+      })
+    }
   }
 
   // MAP

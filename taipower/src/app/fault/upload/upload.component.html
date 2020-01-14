@@ -45,23 +45,21 @@
 
             <li class="upload_information">
               <p class="name">{{ start? selectTower.startpos: (last? selectTower.stoppos: "端點" + id)}}</p>
-              <select class="Vendor" name="brand" [(ngModel)]="selectBrand">
+              <select class="Vendor" name="brand" [(ngModel)]="selectBrand" (change)="setCalData()">
                 <option value="" disabled>選擇廠家</option>
                 <option *ngFor="let brand of brandList" [value]="brand.name">{{ brand.name }}</option>
               </select>
 
 
-              <ng-container *ngFor="let file of getFile(selectBrand)">
+              <ng-container *ngFor="let file of getFile(selectBrand); let fileId = index">
 
-                <form
-                  method="post"
-                  enctype="multipart/form-data"
-                  [action]="apiUrl.uploadAPI.post"
-                  class="uploadData"
-                >
-                  <span class="file-name error-file">{{'選擇 ' + file + ' 檔案'}}</span>
+                <form [formGroup]="uploadForm" class="uploadData">
+                  <span class="file-name" [ngClass]="{
+                    'sucess-file': calData.file[id].data[fileId].isUpload =='success',
+                    'error-file': calData.file[id].data[fileId].isUpload =='error'
+                    }">{{'選擇 ' + file.type + ' 檔案'}}</span>
                   <label>
-                    <input type="file" class="file-upload" name="file" [accept]="file" (change)="changeFile($event)"/>
+                    <input type="file" class="file-upload" name="file" [accept]="file.type" (change)="onSubmit($event, id, fileId);"/>
                     <input type="hidden" name="description" />
                   </label>
                   <!-- <input type="submit" value="Go" /> -->

@@ -5,7 +5,7 @@ import { FaultRoutingModule } from './fault-routing.module';
 
 import { UploadComponent } from './upload/upload.component';
 import { ResultComponent } from './result/result.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     UploadComponent,
@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FaultRoutingModule,
     FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class FaultModule { }

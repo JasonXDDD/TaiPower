@@ -184,6 +184,8 @@ form.uploadData { position: relative; width: 260px; overflow: hidden; }
 @media (max-width: 1260px) { form.uploadData { margin-bottom: 12px; } }
 form.uploadData span.error-file { border: 1px solid #FF7E8D !important; border-right: 0px !important; background-color: #FFE0E4; }
 form.uploadData span.error-file:before { content: "錯誤"; position: absolute; right: 55px; margin-top: 2px; color: #FF7E8D; font-size: 12px; }
+form.uploadData span.sucess-file { border: 1px solid #4CAF50 !important; border-right: 0px !important; background-color: #dffabf; }
+form.uploadData span.sucess-file:before { content: "上傳成功"; position: absolute; right: 55px; margin-top: 2px; color: #4CAF50; font-size: 12px; }
 
 .mapBox { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; padding: 12px; -ms-flex-wrap: nowrap; flex-wrap: nowrap; }
 @media (max-width: 1260px) { .mapBox { -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; } }
