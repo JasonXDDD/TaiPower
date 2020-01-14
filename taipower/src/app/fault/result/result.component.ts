@@ -19,7 +19,8 @@ export class ResultComponent implements OnInit {
     est_long: "",
     est_lati: "",
     towerN: 0,
-    towerN_2: 0
+    towerN_2: 0,
+    photo: []
   }
 
   constructor(private ajax: ResultAjaxService) { }
@@ -102,6 +103,7 @@ export class ResultComponent implements OnInit {
     // do AJAX
     let isResult = await this.doGetEventResult(item.eventid)
     let line = await this.ajax.getLinePos({lineid: item.lineid})
+    await this.doGetPhoto(item.eventid)
     // do VIEW
 
     this.openCollapse(event)
@@ -134,16 +136,15 @@ export class ResultComponent implements OnInit {
       est_long: "",
       est_lati: "",
       towerN: 0,
-      towerN_2: 0
+      towerN_2: 0,
+      photo: []
     }
   }
 
   // AJAX
-  src: string = "";
-
-  async doGetPhoto(){
-    let res = await this.ajax.getPhoto()
-    this.src = res.data[0].photo
+  async doGetPhoto(id){
+    let res = await this.ajax.getPhoto({eventid: id})
+    this.eventResult['photo'] = res.data
   }
 
   async doGetEventAndReport(){

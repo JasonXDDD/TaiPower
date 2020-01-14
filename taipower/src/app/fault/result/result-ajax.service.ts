@@ -27,8 +27,8 @@ export class ResultAjaxService {
     return a
   }
 
-  async getPhoto(){
-    let a = await this.server.doGetRequest(this.url.historyAPI.photo)
+  async getPhoto(data){
+    let a = await this.server.doGetRequest(this.url.historyAPI.photo, data)
     return a
   }
 

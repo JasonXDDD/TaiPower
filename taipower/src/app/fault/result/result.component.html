@@ -77,14 +77,8 @@
                 </ul>
 
                 <div class="photo">
-                  <div class="picture">
-                    <div class="image" [ngStyle]="{'backgroundImage': 'url(/assets/images/mobile/1.png)'}"></div>
-                  </div>
-                  <div class="picture">
-                    <div class="image" [ngStyle]="{'backgroundImage': 'url(/assets/images/mobile/2.png)'}"></div>
-                  </div>
-                  <div class="picture">
-                    <div class="image" [ngStyle]="{'backgroundImage': 'url(/assets/images/mobile/3.png)'}"></div>
+                  <div class="picture" *ngFor="let photo of eventResult.photo">
+                    <div class="image" [ngStyle]="{'backgroundImage': 'url(' + photo.photo + ')'}"></div>
                   </div>
                 </div>
               </div>
