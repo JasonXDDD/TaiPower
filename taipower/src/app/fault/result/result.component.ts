@@ -151,7 +151,7 @@ export class ResultComponent implements OnInit {
     var res = await this.ajax.getEvent()
     var reportRes = await this.ajax.getReport()
 
-    this.eventList = _.cloneDeep(res.data)
+    this.eventList = _.cloneDeep(res.data.reverse())
     this.eventList.forEach(ele => {
       ele['map'] = {}
       ele['report'] = reportRes.data.filter(report => report.eventid === ele.eventid)

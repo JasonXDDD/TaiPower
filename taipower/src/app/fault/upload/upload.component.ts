@@ -149,6 +149,7 @@ export class UploadComponent implements OnInit {
   }
 
   setCalData(){
+    this.calData.file = []
     for(let i = 0; i < this.terminal; i++){
       this.calData.file.push({
         terminal: i,
