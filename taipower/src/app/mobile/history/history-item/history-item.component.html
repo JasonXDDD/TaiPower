@@ -1,6 +1,12 @@
 <div class="mapBox" *ngFor="let result of resultList">
   <div class="map">
     <div class="idMap" id="mapid"></div>
+
+    <a style="display: block; text-align: center; background-color: #35b7fc; border-radius: 4px; color: white; font-size: 15px; margin-top: 15px; padding: 8px;"
+      [href]="'https://www.google.com/maps/dir/' + result.est_lati + ',' + result.est_long" target="_blank">
+    前往導航
+    </a>
+
   </div>
   <div class="detail">
     <p>發生時間<span>{{ eventDate }}</span></p>
