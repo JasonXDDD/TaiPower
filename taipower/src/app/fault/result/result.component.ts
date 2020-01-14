@@ -19,19 +19,13 @@ export class ResultComponent implements OnInit {
     est_long: "",
     est_lati: "",
     towerN: 0,
-    towerN_2: 0,
-    report: {
-      eventid: 0,
-      description: "",
-      opinion: ""
-    }
+    towerN_2: 0
   }
 
   constructor(private ajax: ResultAjaxService) { }
 
   async ngOnInit() {
-    await this.doGetEvent()
-
+    await this.doGetEventAndReport()
   }
 
 
@@ -140,12 +134,7 @@ export class ResultComponent implements OnInit {
       est_long: "",
       est_lati: "",
       towerN: 0,
-      towerN_2: 0,
-      report: {
-        eventid: 0,
-        description: "",
-        opinion: ""
-      }
+      towerN_2: 0
     }
   }
 
@@ -157,30 +146,24 @@ export class ResultComponent implements OnInit {
     this.src = res.data[0].photo
   }
 
-  async doGetEvent(){
+  async doGetEventAndReport(){
     var res = await this.ajax.getEvent()
+    var reportRes = await this.ajax.getReport()
 
     this.eventList = _.cloneDeep(res.data)
-    // console.log(this.eventList)
-    this.eventList.forEach(ele => ele['map']={})
+    this.eventList.forEach(ele => {
+      ele['map'] = {}
+      ele['report'] = reportRes.data.filter(report => report.eventid === ele.eventid)
+    })
 
-    // console.log(this.eventList)
+    console.log(this.eventList)
   }
 
   async doGetEventResult(id){
     let res = await this.ajax.getResult({eventid: id})
-    var reportRes = await this.ajax.getReport({eventid: id})
 
     if(res.data.length > 0){
       this.eventResult = res.data[0]
-      if(reportRes.data.length > 0)
-        this.eventResult.report = reportRes.data[0]
-      else this.eventResult.report =  {
-        eventid: 0,
-        description: "",
-        opinion: ""
-      }
-
       return true
     }
     else return false

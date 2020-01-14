@@ -7,6 +7,7 @@
       <div class="togglefaq" (click)="openPane(item, id, $event)">
         <p class="date">{{ item.create_date }}</p>
         <p class="location">{{ item.linename }}</p>
+        <p class="date" style="margin-left: auto;">{{ item.report.length }}則回報</p>
       </div>
 
       <div class="faqanswer">
@@ -56,7 +57,7 @@
               </ul>
             </div>
 
-            <div class="map_information" style="margin-top: 15px;" *ngIf="eventResult.report.eventid != 0">
+            <div class="map_information" style="margin-top: 15px;" *ngIf="item.report.length > 0">
               <div class="little_bar">
                 <p>回報資料</p>
               </div>
@@ -64,13 +65,13 @@
                 <ul class="malfunction">
                   <li class="malfunction_information">
                     <p class="tittle">故障描述</p>
-                    <p class="context">{{ eventResult.report.description }}</p>
+                    <p class="context">{{ item.report[0].description }}</p>
                   </li>
                   <div class="line"></div>
                   <li class="malfunction_information">
                     <p class="tittle">備註</p>
                     <div class="distance">
-                      <p class="context">{{ eventResult.report.opinion }}</p>
+                      <p class="context">{{ item.report[0].opinion }}</p>
                     </div>
                   </li>
                 </ul>
