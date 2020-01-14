@@ -16,4 +16,9 @@ export class ReportAjaxService {
     let a = await this.server.doGetRequest(this.url.reportAPI.report, data)
     return a
   }
+
+  async getPhoto(data){
+    let a = await this.server.doGetRequest(this.url.historyAPI.photo, data)
+    return a
+  }
 }
