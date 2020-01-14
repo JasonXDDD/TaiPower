@@ -22,6 +22,13 @@ export class UploadComponent implements OnInit {
   map: any;
   layerGroup: any;
 
+  brandList: any[] = [
+    {name: 'Toshiba', file: ['.osc']},
+    {name: 'GE', file: ['.hdr', '.cfg', '.dat']},
+    {name: 'SEL', file: ['.cev']},
+  ];
+  selectBrand: string = "";
+
   showResult: boolean = false;
   apiUrl: any;
 
@@ -29,6 +36,7 @@ export class UploadComponent implements OnInit {
 
   ngOnInit () {
     // this.init()
+
     this.apiUrl = this.url
     this.mapInit()
   }
@@ -79,7 +87,13 @@ export class UploadComponent implements OnInit {
   }
 
   show(item){
-    console.log(this.selectTower)
+    console.log(JSON.stringify(item))
+  }
+
+  getFile(target){
+    let item = this.brandList.filter(ele => ele.name === target)
+    if(item.length > 0) return item[0].file
+    else return []
   }
 
   // MAP

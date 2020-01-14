@@ -45,52 +45,31 @@
 
             <li class="upload_information">
               <p class="name">{{ start? selectTower.startpos: (last? selectTower.stoppos: "端點" + id)}}</p>
-              <select class="Vendor">
-                <option value="GE">GE</option>
-                <option value="BG">BG</option>
-                <option value="G8">G8</option>
+              <select class="Vendor" name="brand" [(ngModel)]="selectBrand">
+                <option value="" disabled>選擇廠家</option>
+                <option *ngFor="let brand of brandList" [value]="brand.name">{{ brand.name }}</option>
               </select>
-              <!-- <select class="ElectricStation">
-                <option value="北投">北投</option>
-                <option value="基隆">基隆</option>
-                <option value="宜蘭">宜蘭</option>
-              </select> -->
-              <form
-                method="post"
-                enctype="multipart/form-data"
-                [action]="apiUrl.uploadAPI.post"
-                class="uploadData"
-              >
-                <span class="file-name error-file">{{'select your file'}}</span>
-                <label>
-                  <input type="file" class="file-upload" name="file" (change)="changeFile($event)"/>
-                  <input type="hidden" name="description" />
-                </label>
-                <!-- <input type="submit" value="Go" /> -->
-              </form>
 
-              <form
-                method="post"
-                enctype="multipart/form-data"
-                action=""
-                class="uploadData"
-              >
-                <span class="file-name error-file">select your file</span>
-                <label>
-                  <input type="file" class="file-upload"/>
-                </label>
-              </form>
-              <form
-                method="post"
-                enctype="multipart/form-data"
-                action=""
-                class="uploadData"
-              >
-                <span class="file-name">select your file</span>
-                <label>
-                  <input type="file" class="file-upload"/>
-                </label>
-              </form>
+
+              <ng-container *ngFor="let file of getFile(selectBrand)">
+
+                <form
+                  method="post"
+                  enctype="multipart/form-data"
+                  [action]="apiUrl.uploadAPI.post"
+                  class="uploadData"
+                >
+                  <span class="file-name error-file">{{'選擇 ' + file + ' 檔案'}}</span>
+                  <label>
+                    <input type="file" class="file-upload" name="file" [accept]="file" (change)="changeFile($event)"/>
+                    <input type="hidden" name="description" />
+                  </label>
+                  <!-- <input type="submit" value="Go" /> -->
+                </form>
+              </ng-container>
+
+
+
             </li>
             <div *ngIf="!last" class="line"></div>
           </ng-container>
