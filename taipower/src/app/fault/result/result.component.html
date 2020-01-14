@@ -60,24 +60,34 @@
               <div class="little_bar">
                 <p>回報資料</p>
               </div>
-              <ul class="malfunction">
-                <li class="malfunction_information">
-                  <p class="tittle">故障描述</p>
-                  <p class="context">{{ eventResult.report.description }}</p>
-                </li>
-                <div class="line"></div>
-                <li class="malfunction_information">
-                  <p class="tittle">備註</p>
-                  <div class="distance">
-                    <p class="context">{{ eventResult.report.opinion }}</p>
+              <div style="display: flex; flex-direction: column;">
+                <ul class="malfunction">
+                  <li class="malfunction_information">
+                    <p class="tittle">故障描述</p>
+                    <p class="context">{{ eventResult.report.description }}</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="tittle">備註</p>
+                    <div class="distance">
+                      <p class="context">{{ eventResult.report.opinion }}</p>
+                    </div>
+                  </li>
+                </ul>
+
+                <div class="photo">
+                  <div class="picture">
+                    <div class="image" [ngStyle]="{'backgroundImage': 'url(/assets/images/mobile/1.png)'}"></div>
                   </div>
-                </li>
-                <div class="line"></div>
-                <li class="malfunction_information">
-                  <p class="tittle">故障日期</p>
-                  <p class="context">{{ item.create_date }}</p>
-                </li>
-              </ul>
+                  <div class="picture">
+                    <div class="image" [ngStyle]="{'backgroundImage': 'url(/assets/images/mobile/2.png)'}"></div>
+                  </div>
+                  <div class="picture">
+                    <div class="image" [ngStyle]="{'backgroundImage': 'url(/assets/images/mobile/3.png)'}"></div>
+                  </div>
+                </div>
+              </div>
+
 
             </div>
           </div>

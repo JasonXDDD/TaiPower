@@ -23,7 +23,7 @@
 
           <div *ngIf="towerList.length > 0">
             <span class="little_title" style="margin-left: 3rem; margin-right: 1rem; text-align: center; height: fit-content;">選擇電驛站</span>
-            <select class="Vendor" name="selectTower" [(ngModel)]="selectTower" (change)="doGetLinePos(selectTower.linenum)">
+            <select class="Vendor" name="selectTower" [(ngModel)]="selectTower" (change)="doGetLinePos(selectTower.lineid)">
               <option value="" disabled>選擇電驛站</option>
               <option *ngFor="let item of towerList" [ngValue]="item">{{ item.linename }}</option>
             </select>
@@ -34,7 +34,7 @@
     </form>
 
 
-    <ng-container *ngIf="selectTower.linenum != 0">
+    <ng-container *ngIf="selectTower.lineid != 0">
       <div class="stepFormBox">
         <div class="little_bar">
           <span class="little_title">選擇廠商</span>

@@ -13,7 +13,7 @@ export class HistoryItemComponent implements OnInit {
 
   eventId: number = 0;
   resultList: any[] = [];
-  lineNum: number = 0;
+  lineId: number = 0;
   eventLine: string = "";
   eventDate: string = "";
 
@@ -25,18 +25,18 @@ export class HistoryItemComponent implements OnInit {
 
     this.route.params.forEach(params => {
       self.eventId = params["id"].split("_")[0];
-      self.lineNum = params["id"].split("_")[1];
+      self.lineId = params["id"].split("_")[1];
       self.eventDate = params["id"].split("_")[2];
       self.eventLine = decodeURI(params["id"].split("_")[3]);
 
-      self.doGetResult(self.eventId, self.lineNum);
+      self.doGetResult(self.eventId, self.lineId);
     });
   }
 
   // AJAX
-  async doGetResult(eventId, lineNum){
+  async doGetResult(eventId, lineId){
     var res = await this.ajax.getResult({eventid: eventId})
-    var line = await this.ajax.getLinePos({linenum: lineNum})
+    var line = await this.ajax.getLinePos({lineid: lineId})
     this.resultList = res.data
 
     if(this.resultList.length > 0){

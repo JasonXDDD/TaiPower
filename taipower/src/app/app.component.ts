@@ -68,7 +68,6 @@ export class AppComponent implements OnInit {
   }
 
   checkRoute(url){
-    console.log(this.deviceService.isMobile(), this.deviceService.getDeviceInfo(), url)
 
     if(url === '/') return;
 

@@ -12,7 +12,7 @@ export class UploadComponent implements OnInit {
   terminal: number = 0
   towerList: any[] = []
   selectTower: any = {
-    linenum: 0,
+    lineid: 0,
     numtower: 0,
     linename: '',
     terminals: 0,
@@ -54,7 +54,7 @@ export class UploadComponent implements OnInit {
   }
 
   async doGetLinePos(num){
-    let data = {linenum: num}
+    let data = {lineid: num}
     let res = await this.ajax.getLinePos(data)
     let line = this.toLineLatLng(res.data)
     this.addLinePosToMap(line)

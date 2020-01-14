@@ -23,7 +23,7 @@ export class HistoryComponent implements OnInit {
   }
 
   routeToItem(item){
-    this.router.navigate([`/mobile/history/${item.eventid}_${item.linenum}_${item.create_date}_${item.linename}_${item.report.length}`])
+    this.router.navigate([`/mobile/history/${item.eventid}_${item.lineid}_${item.create_date}_${item.linename}_${item.report.length}`])
   }
 
   // AJAX

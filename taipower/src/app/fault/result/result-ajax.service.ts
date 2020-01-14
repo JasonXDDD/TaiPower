@@ -31,4 +31,9 @@ export class ResultAjaxService {
     let a = await this.server.doGetRequest(this.url.historyAPI.photo)
     return a
   }
+
+  async getLinePos(data){
+    let a = await this.server.doGetRequest(this.url.linePosAPI.get, data)
+    return a
+  }
 }
