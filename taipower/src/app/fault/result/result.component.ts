@@ -20,18 +20,13 @@ export class ResultComponent implements OnInit {
     est_lati: "",
     towerN: 0,
     towerN_2: 0,
-    report: {
-      eventid: 0,
-      description: "",
-      opinion: ""
-    }
+    photo: []
   }
 
   constructor(private ajax: ResultAjaxService) { }
 
   async ngOnInit() {
-    await this.doGetEvent()
-
+    await this.doGetEventAndReport()
   }
 
 
@@ -72,9 +67,33 @@ export class ResultComponent implements OnInit {
     }).addTo(this.layerGroup)
   }
 
-  markerEvent(lat, lng){
+  addMarkerEvent(lat, lng){
     var marker = L.marker([lat, lng]).addTo(this.layerGroup)
   }
+
+  addLinePosToMap(line){
+    line.forEach(ele => {
+      L.circle(ele, {
+          color: 'red',
+          fillColor: '#f03',
+          fillOpacity: 0.5,
+          radius: 20
+        }).addTo(this.layerGroup)
+    })
+    var polyline = L.polyline(line, { color: 'red' }).addTo(this.layerGroup)
+  }
+
+  // FORMATTER
+  toLineLatLng(data){
+    return data
+    .sort((a,b)=> {
+      return Number(a.towerN) - Number(b.towerN)
+    })
+    .map(ele => {
+      return [Number(ele.cn) , Number(ele.ce)]
+    })
+  }
+
 
 
   // VIEW
@@ -83,13 +102,17 @@ export class ResultComponent implements OnInit {
 
     // do AJAX
     let isResult = await this.doGetEventResult(item.eventid)
-
+    let line = await this.ajax.getLinePos({lineid: item.lineid})
+    await this.doGetPhoto(item.eventid)
     // do VIEW
 
     this.openCollapse(event)
     this.openMap(index)
     if(isResult){
-      this.markerEvent(this.eventResult.est_lati, this.eventResult.est_long)
+      // clear
+      this.layerGroup.clearLayers()
+      this.addMarkerEvent(this.eventResult.est_lati, this.eventResult.est_long)
+      this.addLinePosToMap(this.toLineLatLng(line.data))
       this.eventList[index].map.fitBounds(this.layerGroup.getBounds())
     }
   }
@@ -114,45 +137,34 @@ export class ResultComponent implements OnInit {
       est_lati: "",
       towerN: 0,
       towerN_2: 0,
-      report: {
-        eventid: 0,
-        description: "",
-        opinion: ""
-      }
+      photo: []
     }
   }
 
   // AJAX
-  src: string = "";
-
-  async doGetPhoto(){
-    let res = await this.ajax.getPhoto()
-    this.src = res.data[0].photo
+  async doGetPhoto(id){
+    let res = await this.ajax.getPhoto({eventid: id})
+    this.eventResult['photo'] = res.data
   }
 
-  async doGetEvent(){
+  async doGetEventAndReport(){
     var res = await this.ajax.getEvent()
+    var reportRes = await this.ajax.getReport()
 
-    this.eventList = _.cloneDeep(res.data)
-    // console.log(this.eventList)
-    this.eventList.forEach(ele => ele['map']={})
+    this.eventList = _.cloneDeep(res.data.reverse())
+    this.eventList.forEach(ele => {
+      ele['map'] = {}
+      ele['report'] = reportRes.data.filter(report => report.eventid === ele.eventid)
+    })
 
-    // console.log(this.eventList)
+    console.log(this.eventList)
   }
 
   async doGetEventResult(id){
     let res = await this.ajax.getResult({eventid: id})
-    var reportRes = await this.ajax.getReport({eventid: id})
 
     if(res.data.length > 0){
       this.eventResult = res.data[0]
-      if(reportRes.data.length > 0) this.eventResult.report = reportRes.data[0]
-      else this.eventResult.report =  {
-        eventid: 0,
-        description: "",
-        opinion: ""
-      }
-
       return true
     }
     else return false

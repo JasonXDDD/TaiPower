@@ -24,6 +24,17 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     let self = this;
 
+    // do route if mobile
+    this.checkRoute(this.router.url)
+    this.router.events.subscribe(async evt => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      else {
+        self.checkRoute(evt.url)
+      }
+    })
+
     //init firebase
     firebase.initializeApp(environment.firebase);
     const messaging = firebase.messaging();
@@ -54,20 +65,10 @@ export class AppComponent implements OnInit {
     this.swPush.messages.subscribe(msg => {
       console.log(msg);
     });
-
-    // do route if mobile
-    this.checkRoute(this.router.url)
-    this.router.events.subscribe(async evt => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-      else {
-        self.checkRoute(evt.url)
-      }
-    })
   }
 
   checkRoute(url){
+
     if(url === '/') return;
 
     if(this.deviceService.isMobile() && url.split('/')[1] !== 'mobile'){

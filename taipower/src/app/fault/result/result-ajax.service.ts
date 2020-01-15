@@ -22,13 +22,18 @@ export class ResultAjaxService {
     return a
   }
 
-  async getReport(data){
-    let a = await this.server.doGetRequest(this.url.reportAPI.report, data)
+  async getReport(){
+    let a = await this.server.doGetRequest(this.url.reportAPI.report)
     return a
   }
 
-  async getPhoto(){
-    let a = await this.server.doGetRequest(this.url.historyAPI.photo)
+  async getPhoto(data){
+    let a = await this.server.doGetRequest(this.url.historyAPI.photo, data)
+    return a
+  }
+
+  async getLinePos(data){
+    let a = await this.server.doGetRequest(this.url.lineAPI.pos, data)
     return a
   }
 }

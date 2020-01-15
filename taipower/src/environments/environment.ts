@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiServer: "http://140.112.20.123:22810",
+  apiServer: "http://www.taipowerfl.tk",
+  domain: "https://taipower-2019.firebaseapp.com",
   firebase: {
     apiKey: "AIzaSyB7lgM34DNGP7RQBnQgzKdu3HzKcN21Ckk",
     authDomain: "taipower-2019.firebaseapp.com",

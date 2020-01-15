@@ -5,10 +5,15 @@
 
     <div class="historyBox" *ngFor="let item of eventList">
       <a (click)="routeToItem(item)">
-        <div class="togglefaq">
-          <p class="date">{{ item.create_date }}</p>
+        <div class="togglefaq" style="position: relative;">
+          <div style="position: absolute; left: 10px; top: 22px; line-height: 0;" *ngIf="item.report.length == 0">
+            <i class="fas fa-circle fa-xs" style="color: red"></i>
+          </div>
+          <p class="date" style="margin-left: 10px;">{{ item.create_date }}</p>
           <p class="location">{{ item.linename }}</p>
-          <p class="date">{{ item.report.length }}則回報</p>
+          <p class="date" [ngClass]="{'error': item.report.length == 0}">
+            {{ item.report.length == 0? '尚未回報': item.report.length + '則回報' }}
+          </p>
         </div>
       </a>
     </div>

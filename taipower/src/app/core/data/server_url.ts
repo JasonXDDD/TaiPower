@@ -6,22 +6,23 @@ export class server_url{
   private base = environment.apiServer;
 
   private lineInfo = "/api/lineinfo";
-  private linePos = "/api/towerpos";
+  private linePos = "/api/towerpos/";
+  private lineParam = "/api/linepar";
+  private lineCalc = "/api/calculate_new/"
 
-  private event = "/api/eventdata";
+  private event = "/api/eventdata/";
   private photo = "/api/photo";
-  private result = "/api/calresult";
+  private result = "/api/calresult/";
   private report = "/api/report";
 
-  private upload = "/api/uploadfile";
+  private upload = "/api/uploadfile/";
 
 
-  readonly lineInfoAPI = {
-    get: this.base + this.lineInfo
-  }
-
-  readonly linePosAPI = {
-    get: this.base + this.linePos
+  readonly lineAPI = {
+    info: this.base + this.lineInfo,
+    pos: this.base + this.linePos,
+    param: this.base + this.lineParam,
+    calc: this.base + this.lineCalc
   }
 
   readonly historyAPI = {
@@ -38,4 +39,6 @@ export class server_url{
   readonly uploadAPI = {
     post: this.base + this.upload
   }
+
+  readonly fsmAPI = 'https://fcm.googleapis.com/fcm/send'
 }

@@ -25,8 +25,10 @@ img { border: 0; display: inline-block; }
 body { font-family: Arial, "微軟正黑體", "繁黑體", 'Microsoft JhengHei', 'Microsoft YaHei', 'Heiti TC', 'LiHei Pro', sans-serif, "新細明體", PMingLiU; -webkit-text-size-adjust: 100%; margin: 0; padding: 0; background-attachment: fixed; overflow-x: hidden; line-height: 1.4286; color: #000; font-size: 18px; }
 body a { color: #000; }
 
+.disabled { color: rgb(170, 170, 170); }
 button { width: 87px; height: 34px; outline: none; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; text-align: center; cursor: pointer; color: #fff; background-color: #35B7FC; -webkit-box-sizing: border-box; box-sizing: border-box; padding: 0; border-width: 0px; border-style: none; font-size: 15px; border-radius: 5px; -webkit-appearance: none; font-weight: 400; -webkit-box-shadow: 0px 2px 5px #ACACAC; box-shadow: 0px 2px 5px #ACACAC; }
-button:hover { border: 2px solid #35B7FC; background-color: #fff; color: #35B7FC; -webkit-transition: 0.5s all; -o-transition: 0.5s all; transition: 0.5s all; }
+button:hover { border: 2px solid #35B7FC; background-color: #fff; color: #35B7FC; -webkit-transition: 0.3s all; -o-transition: 0.3s all; transition: 0.3s all; }
+button:disabled { background-color: #F0F1F5; color: rgb(170, 170, 170); box-shadow: none; border: none;}
 
 input { display: inline-block; outline: none; -webkit-box-sizing: border-box; box-sizing: border-box; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; background-color: rgba(255, 255, 255, 0); -webkit-appearance: none; cursor: text; }
 
@@ -64,7 +66,7 @@ select { background: url(/assets/images/selectBG.png) no-repeat 100% 100%; backg
 .login_box_position { position: absolute; top: 35%; left: 25%; -ms-transform: translateX(-25%) translateY(-35%); -webkit-transform: translateX(-25%) translateY(-35%); transform: translateX(-25%) translateY(-35%); }
 @media (max-width: 1025px) { .login_box_position { position: absolute; top: 50%; left: 50%; -ms-transform: translateX(-50%) translateY(-50%); -webkit-transform: translateX(-50%) translateY(-50%); transform: translateX(-50%) translateY(-50%); } }
 
-.loginBox { width: 480px; height: 623px; min-height: 500px; border: 1px solid #dadce0; border-radius: 3px; background-color: #fff; }
+.loginBox { width: 400px; height: 480px; min-height: 500px; border: 1px solid #dadce0; border-radius: 3px; background-color: #fff; }
 @media (max-width: 1367px) { .loginBox { width: 380px; height: 523px; } }
 @media (max-width: 767px) { .loginBox { width: 300px; max-height: 430px; border: none; } }
 .loginBox .loginInformation { padding: 38px 41px; text-align: center; }
@@ -129,6 +131,7 @@ select { background: url(/assets/images/selectBG.png) no-repeat 100% 100%; backg
 .file-upload { position: absolute; left: -9999px; }
 
 .file-name+label { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
+.file-name+label.disabled { background: none; }
 
 .file-name { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; }
 
@@ -183,7 +186,11 @@ label[for="file-upload9"] { display: inline-block; background: url(/assets/image
 form.uploadData { position: relative; width: 260px; overflow: hidden; }
 @media (max-width: 1260px) { form.uploadData { margin-bottom: 12px; } }
 form.uploadData span.error-file { border: 1px solid #FF7E8D !important; border-right: 0px !important; background-color: #FFE0E4; }
-form.uploadData span.error-file:before { content: "檔案格式錯誤"; position: absolute; margin: 3px 0px 0px 125px; margin-top: 2px; color: #FF7E8D; font-size: 12px; }
+form.uploadData span.error-file:before { content: "錯誤"; position: absolute; right: 55px; margin-top: 2px; color: #FF7E8D; font-size: 12px; }
+form.uploadData span.sucess-file { border: 1px solid #4CAF50 !important; border-right: 0px !important; background-color: #dffabf; }
+form.uploadData span.sucess-file:before { content: "上傳成功"; position: absolute; right: 55px; margin-top: 2px; color: #4CAF50; font-size: 12px; }
+form.uploadData span.loading-file { border: 1px solid #67a4ff !important; border-right: 0px !important; background-color: #c3f1ff; }
+form.uploadData span.loading-file:before { content: "上傳中..."; position: absolute; right: 55px; margin-top: 2px; color: #67a4ff; font-size: 12px; }
 
 .mapBox { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; padding: 12px; -ms-flex-wrap: nowrap; flex-wrap: nowrap; }
 @media (max-width: 1260px) { .mapBox { -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; } }
@@ -191,7 +198,7 @@ form.uploadData span.error-file:before { content: "檔案格式錯誤"; position
 @media (max-width: 1260px) { .mapBox .map { margin-right: 0px; } }
 .mapBox .map .idMap { width: 468px; height: 400px; }
 @media (max-width: 1260px) { .mapBox .map .idMap { width: 100%; height: 300px; } }
-.mapBox .map_information { margin: 0px; width: 56%; overflow: hidden; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; }
+.mapBox .map_information { margin: 0px; width: 57%; overflow: hidden; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; }
 @media (max-width: 1260px) { .mapBox .map_information { width: 100%; margin: 12px 0px 0px 0px; height: auto; padding: 38px 0px 0px 0px; } }
 .mapBox .map_information .little_bar { font-size: 15px; color: #b2b2b2; }
 @media (max-width: 1260px) { .mapBox .map_information .little_bar { display: -webkit-box; display: -ms-flexbox; display: flex; } }
@@ -264,8 +271,15 @@ button.push { position: absolute; bottom: 30px; right: 30px; }
 
 .togglefaq { -webkit-box-shadow: 0px 0px 5px 2px #dcdcdc; box-shadow: 0px 0px 5px 2px #dcdcdc; position: relative; height: 56px; background-color: #fff; margin-bottom: 12px; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-transition: .35s all; -o-transition: .35s all; transition: .35s all; }
 .togglefaq p.date { font-size: 15px; font-weight: bold; color: #525077; margin: 0px 60px 0px 30px; }
+.togglefaq p.date.error { color: red }
 .togglefaq p.location { font-size: 15px; color: #525077; }
 
 .activeCollapse { background-color: #7C80AA; }
-.activeCollapse p.date { font-size: 15px; font-weight: bold; color: #fff; margin: 0px 60px 0px 30px; }
+.activeCollapse p.date, .activeCollapse p.date.error { font-size: 15px; font-weight: bold; color: #fff; margin: 0px 60px 0px 30px; }
 .activeCollapse p.location { font-size: 15px; color: #fff; }
+
+/* for report image */
+.pc .photo { display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: center; margin-top: 15px; }
+.pc .photo .picture { position: relative; width: 100px; height: 100px; margin: 0 10px; padding-bottom: 10px; }
+.pc .photo .picture .image { width: 100%; height: 100%; background-color: #e5e5e5; border-radius: .5rem; background-position: center center; background-repeat: no-repeat; background-size: cover; }
+.pc .photo .picture .close { position: absolute; right: -8px; top: -8px; }

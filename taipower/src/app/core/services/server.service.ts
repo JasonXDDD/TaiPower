@@ -18,7 +18,7 @@ export class ServerService {
 
     if (header) {
       _.forEach(header, (value, key) => {
-        headers.set(key, value);
+        headers = headers.append(key, value);
       });
     }
 
@@ -32,6 +32,27 @@ export class ServerService {
 
   }
 
+  async doPostFileRequest(url, data, params?, header?) {
+
+    let headers = new HttpHeaders()
+      // .set("Content-Type", "application/json")
+      // .set("X-MPG-Language", sessionStorage.getItem('lang') ? sessionStorage.getItem('lang') : '')
+      // .set("Authorization", sessionStorage.getItem("authentication") ? sessionStorage.getItem("authentication") : '');
+
+    if (header) {
+      _.forEach(header, (value, key) => {
+        headers = headers.append(key, value);
+      });
+    }
+
+    try {
+      const response = await this.http.post(url, data, { headers: headers, params: params }).toPromise();
+      return { status: 200, data: response };
+    } catch (error) {
+      return error;
+    }
+  }
+
   async doPostRequest(url, data, params?, header?) {
 
     let headers = new HttpHeaders()
@@ -41,8 +62,9 @@ export class ServerService {
 
     if (header) {
       _.forEach(header, (value, key) => {
-        headers.set(key, value);
+        headers = headers.append(key, value);
       });
+      console.log(headers)
     }
 
     try {
@@ -62,7 +84,7 @@ export class ServerService {
 
     if (header) {
       _.forEach(header, (value, key) => {
-        headers.set(key, value);
+        headers = headers.append(key, value);
       });
     }
 

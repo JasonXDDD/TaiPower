@@ -23,7 +23,7 @@ export class HistoryComponent implements OnInit {
   }
 
   routeToItem(item){
-    this.router.navigate([`/mobile/history/${item.eventid}_${item.linenum}_${item.create_date}_${item.linename}_${item.report.length}`])
+    this.router.navigate([`/mobile/history/${item.eventid}_${item.lineid}_${item.create_date}_${item.linename}_${item.report.length}`])
   }
 
   // AJAX
@@ -31,7 +31,7 @@ export class HistoryComponent implements OnInit {
     var res = await this.ajax.getEvent()
     var reportRes = await this.ajax.getReport()
 
-    this.eventList = _.cloneDeep(res.data)
+    this.eventList = _.cloneDeep(res.data.reverse())
     this.eventList.forEach(ele => {
       ele['report'] = reportRes.data.filter(report => report.eventid === ele.eventid)
     })

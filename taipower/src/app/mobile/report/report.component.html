@@ -13,26 +13,14 @@
       </div>
 
       <div class="photo">
-        <div class="picture">
+        <div class="picture" *ngFor="let photo of report.photo">
           <a *ngIf="!isReport">
             <i class="far fa-times-circle fa-2x close" style="color: #ff7575"></i>
           </a>
-          <div class="image" [ngStyle]="{'backgroundImage': 'url(/assets/images/mobile/1.png)'}"></div>
-        </div>
-        <div class="picture">
-          <a *ngIf="!isReport">
-            <i class="far fa-times-circle fa-2x close" style="color: #ff7575"></i>
-          </a>
-          <div class="image" [ngStyle]="{'backgroundImage': 'url(/assets/images/mobile/2.png)'}"></div>
-        </div>
-        <div class="picture">
-          <a *ngIf="!isReport">
-            <i class="far fa-times-circle fa-2x close" style="color: #ff7575"></i>
-          </a>
-          <div class="image" [ngStyle]="{'backgroundImage': 'url(/assets/images/mobile/3.png)'}"></div>
+          <div class="image" [ngStyle]="{'backgroundImage': 'url(' + photo.photo + ')'}"></div>
         </div>
 
-        <div class="picture" *ngIf="isReport">
+        <div class="picture" *ngIf="!isReport">
           <input type="file" accept="image/*" capture style="display: none;" #cameraImage>
           <a class="image"
           style="display: flex; flex-direction: column; align-items: center; justify-content: center;"

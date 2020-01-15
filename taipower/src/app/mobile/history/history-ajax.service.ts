@@ -37,7 +37,7 @@ export class HistoryAjaxService {
   }
 
   async getLinePos(data){
-    let a = await this.server.doGetRequest(this.url.linePosAPI.get, data)
+    let a = await this.server.doGetRequest(this.url.lineAPI.pos, data)
     return a
   }
 }

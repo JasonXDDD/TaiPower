@@ -13,7 +13,8 @@ export class ReportComponent implements OnInit {
   eventLine: string = ""
   report: any = {
     description: "",
-    opinion: ""
+    opinion: "",
+    photo: []
   };
   isReport: boolean = false;
 
@@ -21,11 +22,12 @@ export class ReportComponent implements OnInit {
 
   ngOnInit() {
     let self = this
-    this.route.params.forEach(params => {
+    this.route.params.forEach(async params => {
       self.eventId = params["id"].split("_")[0];
       self.eventLine = decodeURI(params["id"].split("_")[1]);
 
-      self.doGetReport(self.eventId);
+      await self.doGetReport(self.eventId);
+      await self.doGetPhoto(self.eventId)
     })
   }
 
@@ -37,4 +39,10 @@ export class ReportComponent implements OnInit {
       this.isReport = true
     }
   }
+
+  async doGetPhoto(id){
+    let res = await this.ajax.getPhoto({eventid: id})
+    this.report['photo'] = res.data
+  }
+
 }

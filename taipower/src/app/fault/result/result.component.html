@@ -7,6 +7,9 @@
       <div class="togglefaq" (click)="openPane(item, id, $event)">
         <p class="date">{{ item.create_date }}</p>
         <p class="location">{{ item.linename }}</p>
+        <p class="date" style="margin-left: auto;" [ngClass]="{'error': item.report.length == 0}">
+          {{ item.report.length == 0? '尚未回報': item.report.length + '則回報' }}
+        </p>
       </div>
 
       <div class="faqanswer">
@@ -15,14 +18,14 @@
             <div class="idMap" [id]="'mapid' + id"></div>
           </div>
 
-          <div style="width: 56%;">
+          <div style="width: 57%;">
             <div class="map_information stepFormBox">
               <div class="little_bar">
                 <p>故障資訊</p>
               </div>
               <ul class="malfunction">
                 <li class="malfunction_information">
-                  <p class="tittle">故障位置</p>
+                  <p class="tittle">故障座標</p>
                   <p class="context">
                     經度：{{ eventResult.est_long }},<br>
                     緯度：{{ eventResult.est_lati }}
@@ -30,13 +33,10 @@
                 </li>
                 <div class="line"></div>
                 <li class="malfunction_information">
-                  <p class="tittle">與電驛站相距</p>
-                  <div class="distance">
-                    <p class="context">
-                      距{{ eventResult.ref_sub }} {{ eventResult.ref_length }} km<br>
-                      距{{ eventResult.ref_sub }}變電所，第 {{ eventResult.towerN }} 與 {{ eventResult.towerN_2 }} 電塔之間
-                    </p>
-                  </div>
+                  <p class="tittle">故障位置</p>
+                  <p class="context">
+                    距{{ eventResult.ref_sub }} {{ eventResult.ref_length }} 公里處
+                  </p>
                 </li>
                 <!-- <div class="line"></div>
                 <li class="malfunction_information">
@@ -50,34 +50,40 @@
                 </li> -->
                 <div class="line"></div>
                 <li class="malfunction_information">
-                  <p class="tittle">故障日期</p>
-                  <p class="context">{{ item.create_date }}</p>
+                  <p class="tittle">電塔距離</p>
+                  <p class="context">
+                    從{{ eventResult.ref_sub }}變電所，第 {{ eventResult.towerN }} 與 {{ eventResult.towerN_2 }} 電塔之間
+                  </p>
                 </li>
               </ul>
             </div>
 
-            <div class="map_information" style="margin-top: 15px;" *ngIf="eventResult.report.eventid != 0">
+            <div class="map_information" style="margin-top: 15px;" *ngIf="item.report.length > 0">
               <div class="little_bar">
                 <p>回報資料</p>
               </div>
-              <ul class="malfunction">
-                <li class="malfunction_information">
-                  <p class="tittle">故障描述</p>
-                  <p class="context">{{ eventResult.report.description }}</p>
-                </li>
-                <div class="line"></div>
-                <li class="malfunction_information">
-                  <p class="tittle">備註</p>
-                  <div class="distance">
-                    <p class="context">{{ eventResult.report.opinion }}</p>
+              <div class="pc" style="display: flex; flex-direction: column;">
+                <ul class="malfunction">
+                  <li class="malfunction_information">
+                    <p class="tittle">故障描述</p>
+                    <p class="context">{{ item.report[0].description }}</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="tittle">備註</p>
+                    <div class="distance">
+                      <p class="context">{{ item.report[0].opinion }}</p>
+                    </div>
+                  </li>
+                </ul>
+
+                <div class="photo">
+                  <div class="picture" *ngFor="let photo of eventResult.photo">
+                    <div class="image" [ngStyle]="{'backgroundImage': 'url(' + photo.photo + ')'}"></div>
                   </div>
-                </li>
-                <div class="line"></div>
-                <li class="malfunction_information">
-                  <p class="tittle">故障日期</p>
-                  <p class="context">{{ item.create_date }}</p>
-                </li>
-              </ul>
+                </div>
+              </div>
+
 
             </div>
           </div>
