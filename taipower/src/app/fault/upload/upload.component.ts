@@ -44,6 +44,7 @@ export class UploadComponent implements OnInit {
 
   // calculate
   showResult: boolean = true
+  isCalc: boolean = false
 
   constructor (
     private formBuilder: FormBuilder,

@@ -25,8 +25,10 @@ img { border: 0; display: inline-block; }
 body { font-family: Arial, "微軟正黑體", "繁黑體", 'Microsoft JhengHei', 'Microsoft YaHei', 'Heiti TC', 'LiHei Pro', sans-serif, "新細明體", PMingLiU; -webkit-text-size-adjust: 100%; margin: 0; padding: 0; background-attachment: fixed; overflow-x: hidden; line-height: 1.4286; color: #000; font-size: 18px; }
 body a { color: #000; }
 
+.disabled { color: rgb(170, 170, 170); }
 button { width: 87px; height: 34px; outline: none; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; text-align: center; cursor: pointer; color: #fff; background-color: #35B7FC; -webkit-box-sizing: border-box; box-sizing: border-box; padding: 0; border-width: 0px; border-style: none; font-size: 15px; border-radius: 5px; -webkit-appearance: none; font-weight: 400; -webkit-box-shadow: 0px 2px 5px #ACACAC; box-shadow: 0px 2px 5px #ACACAC; }
-button:hover { border: 2px solid #35B7FC; background-color: #fff; color: #35B7FC; -webkit-transition: 0.5s all; -o-transition: 0.5s all; transition: 0.5s all; }
+button:hover { border: 2px solid #35B7FC; background-color: #fff; color: #35B7FC; -webkit-transition: 0.3s all; -o-transition: 0.3s all; transition: 0.3s all; }
+button:disabled { background-color: #F0F1F5; color: rgb(170, 170, 170); box-shadow: none; border: none;}
 
 input { display: inline-block; outline: none; -webkit-box-sizing: border-box; box-sizing: border-box; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; background-color: rgba(255, 255, 255, 0); -webkit-appearance: none; cursor: text; }
 
@@ -129,6 +131,7 @@ select { background: url(/assets/images/selectBG.png) no-repeat 100% 100%; backg
 .file-upload { position: absolute; left: -9999px; }
 
 .file-name+label { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
+.file-name+label.disabled { background: none; }
 
 .file-name { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; }
 
