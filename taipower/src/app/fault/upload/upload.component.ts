@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import { UploadAjaxService } from './upload-ajax.service'
 import { server_url } from '@app/core/data/server_url'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { HttpClient } from '@angular/common/http'
+import { Router, NavigationEnd } from '@angular/router';
+
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -57,7 +58,7 @@ export class UploadComponent implements OnInit {
 
   constructor (
     private formBuilder: FormBuilder,
-    private http: HttpClient,
+    private router: Router,
     private ajax: UploadAjaxService,
     private url: server_url
   ) {}
@@ -196,18 +197,18 @@ export class UploadComponent implements OnInit {
 
   async doPostCalc(){
     let data = this.toGenCalcData()
-    // let res = await this.ajax.postCalc(data)
+    let res = await this.ajax.postCalc(data)
     // console.log(JSON.stringify(data), res)
-    let test = {
-      SRT: 1,
-      Dist: 3.8777499091205336,
-      SR: 8.281,
-      towerN: 25.088114326657983,
-      towerE: 121.43783594156213,
-      tower_num1: 12,
-      tower_num2: 13
-    }
-    this.result = this.toAnsResult(test)
+    // let test = {
+    //   SRT: 1,
+    //   Dist: 3.8777499091205336,
+    //   SR: 8.281,
+    //   towerN: 25.088114326657983,
+    //   towerE: 121.43783594156213,
+    //   tower_num1: 12,
+    //   tower_num2: 13
+    // }
+    this.result = this.toAnsResult(res.data)
     console.log(this.result)
     this.addMarkerEvent(this.result.est_lati, this.result.est_long)
   }
@@ -242,6 +243,7 @@ export class UploadComponent implements OnInit {
     await this.doPostResult(event.eventid)
 
     await this.doSendNotification()
+    this.router.navigate(['/fault/result'])
   }
 
 
@@ -387,6 +389,16 @@ export class UploadComponent implements OnInit {
       lineid3: this.query.terminal == 3? this.lineInfo.map(ele => ele.lineid)[2]: 0,
       terminals: this.query.terminal,
     }
+  }
+
+  checkCanCalc(){
+    return (
+      this.selectBrand !== ""
+      &&
+      this.subList.map(sub => {
+        return sub.file.filter(ele => ele.name == "").length
+      }).reduce((a,b)=>a+b) == 0
+    )
   }
 
   // VIEW

@@ -108,7 +108,7 @@
         </ul>
       </div>
       <div class="calculationBox">
-        <button class="calculation" (click)="isCalc = !isCalc; doPostCalc()" [disabled]="isCalc">
+        <button class="calculation" (click)="isCalc = !isCalc; doPostCalc()" [disabled]="isCalc || !checkCanCalc()">
           計算
         </button>
       </div>
