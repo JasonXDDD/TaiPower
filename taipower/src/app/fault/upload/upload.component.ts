@@ -19,16 +19,17 @@ export class UploadComponent implements OnInit {
   lineList: string[] = [] // view for select line
   selectLine: string = ''
 
-  subList: any[] = []
-
+  subList: any[] = [] // select line's sub data
+  lineInfo: any[] = [] // set all data to select line
   // map
   map: any
   layerGroup: any
 
   // file
   brandList: any[] = [
-    { name: 'Toshiba', file: [{ type: '.osc', isUpload: 'none', name: '' }] },
+    { id: 1, name: 'SEL', file: [{ type: '.cev', isUpload: 'none', name: '' }] },
     {
+      id: 2,
       name: 'GE',
       file: [
         { type: '.hdr', isUpload: 'none', name: '' },
@@ -36,7 +37,7 @@ export class UploadComponent implements OnInit {
         { type: '.dat', isUpload: 'none', name: '' }
       ]
     },
-    { name: 'SEL', file: [{ type: '.cev', isUpload: 'none', name: '' }] }
+    { id: 3, name: 'Toshiba', file: [{ type: '.osc', isUpload: 'none', name: '' }] }
   ]
   selectBrand: any = ''
   uploadForm: FormGroup
@@ -69,7 +70,7 @@ export class UploadComponent implements OnInit {
       this.subList[subId].file[fileId].name = file.name
     }
   }
-  onSubmit (event, subId, fileId) {
+  async onSubmit (event, subId, fileId) {
     let self = this
     this.onFileSelect(event, subId, fileId)
     // change status
@@ -79,19 +80,15 @@ export class UploadComponent implements OnInit {
     formData.append('file', this.uploadForm.get('file').value)
     formData.append('description', this.uploadForm.get('description').value)
 
-    console.log(formData)
-    this.http
-      .post<any>('http://140.112.20.123:22810/api/uploadfile', formData)
-      .subscribe(
-        res => {
-          console.log(res)
-          self.subList[subId].file[fileId].isUpload = 'sucess'
-        },
-        err => {
-          console.log(err)
-          self.subList[subId].file[fileId].isUpload = 'error'
-        }
-      )
+    let res = await this.ajax.postFile(formData)
+    console.log(res.status)
+
+    if(res.status == 200){
+      this.subList[subId].file[fileId].isUpload = 'success'
+    }
+    else {
+      this.subList[subId].file[fileId].isUpload = 'error'
+    }
   }
 
   //AJAX
@@ -100,9 +97,11 @@ export class UploadComponent implements OnInit {
     else this.query.terminal = 2
 
     //reset
+    this.layerGroup.clearLayers() // clear map
     this.lineList = []
     this.selectLine = ''
     this.subList = []
+    this.selectBrand = ''
 
     let data = { terminals: this.query.terminal }
     let res = await this.ajax.getLineInfo(data)
@@ -122,13 +121,12 @@ export class UploadComponent implements OnInit {
     return res.data
   }
 
-  async doGetLinePos (num, id) {
+  async doGetLinePos (num, index) {
     let data = { lineid: num }
     let res = await this.ajax.getLinePos(data)
-    let color1 = ['red', 'green', 'blue']
-    let color2 = ['#f03', '#0f3', '#30f']
+
     // show map
-    this.addLinePosToMap(this.toLineLatLng(res.data), color1[id%3], color2[id%3])
+    this.addLinePosToMap(this.toLineLatLng(res.data), index)
 
     return res.data
   }
@@ -146,6 +144,8 @@ export class UploadComponent implements OnInit {
     // reset
     this.layerGroup.clearLayers() // clear map
     this.subList = []
+    this.selectBrand = ''
+
 
     // get all line info by line name
     let line = await this.doGetLineByLineName(name)
@@ -173,6 +173,14 @@ export class UploadComponent implements OnInit {
         type: ''
       })
     }
+
+    this.lineInfo = line
+  }
+
+  async doPostCalc(){
+    let data = this.toGenCalcData()
+    let res = await this.ajax.postCalc(data)
+    console.log(res)
   }
 
   doSetSubData (target) {
@@ -180,8 +188,6 @@ export class UploadComponent implements OnInit {
       ele.type = _.cloneDeep(target.name)
       ele.file = _.cloneDeep(target.file)
     })
-
-    console.log(this.subList, target)
   }
 
   // FORMATTER
@@ -193,6 +199,91 @@ export class UploadComponent implements OnInit {
       .map(ele => {
         return [Number(ele.cn), Number(ele.ce)]
       })
+  }
+
+  toGenCalcData(){
+    let self = this
+    // raw data
+    let lineInfo = _.cloneDeep(this.lineInfo)
+    let subList = _.cloneDeep(this.subList)
+    let query = _.cloneDeep(this.query)
+    let selectBrand = _.cloneDeep(this.selectBrand)
+
+    console.log(lineInfo, subList, query, selectBrand)
+
+    let data = this.toCalcBasic(query, selectBrand)
+    data['filename'] = this.toCalcFile(self.subList)
+    this.lineInfo.forEach((ele, id, arr) => {
+      let s_numsegm = arr[0].param[0].numsegm
+      let r_numsegm = arr[1]? arr[1].param[0].numsegm: 0
+      let t_numsegm = arr[2]? arr[2].param[0].numsegm: 0
+
+      data['parameter' + (id+1)] = self.toCalcParam(ele.param, query.terminal, s_numsegm, r_numsegm, t_numsegm)
+      data['tower' + (id+1)] = self.toCalcTower(ele.pos)
+    })
+
+    return data
+  }
+
+  toCalcBasic(data, brand){
+
+    return { // parameter is gen by another formatter fn
+      terminal: data.terminal,
+      w: brand.id,
+    }
+  }
+
+  toCalcParam(oneLine, terminal, s_numsegm?, r_numsegm?, t_numsegm?){
+    let data = {
+      SRorSRT_N: [terminal, s_numsegm?s_numsegm:0, r_numsegm?r_numsegm:0, t_numsegm?t_numsegm:0], // terminal_type, s_numsegm, r_numsegm, t_numsegm
+      SRLine_L: [], // get all lineparam with linelen
+      SRLine_R1: [],
+      SRLine_X1: [],
+      SRLine_Ro: [],
+      SRLine_Xo: [],
+      SRLine_B1: [],
+      SRLine_Bo: [],
+    }
+
+    oneLine.forEach(ele => {
+      data.SRLine_L.push(ele.linelen)
+      data.SRLine_R1.push(ele.r1)
+      data.SRLine_X1.push(ele.x1)
+      data.SRLine_Ro.push(ele.r0)
+      data.SRLine_Xo.push(ele.x0)
+      data.SRLine_B1.push(ele.b1)
+      data.SRLine_Bo.push(ele.b0)
+    })
+    return data
+  }
+
+  toCalcTower(oneLine){
+    return {
+      towerN: oneLine.map(ele => ele.cn),
+      towerE: oneLine.map(ele => ele.ce)
+    }
+  }
+
+  toCalcFile(subList){
+    function genData(sub){
+      if(!sub) return ["", "", ""]
+      else return [
+        sub.file.filter(ele => ele.type == '.hdr' || ele.type == '.cev' || ele.type == '.osc')[0].name,
+        sub.type != 'GE'? "": sub.file.filter(ele => ele.type == '.cfg')[0].name,
+        sub.type != 'GE'? "": sub.file.filter(ele => ele.type == '.dat')[0].name,
+      ]
+    }
+    return {
+      f1: genData(subList[0])[0],
+      f2: genData(subList[0])[1],
+      f3: genData(subList[0])[2],
+      f4: genData(subList[1])[0],
+      f5: genData(subList[1])[1],
+      f6: genData(subList[1])[2],
+      f7: genData(subList[2])[0],
+      f8: genData(subList[2])[1],
+      f9: genData(subList[2])[2],
+    }
   }
 
   // VIEW
@@ -219,7 +310,7 @@ export class UploadComponent implements OnInit {
     this.layerGroup = L.featureGroup().addTo(this.map)
   }
 
-  addLinePosToMap (line, color1, color2) {
+  addLinePosToMap (line, id) {
     // [line demo]
     // var latlngs = [
     //   [25.0799179, 121.4042816],
@@ -242,15 +333,18 @@ export class UploadComponent implements OnInit {
     //   [51.51, -0.047]
     // ]).addTo(this.layerGroup)
 
+    let color1 = ['red', 'green', 'blue']
+    let color2 = ['#f03', '#0f3', '#30f']
+
     line.forEach(ele => {
       L.circle(ele, {
-        color: color1,
-        fillColor: color2,
+        color: color1[id%3],
+        fillColor: color2[id%3],
         fillOpacity: 0.5,
         radius: 20
       }).addTo(this.layerGroup)
     })
-    var polyline = L.polyline(line, { color: color1 }).addTo(this.layerGroup)
+    var polyline = L.polyline(line, { color: color1[id%3] }).addTo(this.layerGroup)
 
     // zoom the this.map to the polyline
     // this.map.fitBounds(polyline.getBounds())

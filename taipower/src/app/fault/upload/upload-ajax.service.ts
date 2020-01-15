@@ -27,4 +27,14 @@ export class UploadAjaxService {
     return a
   }
 
+  async postFile(data){
+    let a = await this.server.doPostFileRequest(this.url.uploadAPI.post, data)
+    return a
+  }
+
+  async postCalc(data){
+    let a = await this.server.doPostRequest(this.url.lineAPI.calc, data)
+    return a
+  }
+
 }
