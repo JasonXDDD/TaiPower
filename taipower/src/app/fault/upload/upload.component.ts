@@ -1,69 +1,57 @@
 import { Component, OnInit } from '@angular/core'
 import { UploadAjaxService } from './upload-ajax.service'
-import { server_url } from '@app/core/data/server_url';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { server_url } from '@app/core/data/server_url'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { HttpClient } from '@angular/common/http'
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
   styles: []
 })
 export class UploadComponent implements OnInit {
-
-
-
+  // line
   isTTypeTerminal: boolean = false
-
   query: any = {
     terminal: 0,
     w: 0
   }
 
   lineList: string[] = [] // view for select line
-  selectLine: string = ""
+  selectLine: string = ''
 
   subList: any[] = []
+
   // map
-  map: any;
-  layerGroup: any;
+  map: any
+  layerGroup: any
 
   // file
   brandList: any[] = [
-    { name: 'Toshiba', file: [
-      { type: '.osc', isUpload: 'none', name: '' }
-    ]},
-    { name: 'GE', file: [
-      { type: '.hdr', isUpload: 'none', name: '' },
-      { type: '.cfg', isUpload: 'none', name: '' },
-      { type: '.dat', isUpload: 'none', name: '' }
-    ]},
-    { name: 'SEL', file: [
-      { type: '.cev', isUpload: 'none', name: '' }
-    ]},
-  ];
+    { name: 'Toshiba', file: [{ type: '.osc', isUpload: 'none', name: '' }] },
+    {
+      name: 'GE',
+      file: [
+        { type: '.hdr', isUpload: 'none', name: '' },
+        { type: '.cfg', isUpload: 'none', name: '' },
+        { type: '.dat', isUpload: 'none', name: '' }
+      ]
+    },
+    { name: 'SEL', file: [{ type: '.cev', isUpload: 'none', name: '' }] }
+  ]
+  selectBrand: any = ''
+  uploadForm: FormGroup
 
-  calData: any = {
-    file: []
-  }
-
-  selectBrand: any = "";
-
-  showResult: boolean = false;
-  apiUrl: any;
-
-  uploadForm: FormGroup;
-
+  // calculate
+  showResult: boolean = false
 
   constructor (
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private ajax: UploadAjaxService,
-    private url: server_url) {}
+    private url: server_url
+  ) {}
 
   ngOnInit () {
-    // this.init()
-
-    this.apiUrl = this.url
     this.mapInit()
 
     this.uploadForm = this.formBuilder.group({
@@ -73,46 +61,48 @@ export class UploadComponent implements OnInit {
   }
 
   // file submit
-  onFileSelect(event, subId, fileId) {
+  onFileSelect (event, subId, fileId) {
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.uploadForm.get('file').setValue(file);
-      this.uploadForm.get('description').setValue(file.name);
+      const file = event.target.files[0]
+      this.uploadForm.get('file').setValue(file)
+      this.uploadForm.get('description').setValue(file.name)
       this.subList[subId].file[fileId].name = file.name
     }
   }
-  onSubmit(event, subId, fileId) {
+  onSubmit (event, subId, fileId) {
     let self = this
     this.onFileSelect(event, subId, fileId)
     // change status
     this.subList[subId].file[fileId].isUpload = 'loading'
 
-    const formData = new FormData();
-    formData.append('file', this.uploadForm.get('file').value);
-    formData.append('description', this.uploadForm.get('description').value);
-
+    const formData = new FormData()
+    formData.append('file', this.uploadForm.get('file').value)
+    formData.append('description', this.uploadForm.get('description').value)
 
     console.log(formData)
-    this.http.post<any>("http://140.112.20.123:22810/api/uploadfile", formData).subscribe(
-      (res) => {
-        console.log(res)
-        self.subList[subId].file[fileId].isUpload = 'sucess'
-      },
-      (err) => {
-        console.log(err)
-        self.subList[subId].file[fileId].isUpload = 'error'
-      }
-    );
+    this.http
+      .post<any>('http://140.112.20.123:22810/api/uploadfile', formData)
+      .subscribe(
+        res => {
+          console.log(res)
+          self.subList[subId].file[fileId].isUpload = 'sucess'
+        },
+        err => {
+          console.log(err)
+          self.subList[subId].file[fileId].isUpload = 'error'
+        }
+      )
   }
 
-
   //AJAX
-  async doGetLineByTerminal() {
+  async doGetLineByTerminal () {
     if (this.isTTypeTerminal) this.query.terminal = 3
     else this.query.terminal = 2
 
     //reset
     this.lineList = []
+    this.selectLine = ''
+    this.subList = []
 
     let data = { terminals: this.query.terminal }
     let res = await this.ajax.getLineInfo(data)
@@ -120,20 +110,20 @@ export class UploadComponent implements OnInit {
     // set line list
     this.lineList = res.data
       .map(ele => ele.linename)
-      .filter((ele, id, arr)=> {
-        return arr.indexOf(ele) === id;
+      .filter((ele, id, arr) => {
+        return arr.indexOf(ele) === id
       })
 
     console.log(this.lineList)
   }
 
-  async doGetLineByLineName(name){
+  async doGetLineByLineName (name) {
     let res = await this.ajax.getLineInfo({ linename: name })
     return res.data
   }
 
-  async doGetLinePos(num){
-    let data = {lineid: num}
+  async doGetLinePos (num) {
+    let data = { lineid: num }
     let res = await this.ajax.getLinePos(data)
 
     // show map
@@ -142,13 +132,13 @@ export class UploadComponent implements OnInit {
     return res.data
   }
 
-  async doGetLineParam(num){
-    let data = {lineid: num}
+  async doGetLineParam (num) {
+    let data = { lineid: num }
     let res = await this.ajax.getLineParam(data)
     return res.data
   }
 
-  async doGetLineInfo(name){
+  async doGetLineInfo (name) {
     let self = this
     console.log(name)
 
@@ -170,21 +160,21 @@ export class UploadComponent implements OnInit {
         name: ele.startpos,
         lineid: ele.lineid,
         file: [],
-        type: ""
+        type: ''
       })
     })
 
-    if(line[0].terminals == 2){
+    if (line[0].terminals == 2) {
       this.subList.push({
         name: line[0].stoppos,
         lineid: line[0].lineid,
         file: [],
-        type: ""
+        type: ''
       })
     }
   }
 
-  doSetSubData(target){
+  doSetSubData (target) {
     this.subList.forEach(ele => {
       ele.type = _.cloneDeep(target.name)
       ele.file = _.cloneDeep(target.file)
@@ -194,40 +184,23 @@ export class UploadComponent implements OnInit {
   }
 
   // FORMATTER
-  toLineLatLng(data){
+  toLineLatLng (data) {
     return data
-    .sort((a,b)=> {
-      return Number(a.towerN) - Number(b.towerN)
-    })
-    .map(ele => {
-      return [Number(ele.cn) , Number(ele.ce)]
-    })
+      .sort((a, b) => {
+        return Number(a.towerN) - Number(b.towerN)
+      })
+      .map(ele => {
+        return [Number(ele.cn), Number(ele.ce)]
+      })
   }
-
 
   // VIEW
   counter (num) {
     return new Array(Math.round(Number(num)))
   }
 
-  show(item){
+  show (item) {
     console.log(JSON.stringify(item))
-  }
-
-  getFile(target){
-    let item = this.brandList.filter(ele => ele.name === target)
-    if(item.length > 0) return item[0].file
-    else return []
-  }
-
-  setCalData(){
-    this.calData.file = []
-    for(let i = 0; i < this.query.terminal; i++){
-      this.calData.file.push({
-        terminal: i,
-        data: _.cloneDeep(this.getFile(this.selectBrand))
-      })
-    }
   }
 
   // MAP
@@ -242,11 +215,10 @@ export class UploadComponent implements OnInit {
       }
     ).addTo(this.map)
 
-    this.layerGroup = L.layerGroup().addTo(this.map);
+    this.layerGroup = L.layerGroup().addTo(this.map)
   }
 
-
-  addLinePosToMap(line){
+  addLinePosToMap (line) {
     // [line demo]
     // var latlngs = [
     //   [25.0799179, 121.4042816],
@@ -269,14 +241,13 @@ export class UploadComponent implements OnInit {
     //   [51.51, -0.047]
     // ]).addTo(this.layerGroup)
 
-
     line.forEach(ele => {
       L.circle(ele, {
-          color: 'red',
-          fillColor: '#f03',
-          fillOpacity: 0.5,
-          radius: 20
-        }).addTo(this.layerGroup)
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 20
+      }).addTo(this.layerGroup)
     })
     var polyline = L.polyline(line, { color: 'red' }).addTo(this.layerGroup)
     // zoom the this.map to the polyline
