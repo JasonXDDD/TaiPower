@@ -122,12 +122,13 @@ export class UploadComponent implements OnInit {
     return res.data
   }
 
-  async doGetLinePos (num) {
+  async doGetLinePos (num, id) {
     let data = { lineid: num }
     let res = await this.ajax.getLinePos(data)
-
+    let color1 = ['red', 'green', 'blue']
+    let color2 = ['#f03', '#0f3', '#30f']
     // show map
-    this.addLinePosToMap(this.toLineLatLng(res.data))
+    this.addLinePosToMap(this.toLineLatLng(res.data), color1[id%3], color2[id%3])
 
     return res.data
   }
@@ -149,8 +150,8 @@ export class UploadComponent implements OnInit {
     // get all line info by line name
     let line = await this.doGetLineByLineName(name)
 
-    await line.forEach(async ele => {
-      ele['pos'] = await this.doGetLinePos(ele.lineid)
+    await line.forEach(async (ele, id) => {
+      ele['pos'] = await this.doGetLinePos(ele.lineid, id)
       ele['param'] = await this.doGetLineParam(ele.lineid)
     })
 
@@ -215,10 +216,10 @@ export class UploadComponent implements OnInit {
       }
     ).addTo(this.map)
 
-    this.layerGroup = L.layerGroup().addTo(this.map)
+    this.layerGroup = L.featureGroup().addTo(this.map)
   }
 
-  addLinePosToMap (line) {
+  addLinePosToMap (line, color1, color2) {
     // [line demo]
     // var latlngs = [
     //   [25.0799179, 121.4042816],
@@ -243,14 +244,16 @@ export class UploadComponent implements OnInit {
 
     line.forEach(ele => {
       L.circle(ele, {
-        color: 'red',
-        fillColor: '#f03',
+        color: color1,
+        fillColor: color2,
         fillOpacity: 0.5,
         radius: 20
       }).addTo(this.layerGroup)
     })
-    var polyline = L.polyline(line, { color: 'red' }).addTo(this.layerGroup)
+    var polyline = L.polyline(line, { color: color1 }).addTo(this.layerGroup)
+
     // zoom the this.map to the polyline
-    this.map.fitBounds(polyline.getBounds())
+    // this.map.fitBounds(polyline.getBounds())
+    this.map.fitBounds(this.layerGroup.getBounds())
   }
 }
