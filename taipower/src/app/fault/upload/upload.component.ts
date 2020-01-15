@@ -45,6 +45,15 @@ export class UploadComponent implements OnInit {
   // calculate
   showResult: boolean = true
   isCalc: boolean = false
+  result: any = {
+    ref_sub: "",
+    ref_length: 0,
+    dis_to_sub: 0,
+    est_long: 0,
+    est_lati: 0,
+    towerN: 0,
+    towerN_2: 0
+  };
 
   constructor (
     private formBuilder: FormBuilder,
@@ -187,21 +196,31 @@ export class UploadComponent implements OnInit {
 
   async doPostCalc(){
     let data = this.toGenCalcData()
-    let res = await this.ajax.postCalc(data)
-    console.log(JSON.stringify(data), res)
+    // let res = await this.ajax.postCalc(data)
+    // console.log(JSON.stringify(data), res)
+    let test = {
+      SRT: 1,
+      Dist: 3.8777499091205336,
+      SR: 8.281,
+      towerN: 25.088114326657983,
+      towerE: 121.43783594156213,
+      tower_num1: 12,
+      tower_num2: 13
+    }
+    this.result = this.toAnsResult(test)
+    console.log(this.result)
+    this.addMarkerEvent(this.result.est_lati, this.result.est_long)
   }
 
   async doPostEvent(){
-    let data = {
-      linename: "東林-蘆洲(山)",
-      lineid: 2,
-      terminals: 2,
-      user_id: 1
-    }
+    let data = this.toGenEvent()
+    let res = await this.ajax.postEventData(data)
+    return res.data
   }
 
-  async doPostResult(){
-
+  async doPostResult(eventid){
+    let res = await this.ajax.postResult(_.assign({eventid: eventid}, this.result))
+    console.log(res)
   }
 
   async doSendNotification(){
@@ -216,6 +235,13 @@ export class UploadComponent implements OnInit {
       `${create_date} ${linename} 有故障發生`,
       `/mobile/history/${eventid}_${lineid}_${create_date}_${linename}_${report.length}`
     )
+  }
+
+  async doSubmitEvent(){
+    let event = await this.doPostEvent()
+    await this.doPostResult(event.eventid)
+
+    await this.doSendNotification()
   }
 
 
@@ -341,6 +367,28 @@ export class UploadComponent implements OnInit {
     }
   }
 
+  toAnsResult(ans){
+    return {
+      ref_sub: this.subList[ans.SRT-1].name,
+      ref_length: ans.SR,
+      dis_to_sub: ans.Dist,
+      est_long: ans.towerE,
+      est_lati: ans.towerN,
+      towerN: ans.tower_num1,
+      towerN_2: ans.tower_num2
+    }
+  }
+
+  toGenEvent(){
+    return {
+      linename: this.selectLine,
+      lineid: this.lineInfo.map(ele => ele.lineid)[0],
+      lineid2: this.query.terminal == 3? this.lineInfo.map(ele => ele.lineid)[1]: 0,
+      lineid3: this.query.terminal == 3? this.lineInfo.map(ele => ele.lineid)[2]: 0,
+      terminals: this.query.terminal,
+    }
+  }
+
   // VIEW
   counter (num) {
     return new Array(Math.round(Number(num)))
@@ -403,6 +451,11 @@ export class UploadComponent implements OnInit {
 
     // zoom the this.map to the polyline
     // this.map.fitBounds(polyline.getBounds())
+    this.map.fitBounds(this.layerGroup.getBounds())
+  }
+
+  addMarkerEvent(lat, lng){
+    var marker = L.marker([lat, lng]).addTo(this.layerGroup)
     this.map.fitBounds(this.layerGroup.getBounds())
   }
 }

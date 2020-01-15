@@ -25,7 +25,7 @@
               </div>
               <ul class="malfunction">
                 <li class="malfunction_information">
-                  <p class="tittle">故障位置</p>
+                  <p class="tittle">故障座標</p>
                   <p class="context">
                     經度：{{ eventResult.est_long }},<br>
                     緯度：{{ eventResult.est_lati }}
@@ -33,13 +33,10 @@
                 </li>
                 <div class="line"></div>
                 <li class="malfunction_information">
-                  <p class="tittle">與電驛站相距</p>
-                  <div class="distance">
-                    <p class="context">
-                      距{{ eventResult.ref_sub }} {{ eventResult.ref_length }} km<br>
-                      距{{ eventResult.ref_sub }}變電所，第 {{ eventResult.towerN }} 與 {{ eventResult.towerN_2 }} 電塔之間
-                    </p>
-                  </div>
+                  <p class="tittle">故障位置</p>
+                  <p class="context">
+                    距{{ eventResult.ref_sub }} {{ eventResult.ref_length }} 公里處
+                  </p>
                 </li>
                 <!-- <div class="line"></div>
                 <li class="malfunction_information">
@@ -53,8 +50,10 @@
                 </li> -->
                 <div class="line"></div>
                 <li class="malfunction_information">
-                  <p class="tittle">故障日期</p>
-                  <p class="context">{{ item.create_date }}</p>
+                  <p class="tittle">電塔距離</p>
+                  <p class="context">
+                    從{{ eventResult.ref_sub }}變電所，第 {{ eventResult.towerN }} 與 {{ eventResult.towerN_2 }} 電塔之間
+                  </p>
                 </li>
               </ul>
             </div>

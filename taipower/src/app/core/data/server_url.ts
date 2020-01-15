@@ -6,13 +6,13 @@ export class server_url{
   private base = environment.apiServer;
 
   private lineInfo = "/api/lineinfo";
-  private linePos = "/api/towerpos";
+  private linePos = "/api/towerpos/";
   private lineParam = "/api/linepar";
   private lineCalc = "/api/calculate_new/"
 
-  private event = "/api/eventdata";
+  private event = "/api/eventdata/";
   private photo = "/api/photo";
-  private result = "/api/calresult";
+  private result = "/api/calresult/";
   private report = "/api/report";
 
   private upload = "/api/uploadfile/";

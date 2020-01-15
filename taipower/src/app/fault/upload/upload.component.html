@@ -108,14 +108,14 @@
         </ul>
       </div>
       <div class="calculationBox">
-        <button class="calculation" (click)="showResult = !showResult; isCalc = !isCalc" [disabled]="isCalc">
+        <button class="calculation" (click)="isCalc = !isCalc; doPostCalc()" [disabled]="isCalc">
           計算
         </button>
       </div>
     </ng-container>
   </div>
 
-  <div class="step_box" [ngStyle]="{'display': showResult? 'block': 'none'}">
+  <div class="step_box" [ngStyle]="{'display': result.ref_sub !== ''? 'block': 'none'}">
     <div class="stepBar">
       <p class="stepIcon">2</p>
       <span class="stepTittle">確認並推播</span>
@@ -130,36 +130,37 @@
         </div>
         <ul class="malfunction">
           <li class="malfunction_information">
-            <p class="tittle">故障位置</p>
-            <p class="context">39C8+72 台北</p>
+            <p class="tittle">發生時間</p>
+            <p class="context">??-??-??</p>
           </li>
           <div class="line"></div>
           <li class="malfunction_information">
-            <p class="tittle">與電驛站相距</p>
+            <p class="tittle">故障線路</p>
             <div class="distance">
-              <p class="context">距北投 2 km</p>
-              <p class="context">距深坑 3 km</p>
-              <p class="context">距五股 5 km</p>
+              <p class="context">{{ selectLine }}</p>
             </div>
           </li>
           <div class="line"></div>
           <li class="malfunction_information">
-            <p class="tittle">故障狀況</p>
-            <p class="context">供電時常短路</p>
+            <p class="tittle">故障座標</p>
+            <p class="context">
+              經度：{{ result.est_long }},<br>
+              緯度：{{ result.est_lati }}
+            </p>
           </li>
           <div class="line"></div>
           <li class="malfunction_information">
-            <p class="tittle">故障原因</p>
-            <p class="context">不明</p>
+            <p class="tittle">故障位置</p>
+            <p class="context">距{{ result.ref_sub }} {{ result.ref_length }} 公里處</p>
           </li>
           <div class="line"></div>
           <li class="malfunction_information">
-            <p class="tittle">故障日期</p>
-            <p class="context">2019.04.18</p>
+            <p class="tittle">電塔距離</p>
+            <p class="context">從{{ result.ref_sub }}變電所，第 {{ result.towerN }} 與 {{ result.towerN_2 }} 電塔之間</p>
           </li>
         </ul>
       </div>
     </div>
-    <button class="push" (click)="doSendNotification()">送出</button>
+    <button class="push" (click)="doSubmitEvent()">送出</button>
   </div>
 </div>
