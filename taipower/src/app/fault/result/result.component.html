@@ -7,7 +7,9 @@
       <div class="togglefaq" (click)="openPane(item, id, $event)">
         <p class="date">{{ item.create_date }}</p>
         <p class="location">{{ item.linename }}</p>
-        <p class="date" style="margin-left: auto;">{{ item.report.length }}則回報</p>
+        <p class="date" style="margin-left: auto;" [ngClass]="{'error': item.report.length == 0}">
+          {{ item.report.length == 0? '尚未回報': item.report.length + '則回報' }}
+        </p>
       </div>
 
       <div class="faqanswer">
