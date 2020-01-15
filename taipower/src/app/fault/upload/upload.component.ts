@@ -43,7 +43,7 @@ export class UploadComponent implements OnInit {
   uploadForm: FormGroup
 
   // calculate
-  showResult: boolean = false
+  showResult: boolean = true
 
   constructor (
     private formBuilder: FormBuilder,
@@ -177,18 +177,33 @@ export class UploadComponent implements OnInit {
     this.lineInfo = line
   }
 
-  async doPostCalc(){
-    let data = this.toGenCalcData()
-    let res = await this.ajax.postCalc(data)
-    console.log(res)
-  }
-
   doSetSubData (target) {
     this.subList.forEach(ele => {
       ele.type = _.cloneDeep(target.name)
       ele.file = _.cloneDeep(target.file)
     })
   }
+
+  async doPostCalc(){
+    let data = this.toGenCalcData()
+    let res = await this.ajax.postCalc(data)
+    console.log(JSON.stringify(data))
+  }
+
+  async doSendNotification(){
+    let eventid = 1
+    let lineid = 2
+    let create_date = "2020-01-13"
+    let linename = "東林-蘆洲(山)"
+    let report = [1]
+
+    await this.ajax.postNotification(
+      "故障通知",
+      `${create_date} ${linename} 有故障發生`,
+      `/mobile/history/${eventid}_${lineid}_${create_date}_${linename}_${report.length}`
+    )
+  }
+
 
   // FORMATTER
   toLineLatLng (data) {
@@ -209,8 +224,6 @@ export class UploadComponent implements OnInit {
     let query = _.cloneDeep(this.query)
     let selectBrand = _.cloneDeep(this.selectBrand)
 
-    console.log(lineInfo, subList, query, selectBrand)
-
     let data = this.toCalcBasic(query, selectBrand)
     data['filename'] = this.toCalcFile(self.subList)
     this.lineInfo.forEach((ele, id, arr) => {
@@ -219,7 +232,7 @@ export class UploadComponent implements OnInit {
       let t_numsegm = arr[2]? arr[2].param[0].numsegm: 0
 
       data['parameter' + (id+1)] = self.toCalcParam(ele.param, query.terminal, s_numsegm, r_numsegm, t_numsegm)
-      data['tower' + (id+1)] = self.toCalcTower(ele.pos)
+      data['tower'] = _.assign(data['tower'], self.toCalcTower(ele.pos, id))
     })
 
     return data
@@ -257,11 +270,12 @@ export class UploadComponent implements OnInit {
     return data
   }
 
-  toCalcTower(oneLine){
-    return {
-      towerN: oneLine.map(ele => ele.cn),
-      towerE: oneLine.map(ele => ele.ce)
-    }
+  toCalcTower(oneLine, id){
+    let data = {}
+    data['towerN'+(id==0?"":id-1)] = oneLine.map(ele => ele.cn),
+    data['towerE'+(id==0?"":id-1)] = oneLine.map(ele => ele.ce)
+
+    return data
   }
 
   toCalcFile(subList){

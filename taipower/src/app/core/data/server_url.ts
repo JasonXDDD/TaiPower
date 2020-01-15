@@ -39,4 +39,6 @@ export class server_url{
   readonly uploadAPI = {
     post: this.base + this.upload
   }
+
+  readonly fsmAPI = 'https://fcm.googleapis.com/fcm/send'
 }

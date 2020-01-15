@@ -18,7 +18,7 @@ export class ServerService {
 
     if (header) {
       _.forEach(header, (value, key) => {
-        headers.set(key, value);
+        headers = headers.append(key, value);
       });
     }
 
@@ -41,7 +41,7 @@ export class ServerService {
 
     if (header) {
       _.forEach(header, (value, key) => {
-        headers.set(key, value);
+        headers = headers.append(key, value);
       });
     }
 
@@ -62,8 +62,9 @@ export class ServerService {
 
     if (header) {
       _.forEach(header, (value, key) => {
-        headers.set(key, value);
+        headers = headers.append(key, value);
       });
+      console.log(headers)
     }
 
     try {
@@ -83,7 +84,7 @@ export class ServerService {
 
     if (header) {
       _.forEach(header, (value, key) => {
-        headers.set(key, value);
+        headers = headers.append(key, value);
       });
     }
 
