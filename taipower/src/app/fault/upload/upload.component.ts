@@ -9,31 +9,36 @@ import { HttpClient } from '@angular/common/http';
   styles: []
 })
 export class UploadComponent implements OnInit {
+
+
+
   isTTypeTerminal: boolean = false
-  terminal: number = 0
-  towerList: any[] = []
-  selectTower: any = {
-    lineid: 0,
-    numtower: 0,
-    linename: '',
-    terminals: 0,
-    startpos: '',
-    stoppos: ''
+
+  query: any = {
+    terminal: 0,
+    w: 0
   }
+
+  lineList: string[] = [] // view for select line
+  selectLine: string = ""
+
+  subList: any[] = []
+  // map
   map: any;
   layerGroup: any;
 
+  // file
   brandList: any[] = [
     { name: 'Toshiba', file: [
-      { type: '.osc', isUpload: 'none' }
+      { type: '.osc', isUpload: 'none', name: '' }
     ]},
     { name: 'GE', file: [
-      { type: '.hdr', isUpload: 'none' },
-      { type: '.cfg', isUpload: 'none' },
-      { type: '.dat', isUpload: 'none' }
+      { type: '.hdr', isUpload: 'none', name: '' },
+      { type: '.cfg', isUpload: 'none', name: '' },
+      { type: '.dat', isUpload: 'none', name: '' }
     ]},
     { name: 'SEL', file: [
-      { type: '.cev', isUpload: 'none' }
+      { type: '.cev', isUpload: 'none', name: '' }
     ]},
   ];
 
@@ -41,14 +46,19 @@ export class UploadComponent implements OnInit {
     file: []
   }
 
-  selectBrand: string = "";
+  selectBrand: any = "";
 
   showResult: boolean = false;
   apiUrl: any;
 
   uploadForm: FormGroup;
 
-  constructor (private formBuilder: FormBuilder, private http: HttpClient, private ajax: UploadAjaxService, private url: server_url) {}
+
+  constructor (
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private ajax: UploadAjaxService,
+    private url: server_url) {}
 
   ngOnInit () {
     // this.init()
@@ -62,18 +72,20 @@ export class UploadComponent implements OnInit {
     })
   }
 
-  onFileSelect(event) {
+  // file submit
+  onFileSelect(event, subId, fileId) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.uploadForm.get('file').setValue(file);
       this.uploadForm.get('description').setValue(file.name);
+      this.subList[subId].file[fileId].name = file.name
     }
   }
-
-  onSubmit(event, id, fileId) {
+  onSubmit(event, subId, fileId) {
     let self = this
-    this.changeFileName(event);
-    this.onFileSelect(event)
+    this.onFileSelect(event, subId, fileId)
+    // change status
+    this.subList[subId].file[fileId].isUpload = 'loading'
 
     const formData = new FormData();
     formData.append('file', this.uploadForm.get('file').value);
@@ -84,41 +96,101 @@ export class UploadComponent implements OnInit {
     this.http.post<any>("http://140.112.20.123:22810/api/uploadfile", formData).subscribe(
       (res) => {
         console.log(res)
-        self.calData.file[id].data[fileId].isUpload = 'sucess'
+        self.subList[subId].file[fileId].isUpload = 'sucess'
       },
       (err) => {
         console.log(err)
-        self.calData.file[id].data[fileId].isUpload = 'error'
+        self.subList[subId].file[fileId].isUpload = 'error'
       }
     );
   }
 
-  changeFileName(event){
-    let target = $(event.target).parents('form').children('.file-name')[0]
-    let filepath = event.target.value
-    let m = filepath.match(/([^\/\\]+)$/)
-    let filename = m[1]
-    $(target).html(filename)
-  }
-
 
   //AJAX
-  async doSearchTower () {
-    if (this.isTTypeTerminal) this.terminal = 3
-    else this.terminal = 2
+  async doGetLineByTerminal() {
+    if (this.isTTypeTerminal) this.query.terminal = 3
+    else this.query.terminal = 2
 
-    let data = { terminals: this.terminal }
+    //reset
+    this.lineList = []
 
+    let data = { terminals: this.query.terminal }
     let res = await this.ajax.getLineInfo(data)
-    this.towerList = res.data
+
+    // set line list
+    this.lineList = res.data
+      .map(ele => ele.linename)
+      .filter((ele, id, arr)=> {
+        return arr.indexOf(ele) === id;
+      })
+
+    console.log(this.lineList)
+  }
+
+  async doGetLineByLineName(name){
+    let res = await this.ajax.getLineInfo({ linename: name })
+    return res.data
   }
 
   async doGetLinePos(num){
     let data = {lineid: num}
     let res = await this.ajax.getLinePos(data)
-    let line = this.toLineLatLng(res.data)
-    this.addLinePosToMap(line)
-    console.log(line)
+
+    // show map
+    this.addLinePosToMap(this.toLineLatLng(res.data))
+
+    return res.data
+  }
+
+  async doGetLineParam(num){
+    let data = {lineid: num}
+    let res = await this.ajax.getLineParam(data)
+    return res.data
+  }
+
+  async doGetLineInfo(name){
+    let self = this
+    console.log(name)
+
+    // reset
+    this.layerGroup.clearLayers() // clear map
+    this.subList = []
+
+    // get all line info by line name
+    let line = await this.doGetLineByLineName(name)
+
+    await line.forEach(async ele => {
+      ele['pos'] = await this.doGetLinePos(ele.lineid)
+      ele['param'] = await this.doGetLineParam(ele.lineid)
+    })
+
+    // set sub data
+    line.forEach(ele => {
+      self.subList.push({
+        name: ele.startpos,
+        lineid: ele.lineid,
+        file: [],
+        type: ""
+      })
+    })
+
+    if(line[0].terminals == 2){
+      this.subList.push({
+        name: line[0].stoppos,
+        lineid: line[0].lineid,
+        file: [],
+        type: ""
+      })
+    }
+  }
+
+  doSetSubData(target){
+    this.subList.forEach(ele => {
+      ele.type = _.cloneDeep(target.name)
+      ele.file = _.cloneDeep(target.file)
+    })
+
+    console.log(this.subList, target)
   }
 
   // FORMATTER
@@ -150,7 +222,7 @@ export class UploadComponent implements OnInit {
 
   setCalData(){
     this.calData.file = []
-    for(let i = 0; i < this.terminal; i++){
+    for(let i = 0; i < this.query.terminal; i++){
       this.calData.file.push({
         terminal: i,
         data: _.cloneDeep(this.getFile(this.selectBrand))
@@ -175,9 +247,6 @@ export class UploadComponent implements OnInit {
 
 
   addLinePosToMap(line){
-    // clear
-    this.layerGroup.clearLayers()
-
     // [line demo]
     // var latlngs = [
     //   [25.0799179, 121.4042816],

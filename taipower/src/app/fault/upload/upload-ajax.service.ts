@@ -13,12 +13,17 @@ export class UploadAjaxService {
   ) { }
 
   async getLineInfo(data){
-    let a = await this.server.doGetRequest(this.url.lineInfoAPI.get, data)
+    let a = await this.server.doGetRequest(this.url.lineAPI.info, data)
     return a
   }
 
   async getLinePos(data){
-    let a = await this.server.doGetRequest(this.url.linePosAPI.get, data)
+    let a = await this.server.doGetRequest(this.url.lineAPI.pos, data)
+    return a
+  }
+
+  async getLineParam(data){
+    let a = await this.server.doGetRequest(this.url.lineAPI.param, data)
     return a
   }
 

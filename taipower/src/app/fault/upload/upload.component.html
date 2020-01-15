@@ -19,13 +19,13 @@
             </div>
             <span class="dortText">3端</span>
           </div>
-          <button class="research" (click)="doSearchTower()">搜尋</button>
+          <button class="research" (click)="doGetLineByTerminal()">搜尋</button>
 
-          <div *ngIf="towerList.length > 0">
+          <div *ngIf="lineList.length > 0">
             <span class="little_title" style="margin-left: 3rem; margin-right: 1rem; text-align: center; height: fit-content;">選擇電驛站</span>
-            <select class="Vendor" name="selectTower" [(ngModel)]="selectTower" (change)="doGetLinePos(selectTower.lineid)">
+            <select class="Vendor" name="selectLine" style="width: fit-content; padding-right: 20px;" [(ngModel)]="selectLine" (change)="doGetLineInfo(selectLine)">
               <option value="" disabled>選擇電驛站</option>
-              <option *ngFor="let item of towerList" [ngValue]="item">{{ item.linename }}</option>
+              <option *ngFor="let item of lineList" [ngValue]="item">{{ item }}</option>
             </select>
           </div>
 
@@ -34,32 +34,35 @@
     </form>
 
 
-    <ng-container *ngIf="selectTower.lineid != 0">
+    <ng-container *ngIf="subList.length > 0">
       <div class="stepFormBox">
         <div class="little_bar">
           <span class="little_title">選擇廠商</span>
           <span class="little_title">上傳檔案</span>
         </div>
         <ul class="upload_informationBox">
-          <ng-container *ngFor="let item of counter(terminal); let id = index; let start = first; let last = last">
+          <ng-container *ngFor="let sub of subList; let subId = index; let start = first; let last = last">
 
             <li class="upload_information">
-              <p class="name">{{ start? selectTower.startpos: (last? selectTower.stoppos: "端點" + id)}}</p>
-              <select class="Vendor" name="brand" [(ngModel)]="selectBrand" (change)="setCalData()">
+              <p class="name">{{ sub.name }}</p>
+              <select class="Vendor" name="brand" [(ngModel)]="selectBrand" (change)="doSetSubData(selectBrand)">
                 <option value="" disabled>選擇廠家</option>
-                <option *ngFor="let brand of brandList" [value]="brand.name">{{ brand.name }}</option>
+                <option *ngFor="let brand of brandList" [ngValue]="brand">{{ brand.name }}</option>
               </select>
 
 
-              <ng-container *ngFor="let file of getFile(selectBrand); let fileId = index">
+              <ng-container *ngFor="let file of sub.file; let fileId = index">
 
                 <form [formGroup]="uploadForm" class="uploadData">
                   <span class="file-name" [ngClass]="{
-                    'sucess-file': calData.file[id].data[fileId].isUpload =='success',
-                    'error-file': calData.file[id].data[fileId].isUpload =='error'
-                    }">{{'選擇 ' + file.type + ' 檔案'}}</span>
+                    'sucess-file': file.isUpload == 'success',
+                    'error-file': file.isUpload == 'error',
+                    'loading-file': file.isUpload == 'loading'
+                    }">
+                    {{file.name? file.name: '選擇 ' + file.type + ' 檔案'}}
+                  </span>
                   <label>
-                    <input type="file" class="file-upload" name="file" [accept]="file.type" (change)="onSubmit($event, id, fileId);"/>
+                    <input type="file" class="file-upload" name="file" [accept]="file.type" (change)="onSubmit($event, subId, fileId);"/>
                     <input type="hidden" name="description" />
                   </label>
                   <!-- <input type="submit" value="Go" /> -->

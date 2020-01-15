@@ -7,6 +7,7 @@ export class server_url{
 
   private lineInfo = "/api/lineinfo";
   private linePos = "/api/towerpos";
+  private lineParam = "/api/towerpar";
 
   private event = "/api/eventdata";
   private photo = "/api/photo";
@@ -16,12 +17,10 @@ export class server_url{
   private upload = "/api/uploadfile";
 
 
-  readonly lineInfoAPI = {
-    get: this.base + this.lineInfo
-  }
-
-  readonly linePosAPI = {
-    get: this.base + this.linePos
+  readonly lineAPI = {
+    info: this.base + this.lineInfo,
+    pos: this.base + this.linePos,
+    param: this.base + this.lineParam
   }
 
   readonly historyAPI = {
