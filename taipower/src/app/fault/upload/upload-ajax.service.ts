@@ -13,18 +13,18 @@ export class UploadAjaxService {
     private server: ServerService
   ) { }
 
-  async getLineInfo(data){
-    let a = await this.server.doGetRequest(this.url.lineAPI.info, data)
+  async getLineInfo(query){
+    let a = await this.server.doGetRequest(this.url.lineAPI.info, query)
     return a
   }
 
-  async getLinePos(data){
-    let a = await this.server.doGetRequest(this.url.lineAPI.pos, data)
+  async getLinePos(query){
+    let a = await this.server.doGetRequest(this.url.lineAPI.pos, query)
     return a
   }
 
-  async getLineParam(data){
-    let a = await this.server.doGetRequest(this.url.lineAPI.param, data)
+  async getLineParam(query){
+    let a = await this.server.doGetRequest(this.url.lineAPI.param, query)
     return a
   }
 
@@ -35,6 +35,16 @@ export class UploadAjaxService {
 
   async postCalc(data){
     let a = await this.server.doPostRequest(this.url.lineAPI.calc, data)
+    return a
+  }
+
+  async postEventData(data){
+    let a = await this.server.doPostRequest(this.url.historyAPI.event, data)
+    return a
+  }
+
+  async postResult(data){
+    let a = await this.server.doPostRequest(this.url.historyAPI.result, data)
     return a
   }
 

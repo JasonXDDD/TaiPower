@@ -187,7 +187,20 @@ export class UploadComponent implements OnInit {
   async doPostCalc(){
     let data = this.toGenCalcData()
     let res = await this.ajax.postCalc(data)
-    console.log(JSON.stringify(data))
+    console.log(JSON.stringify(data), res)
+  }
+
+  async doPostEvent(){
+    let data = {
+      linename: "東林-蘆洲(山)",
+      lineid: 2,
+      terminals: 2,
+      user_id: 1
+    }
+  }
+
+  async doPostResult(){
+
   }
 
   async doSendNotification(){
@@ -231,7 +244,7 @@ export class UploadComponent implements OnInit {
       let r_numsegm = arr[1]? arr[1].param[0].numsegm: 0
       let t_numsegm = arr[2]? arr[2].param[0].numsegm: 0
 
-      data['parameter' + (id+1)] = self.toCalcParam(ele.param, query.terminal, s_numsegm, r_numsegm, t_numsegm)
+      data['parameter'] = _.assign(data['parameter'], self.toCalcParam(ele.param, query.terminal, id, s_numsegm, r_numsegm, t_numsegm))
       data['tower'] = _.assign(data['tower'], self.toCalcTower(ele.pos, id))
     })
 
@@ -246,27 +259,54 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  toCalcParam(oneLine, terminal, s_numsegm?, r_numsegm?, t_numsegm?){
+  toCalcParam(oneLine, terminal, id, s_numsegm?, r_numsegm?, t_numsegm?){
     let data = {
       SRorSRT_N: [terminal, s_numsegm?s_numsegm:0, r_numsegm?r_numsegm:0, t_numsegm?t_numsegm:0], // terminal_type, s_numsegm, r_numsegm, t_numsegm
-      SRLine_L: [], // get all lineparam with linelen
-      SRLine_R1: [],
-      SRLine_X1: [],
-      SRLine_Ro: [],
-      SRLine_Xo: [],
-      SRLine_B1: [],
-      SRLine_Bo: [],
     }
 
-    oneLine.forEach(ele => {
-      data.SRLine_L.push(ele.linelen)
-      data.SRLine_R1.push(ele.r1)
-      data.SRLine_X1.push(ele.x1)
-      data.SRLine_Ro.push(ele.r0)
-      data.SRLine_Xo.push(ele.x0)
-      data.SRLine_B1.push(ele.b1)
-      data.SRLine_Bo.push(ele.b0)
-    })
+    if(terminal == 2){
+      // reset data
+      data['SRLine_L'] = []
+      data['SRLine_R1'] = []
+      data['SRLine_X1'] = []
+      data['SRLine_Ro'] = []
+      data['SRLine_Xo'] = []
+      data['SRLine_B1'] = []
+      data['SRLine_Bo'] = []
+
+      oneLine.forEach(ele => {
+        data['SRLine_L'].push(Number(ele.linelen))
+        data['SRLine_R1'].push(Number(ele.r1))
+        data['SRLine_X1'].push(Number(ele.x1))
+        data['SRLine_Ro'].push(Number(ele.r0))
+        data['SRLine_Xo'].push(Number(ele.x0))
+        data['SRLine_B1'].push(Number(ele.b1))
+        data['SRLine_Bo'].push(Number(ele.b0))
+      })
+    }
+    else {
+      let t = ["S", "R", "T"]
+
+      data[t[id]+'J_L'] = []
+      data[t[id]+'J_R1'] = []
+      data[t[id]+'J_X1'] = []
+      data[t[id]+'J_Ro'] = []
+      data[t[id]+'J_Xo'] = []
+      data[t[id]+'J_B1'] = []
+      data[t[id]+'J_Bo'] = []
+
+      oneLine.forEach(ele => {
+        data[t[id]+'J_L'].push(Number(ele.linelen))
+        data[t[id]+'J_R1'].push(Number(ele.r1))
+        data[t[id]+'J_X1'].push(Number(ele.x1))
+        data[t[id]+'J_Ro'].push(Number(ele.r0))
+        data[t[id]+'J_Xo'].push(Number(ele.x0))
+        data[t[id]+'J_B1'].push(Number(ele.b1))
+        data[t[id]+'J_Bo'].push(Number(ele.b0))
+      })
+    }
+
+
     return data
   }
 

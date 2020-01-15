@@ -8,7 +8,7 @@ export class server_url{
   private lineInfo = "/api/lineinfo";
   private linePos = "/api/towerpos";
   private lineParam = "/api/linepar";
-  private lineCalc = "/api/"
+  private lineCalc = "/api/calculate_new/"
 
   private event = "/api/eventdata";
   private photo = "/api/photo";
