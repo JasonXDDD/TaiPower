@@ -13,8 +13,8 @@
       </div>
 
       <div class="photo">
-        <div class="picture" *ngFor="let photo of report.photo">
-          <a *ngIf="!isReport">
+        <div class="picture" *ngFor="let photo of report.photo; let id = index">
+          <a *ngIf="!isReport" (click)="report.photo.splice(id, 1)">
             <i class="far fa-times-circle fa-2x close" style="color: #ff7575"></i>
           </a>
           <div class="image" [ngStyle]="{'backgroundImage': 'url(' + photo.photo + ')'}"></div>

@@ -200,7 +200,7 @@ export class UploadComponent implements OnInit {
     let data = this.toGenCalcData()
 
     Swal.fire({
-      title: '..資料計算中..',
+      title: '資料計算中',
       text: self.selectLine,
       icon: 'info',
       allowOutsideClick: false,
@@ -234,8 +234,8 @@ export class UploadComponent implements OnInit {
         title: 'Error',
         icon: 'error'
       })
+      self.isCalc = false
     }
-
   }
 
   async doPostEvent(){
