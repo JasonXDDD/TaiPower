@@ -4,12 +4,12 @@
       <div class="inDetail">
         <p class="textareaTitle">故障描述</p>
         <textarea style="padding: .5rem;"
-        [disabled]="report.description !== ''" name="description" [(ngModel)]="report.description"></textarea>
+        [disabled]="isReport" name="description" [(ngModel)]="report.description"></textarea>
       </div>
       <div class="inDetail">
         <p class="textareaTitle">備註</p>
         <textarea style="padding: .5rem;"
-        [disabled]="report.opinion !== ''" name="opinion" [(ngModel)]="report.opinion"></textarea>
+        [disabled]="isReport" name="opinion" [(ngModel)]="report.opinion"></textarea>
       </div>
 
       <div class="photo">
@@ -20,8 +20,8 @@
           <div class="image" [ngStyle]="{'backgroundImage': 'url(' + photo.photo + ')'}"></div>
         </div>
 
-        <div class="picture" *ngIf="!isReport">
-          <input type="file" accept="image/*" capture style="display: none;" #cameraImage>
+        <div class="picture" *ngIf="!isReport && report.photo.length < 4">
+          <input type="file" accept="image/*" capture style="display: none;" #cameraImage (change)="addImage($event)">
           <a class="image"
           style="display: flex; flex-direction: column; align-items: center; justify-content: center;"
           (click)="cameraImage.click()">
@@ -33,7 +33,7 @@
       </div>
 
       <div style="margin: .5rem;" *ngIf="!isReport">
-        <button style="display: block; width: 100%; background-color: #35b7fc; border-radius: 4px; color: white; font-size: 15px;">
+        <button style="display: block; width: 100%; background-color: #35b7fc; border-radius: 4px; color: white; font-size: 15px;" (click)="doSubmit()">
           送出
         </button>
       </div>
