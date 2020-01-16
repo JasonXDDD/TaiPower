@@ -196,21 +196,46 @@ export class UploadComponent implements OnInit {
   }
 
   async doPostCalc(){
+    let self = this
     let data = this.toGenCalcData()
-    let res = await this.ajax.postCalc(data)
-    // console.log(JSON.stringify(data), res)
-    // let test = {
-    //   SRT: 1,
-    //   Dist: 3.8777499091205336,
-    //   SR: 8.281,
-    //   towerN: 25.088114326657983,
-    //   towerE: 121.43783594156213,
-    //   tower_num1: 12,
-    //   tower_num2: 13
-    // }
-    this.result = this.toAnsResult(res.data)
-    console.log(this.result)
-    this.addMarkerEvent(this.result.est_lati, this.result.est_long)
+
+    Swal.fire({
+      title: '..資料計算中..',
+      text: self.selectLine,
+      icon: 'info',
+      allowOutsideClick: false,
+      showCancelButton: false,
+      showConfirmButton: false,
+    })
+
+    try {
+      let res = await self.ajax.postCalc(data)
+
+      // let test = {
+      //   SRT: 1,
+      //   Dist: 3.8777499091205336,
+      //   SR: 8.281,
+      //   towerN: 25.088114326657983,
+      //   towerE: 121.43783594156213,
+      //   tower_num1: 12,
+      //   tower_num2: 13
+      // }
+
+      self.result = self.toAnsResult(res.data)
+      console.log(self.result)
+      self.addMarkerEvent(self.result.est_lati, self.result.est_long)
+
+      Swal.close()
+    }
+
+    catch (error) {
+      console.log(error)
+      Swal.fire({
+        title: 'Error',
+        icon: 'error'
+      })
+    }
+
   }
 
   async doPostEvent(){
