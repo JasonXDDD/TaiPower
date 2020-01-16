@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { IndexAjaxService } from './index-ajax.service';
 
 @Component({
   selector: 'app-index',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  user: any = {
+    username: "",
+    password: ""
+  }
+  isError: boolean = false;
+  isLoading: boolean = false;
+
+  constructor(private router: Router, private ajax: IndexAjaxService) { }
 
   ngOnInit() {
     this.init()
@@ -20,6 +29,33 @@ export class IndexComponent implements OnInit {
         console.log("test");
       }, 3000);
     })();
+  }
+
+  //AJAX
+  async doLogin(){
+    this.isLoading = true;
+
+    try {
+      let res = await this.ajax.postLogin(this.user)
+
+      //set sessionStorage
+      sessionStorage.setItem("token", res.data.token)
+      sessionStorage.setItem("user", this.user.username)
+      sessionStorage.setItem("role", res.data.user_group)
+      sessionStorage.setItem("user_id", res.data.user_id)
+
+      if(res.data.user_group == "巡線人員"){
+        this.router.navigate(['/mobile/history'])
+      }
+      else {
+        this.router.navigate(['/fault/upload'])
+      }
+    }
+
+    catch(error){
+      this.isError = true
+      this.isLoading = false
+    }
   }
 
 }

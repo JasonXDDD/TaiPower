@@ -3,20 +3,50 @@
     <div class="login_box_position">
       <div class="loginBox">
         <div class="loginInformation">
-          <div class="tittle"><img src="/assets/images/logo.png" width="100%"></div>
+          <div class="tittle">
+            <img src="/assets/images/logo.png" width="100%" />
+          </div>
           <form class="formBOx" action="">
-            <div class="user">
-              <div class="inputBox"><span class="representative"><img src="/assets/images/username.png"
-                    width="100%"></span><span class="confirm"><img src="/assets/images/okay.png" width="100%"></span><input
-                  type="text" id="user" name="user" placeholder="請輸入使用者名稱"> <span class="error_message"></span></div>
-            </div>
-            <div class="password Error">
-              <div class="inputBox"><span class="representative"><img src="/assets/images/password.png"
-                    width="100%"></span><span class="confirm"><img src="/assets/images/hide.png" width="100%"></span><input
-                  type="password" id="passwd" name="passwd" placeholder="請輸入密碼"> <span class="error_message"></span>
+
+            <div class="user" [ngClass]="{'Error': isError}">
+              <div class="inputBox">
+                <span class="representative">
+                  <img src="/assets/images/username.png" width="100%" />
+                </span>
+                <!-- <span class="confirm">
+                  <img src="/assets/images/okay.png" width="100%" />
+                </span> -->
+                <input
+                  type="text"
+                  id="user"
+                  name="user"
+                  placeholder="請輸入使用者名稱"
+                  [(ngModel)]="user.username"
+                  [disabled]="isLoading"
+                />
+                <!-- <span class="error_message"></span> -->
               </div>
             </div>
-            <a class="login" [routerLink]="[ '/fault/upload' ]">登入</a>
+            <div class="password" [ngClass]="{'Error': isError}">
+              <div class="inputBox">
+                <span class="representative">
+                  <img src="/assets/images/password.png" width="100%" />
+                </span>
+                <!-- <span class="confirm">
+                  <img src="/assets/images/hide.png" width="100%" />
+                </span> -->
+                <input
+                  type="password"
+                  id="passwd"
+                  name="passwd"
+                  placeholder="請輸入密碼"
+                  [(ngModel)]="user.password"
+                  [disabled]="isLoading"
+                />
+                <!-- <span class="error_message"></span> -->
+              </div>
+            </div>
+            <a class="login" (click)="doLogin()">登入</a>
           </form>
         </div>
       </div>

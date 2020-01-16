@@ -26,10 +26,13 @@
 
     <div *ngSwitchCase="'report'"></div>
 
-    <span class="fa-stack" style="vertical-align: top; color: white" *ngSwitchDefault>
+    <!-- <span class="fa-stack" style="vertical-align: top; color: white" *ngSwitchDefault>
       <i class="far fa-circle fa-stack-2x"></i>
       <i class="fas fa-user fa-stack-1x"></i>
-    </span>
+    </span> -->
+    <a (click)="logout()" *ngSwitchDefault>
+      <i class="fas fa-sign-out-alt fa-2x" style="color: white;"></i>
+    </a>
   </div>
 </div>
 

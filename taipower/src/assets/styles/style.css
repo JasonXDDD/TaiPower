@@ -83,7 +83,7 @@ select { background: url(/assets/images/selectBG.png) no-repeat 100% 100%; backg
 .loginBox .formBOx a.login:hover { border-width: 2px; border-style: solid; border-color: #35B7FC; -webkit-border-image: 0; -o-border-image: 0; border-image: 0; background: #fff; -webkit-transition: 0.3s all; -o-transition: 0.3s all; transition: 0.3s all; color: #35B7FC; }
 .loginBox .formBOx .user, .loginBox .formBOx .password { text-align: left; margin-bottom: 16px; }
 .loginBox .formBOx .inputBox { position: relative; }
-.loginBox .formBOx .inputBox span.representative { position: absolute; top: 50%; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); left: 0px; padding-right: 10px; border-right: 1px solid #ACACAC; }
+.loginBox .formBOx .inputBox span.representative { position: absolute; top: 50%; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); left: 0px; display: flex; padding: 5px 10px 5px 0; border-right: 1px solid #ACACAC; }
 .loginBox .formBOx .inputBox span.confirm { position: absolute; top: 50%; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); right: 15px; }
 
 .line { border-bottom: 1px solid #DBDFE5; width: 98.2%; }

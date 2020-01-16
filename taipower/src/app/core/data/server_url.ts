@@ -16,7 +16,7 @@ export class server_url{
   private report = "/api/report/";
 
   private upload = "/api/uploadfile/";
-
+  private token = "/token/";
 
   readonly lineAPI = {
     info: this.base + this.lineInfo,
@@ -41,4 +41,7 @@ export class server_url{
   }
 
   readonly fsmAPI = 'https://fcm.googleapis.com/fcm/send'
+  readonly userAPI = {
+    login: this.base + this.token
+  }
 }
