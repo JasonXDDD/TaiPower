@@ -115,7 +115,10 @@
     </ng-container>
   </div>
 
-  <div class="step_box" [ngStyle]="{'display': result.ref_sub !== ''? 'block': 'none'}">
+  <div class="step_box" [ngStyle]="{
+    'height': result.ref_sub !== ''? 'fit-content': '0',
+    'visibility': result.ref_sub !== ''? 'visible': 'hidden'
+    }">
     <div class="stepBar">
       <p class="stepIcon">2</p>
       <span class="stepTittle">確認並推播</span>

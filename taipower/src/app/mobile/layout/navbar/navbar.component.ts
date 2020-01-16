@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
     if (token.length == 3 && token[2] == 'history') {
       this.nowRoute = 'history'
       this.nowTitle = '台電回報系統'
-      sessionStorage.clear()
+      // sessionStorage.clear()
     } else if (token.length == 4 && token[2] == 'history') {
       this.nowRoute = 'history-item'
       this.nowTitle = decodeURI(token[3].split("_")[3]);
@@ -57,5 +57,14 @@ export class NavbarComponent implements OnInit {
 
   goBack () {
     this.location.back()
+  }
+
+  logout(){
+    sessionStorage.removeItem("token")
+    sessionStorage.removeItem("user")
+    sessionStorage.removeItem("role")
+    sessionStorage.removeItem("user_id")
+
+    this.router.navigate(['/account/login'])
   }
 }

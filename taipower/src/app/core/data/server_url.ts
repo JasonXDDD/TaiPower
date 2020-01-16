@@ -5,18 +5,18 @@ import { Injectable } from "@angular/core";
 export class server_url{
   private base = environment.apiServer;
 
-  private lineInfo = "/api/lineinfo";
+  private lineInfo = "/api/lineinfo/";
   private linePos = "/api/towerpos/";
-  private lineParam = "/api/linepar";
+  private lineParam = "/api/linepar/";
   private lineCalc = "/api/calculate_new/"
 
   private event = "/api/eventdata/";
-  private photo = "/api/photo";
+  private photo = "/api/photo/";
   private result = "/api/calresult/";
-  private report = "/api/report";
+  private report = "/api/report/";
 
   private upload = "/api/uploadfile/";
-
+  private token = "/token/";
 
   readonly lineAPI = {
     info: this.base + this.lineInfo,
@@ -41,4 +41,7 @@ export class server_url{
   }
 
   readonly fsmAPI = 'https://fcm.googleapis.com/fcm/send'
+  readonly userAPI = {
+    login: this.base + this.token
+  }
 }

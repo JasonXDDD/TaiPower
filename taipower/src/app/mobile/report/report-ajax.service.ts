@@ -12,13 +12,23 @@ export class ReportAjaxService {
     private server: ServerService
   ) { }
 
-  async getReport(data){
-    let a = await this.server.doGetRequest(this.url.reportAPI.report, data)
+  async getReport(query){
+    let a = await this.server.doGetRequest(this.url.reportAPI.report, query)
     return a
   }
 
-  async getPhoto(data){
-    let a = await this.server.doGetRequest(this.url.historyAPI.photo, data)
+  async getPhoto(query){
+    let a = await this.server.doGetRequest(this.url.historyAPI.photo, query)
+    return a
+  }
+
+  async postReport(data){
+    let a = await this.server.doPostRequest(this.url.reportAPI.report, data)
+    return a
+  }
+
+  async postPhoto(data){
+    let a = await this.server.doPostRequest(this.url.historyAPI.photo, data)
     return a
   }
 }

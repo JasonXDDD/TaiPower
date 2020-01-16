@@ -14,7 +14,7 @@ export class ServerService {
     let headers = new HttpHeaders()
       .set("Content-Type", "application/json")
       // .set("X-MPG-Language", sessionStorage.getItem('lang') ? sessionStorage.getItem('lang') : '')
-      // .set("Authorization", sessionStorage.getItem("authentication") ? sessionStorage.getItem("authentication") : '');
+      .set("authorization", sessionStorage.getItem("token") ? 'token ' + sessionStorage.getItem("token") : '');
 
     if (header) {
       _.forEach(header, (value, key) => {
@@ -37,7 +37,7 @@ export class ServerService {
     let headers = new HttpHeaders()
       // .set("Content-Type", "application/json")
       // .set("X-MPG-Language", sessionStorage.getItem('lang') ? sessionStorage.getItem('lang') : '')
-      // .set("Authorization", sessionStorage.getItem("authentication") ? sessionStorage.getItem("authentication") : '');
+      .set("authorization", sessionStorage.getItem("token") ? 'token ' + sessionStorage.getItem("token") : '');
 
     if (header) {
       _.forEach(header, (value, key) => {
@@ -58,7 +58,7 @@ export class ServerService {
     let headers = new HttpHeaders()
       .set("Content-Type", "application/json")
       // .set("X-MPG-Language", sessionStorage.getItem('lang') ? sessionStorage.getItem('lang') : '')
-      // .set("Authorization", sessionStorage.getItem("authentication") ? sessionStorage.getItem("authentication") : '');
+      .set("authorization", sessionStorage.getItem("token") ? 'token ' + sessionStorage.getItem("token") : '');
 
     if (header) {
       _.forEach(header, (value, key) => {
@@ -80,7 +80,7 @@ export class ServerService {
     let headers = new HttpHeaders()
       .set("Content-Type", "application/json")
       // .set("X-MPG-Language", sessionStorage.getItem('lang') ? sessionStorage.getItem('lang') : '')
-      // .set("Authorization", sessionStorage.getItem("authentication") ? sessionStorage.getItem("authentication") : '');
+      .set("authorization", sessionStorage.getItem("token") ? 'token ' + sessionStorage.getItem("token") : '');
 
     if (header) {
       _.forEach(header, (value, key) => {

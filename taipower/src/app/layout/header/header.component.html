@@ -6,11 +6,15 @@
       <button class="sign_out">
         <a target="_blank" [href]="env.apiServer + '/admin'" style="color: white;">管理後台</a>
       </button>
-      <span class="user_icon"
-        ><img src="assets/images/userhead.png" width="100%"
-      /></span>
-      <p class="user_name">taiwanpower</p>
-      <button class="sign_out">登出</button>
+
+      <span class="fa-stack" style="vertical-align: top; color: white; font-size: .8rem;">
+        <i class="far fa-circle fa-stack-2x"></i>
+        <i class="fas fa-user fa-stack-1x"></i>
+      </span>
+      <p class="user_name" style="padding-left: 5px;">
+        {{ role }}, {{ username }}
+      </p>
+      <button class="sign_out" (click)="logout()">登出</button>
     </div>
   </div>
   <div class="container">
