@@ -473,16 +473,27 @@ export class UploadComponent implements OnInit {
     //   [51.51, -0.047]
     // ]).addTo(this.layerGroup)
 
+    var myIcon = L.icon({
+      iconUrl: '/assets/images/tower.png',
+      iconSize: [12, 16],
+      iconAnchor: [6, 8],
+      // popupAnchor: [-3, -76],
+      // shadowSize: [68, 95],
+      // shadowAnchor: [22, 94]
+    });
+
     let color1 = ['red', 'green', 'blue']
     let color2 = ['#f03', '#0f3', '#30f']
 
     line.forEach(ele => {
-      L.circle(ele, {
-        color: color1[id%3],
-        fillColor: color2[id%3],
-        fillOpacity: 0.5,
-        radius: 20
-      }).addTo(this.layerGroup)
+      // L.circle(ele, {
+      //   color: color1[id%3],
+      //   fillColor: color2[id%3],
+      //   fillOpacity: 0.5,
+      //   radius: 20
+      // }).addTo(this.layerGroup)
+
+      L.marker(ele, {icon: myIcon}).addTo(this.layerGroup);
     })
     var polyline = L.polyline(line, { color: color1[id%3] }).addTo(this.layerGroup)
 
