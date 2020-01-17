@@ -474,7 +474,7 @@ export class UploadComponent implements OnInit {
     // ]).addTo(this.layerGroup)
 
     var myIcon = L.icon({
-      iconUrl: '/assets/images/tower.png',
+      iconUrl: 'assets/images/tower.png',
       iconSize: [12, 16],
       iconAnchor: [6, 8],
       // popupAnchor: [-3, -76],

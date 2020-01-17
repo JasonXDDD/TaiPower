@@ -116,8 +116,8 @@
   </div>
 
   <div class="step_box" [ngStyle]="{
-    'height': result.ref_sub == ''? 'fit-content': '0',
-    'visibility': result.ref_sub == ''? 'visible': 'hidden'
+    'height': result.ref_sub !== ''? 'fit-content': '0',
+    'visibility': result.ref_sub !== ''? 'visible': 'hidden'
     }">
     <div class="stepBar">
       <p class="stepIcon">2</p>
