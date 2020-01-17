@@ -32,7 +32,7 @@ button:disabled { background-color: #F0F1F5; color: rgb(170, 170, 170); box-shad
 
 input { display: inline-block; outline: none; -webkit-box-sizing: border-box; box-sizing: border-box; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; background-color: rgba(255, 255, 255, 0); -webkit-appearance: none; cursor: text; }
 
-select { background: url(/assets/images/selectBG.png) no-repeat 100% 100%; background-size: contain; background-color: #f0f1f5; border-color: #f0f1f5; border-radius: 0px; width: 100px; height: 25px; -moz-appearance: none; -webkit-appearance: none; appearance: none; outline: none; cursor: pointer; padding-left: 5px; }
+select { background: url(../images/selectBG.png) no-repeat 100% 100%; background-size: contain; background-color: #f0f1f5; border-color: #f0f1f5; border-radius: 0px; width: 100px; height: 25px; -moz-appearance: none; -webkit-appearance: none; appearance: none; outline: none; cursor: pointer; padding-left: 5px; }
 @media (max-width: 1260px) { select { margin-bottom: 12px; } }
 
 .container { width: 1280px; margin-left: auto; margin-right: auto; }
@@ -61,7 +61,7 @@ select { background: url(/assets/images/selectBG.png) no-repeat 100% 100%; backg
 .header ul .speed-hover:hover { opacity: 1; }
 .header ul .speed-hover:hover:after { content: " "; position: absolute; width: 100%; height: 100%; border-bottom: 5px solid #35b7fc; -webkit-transition: border-color 0s ease-out 0.0s, width 0.20s ease-out 0.0s, height 0.20s ease-out 0.25s; -o-transition: border-color 0s ease-out 0.0s, width 0.20s ease-out 0.0s, height 0.20s ease-out 0.25s; transition: border-color 0s ease-out 0.0s, width 0.20s ease-out 0.0s, height 0.20s ease-out 0.25s; }
 
-.login_bg { position: absolute; top: 0; left: 0; height: 100%; width: 100%; background-image: url(/assets/images/bg.png); background-size: cover; }
+.login_bg { position: absolute; top: 0; left: 0; height: 100%; width: 100%; background-image: url(../images/bg.png); background-size: cover; }
 
 .login_box_position { position: absolute; top: 35%; left: 25%; -ms-transform: translateX(-25%) translateY(-35%); -webkit-transform: translateX(-25%) translateY(-35%); transform: translateX(-25%) translateY(-35%); }
 @media (max-width: 1025px) { .login_box_position { position: absolute; top: 50%; left: 50%; -ms-transform: translateX(-50%) translateY(-50%); -webkit-transform: translateX(-50%) translateY(-50%); transform: translateX(-50%) translateY(-50%); } }
@@ -130,56 +130,56 @@ select { background: url(/assets/images/selectBG.png) no-repeat 100% 100%; backg
 
 .file-upload { position: absolute; left: -9999px; }
 
-.file-name+label { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
+.file-name+label { display: inline-block; background: url(../images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
 .file-name+label.disabled { background: none; }
 
 .file-name { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; }
 
 /* #file-upload2 { position: absolute; left: -9999px; }
 
-label[for="file-upload2"] { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
+label[for="file-upload2"] { display: inline-block; background: url(../images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
 
 #filename2 { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; }
 
 #file-upload3 { position: absolute; left: -9999px; }
 
-label[for="file-upload3"] { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
+label[for="file-upload3"] { display: inline-block; background: url(../images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
 
 #filename3 { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; }
 
 #file-upload4 { position: absolute; left: -9999px; }
 
-label[for="file-upload4"] { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
+label[for="file-upload4"] { display: inline-block; background: url(../images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
 
 #filename4 { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; }
 
 #file-upload5 { position: absolute; left: -9999px; }
 
-label[for="file-upload5"] { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
+label[for="file-upload5"] { display: inline-block; background: url(../images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
 
 #filename5 { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; }
 
 #file-upload6 { position: absolute; left: -9999px; }
 
-label[for="file-upload6"] { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
+label[for="file-upload6"] { display: inline-block; background: url(../images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
 
 #filename6 { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; }
 
 #file-upload7 { position: absolute; left: -9999px; }
 
-label[for="file-upload7"] { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
+label[for="file-upload7"] { display: inline-block; background: url(../images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
 
 #filename7 { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; }
 
 #file-upload8 { position: absolute; left: -9999px; }
 
-label[for="file-upload8"] { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
+label[for="file-upload8"] { display: inline-block; background: url(../images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
 
 #filename8 { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; }
 
 #file-upload9 { position: absolute; left: -9999px; }
 
-label[for="file-upload9"] { display: inline-block; background: url(/assets/images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
+label[for="file-upload9"] { display: inline-block; background: url(../images/upload.png) no-repeat 100% 100%; cursor: pointer; background-size: cover; width: 29px; height: 28px; position: absolute; right: 20px; }
 
 #filename9 { padding-left: 0.5em; padding-top: 1.5px; padding-bottom: 1.5px; float: left; width: 205px; white-space: nowrap; overflow: hidden; font-size: 15px; border: 1px solid #f0f1f5; border-radius: 2px; border-right: 0px; } */
 
@@ -236,9 +236,9 @@ button.push { position: absolute; bottom: 30px; right: 30px; }
 .editBox { position: absolute; right: 0px; }
 .editBox button.editButton { width: 26px; height: 27px; -webkit-box-shadow: none; box-shadow: none; background-color: rgba(255, 255, 255, 0); }
 .editBox button.editButton:hover { border: none; }
-.editBox .edit { background-image: url(/assets/images/edit.png); margin-right: 15px; }
+.editBox .edit { background-image: url(../images/edit.png); margin-right: 15px; }
 @media (max-width: 1260px) { .editBox .edit { margin-right: 0px; } }
-.editBox .delete { background-image: url(/assets/images/delete.png); }
+.editBox .delete { background-image: url(../images/delete.png); }
 
 .ElectricStationBox_dortNumer { -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; display: -webkit-box; display: -ms-flexbox; display: flex; font-size: 15px; font-weight: bold; }
 @media (max-width: 1260px) { .ElectricStationBox_dortNumer { padding: 30px 0px; width: 100%; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; } }

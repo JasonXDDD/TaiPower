@@ -55,14 +55,15 @@ export class UploadAjaxService {
       notification: {
         title: title,
         body: body?body:"",
-        icon: ""
+        icon: "",
+        sound: "default"
       },
       data: {
         url: router? environment.domain + router: ""
       }
     }
 
-    let a = await this.server.doPostRequest(this.url.fsmAPI, data, {}, {Authorization: environment.fcm_key})
+    let a = await this.server.doPostNoHeaderRequest(this.url.fsmAPI, data, {}, {Authorization: environment.fcm_key})
     return a
   }
 }

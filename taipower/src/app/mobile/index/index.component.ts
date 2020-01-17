@@ -44,12 +44,7 @@ export class IndexComponent implements OnInit {
       sessionStorage.setItem("role", res.data.user_group)
       sessionStorage.setItem("user_id", res.data.user_id)
 
-      if(res.data.user_group == "巡線人員"){
-        this.router.navigate(['/mobile/history'])
-      }
-      else {
-        this.router.navigate(['/fault/upload'])
-      }
+      this.router.navigate(['/mobile/history'])
     }
 
     catch(error){

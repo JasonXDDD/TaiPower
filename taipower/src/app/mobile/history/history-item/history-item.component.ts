@@ -80,13 +80,24 @@ export class HistoryItemComponent implements OnInit {
     // clear
     this.layerGroup.clearLayers()
 
+    var myIcon = L.icon({
+      iconUrl: 'assets/images/tower.png',
+      iconSize: [12, 16],
+      iconAnchor: [6, 8],
+      // popupAnchor: [-3, -76],
+      // shadowSize: [68, 95],
+      // shadowAnchor: [22, 94]
+    });
+
+
     line.forEach(ele => {
-      L.circle(ele, {
-          color: 'red',
-          fillColor: '#f03',
-          fillOpacity: 0.5,
-          radius: 20
-        }).addTo(this.layerGroup)
+      // L.circle(ele, {
+      //     color: 'red',
+      //     fillColor: '#f03',
+      //     fillOpacity: 0.5,
+      //     radius: 20
+      //   }).addTo(this.layerGroup)
+      L.marker(ele, {icon: myIcon}).addTo(this.layerGroup);
     })
     var polyline = L.polyline(line, { color: 'red' }).addTo(this.layerGroup)
     // zoom the this.map to the polyline
