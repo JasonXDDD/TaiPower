@@ -39,9 +39,6 @@ export class HistoryItemComponent implements OnInit {
 
   // AJAX
   async doGetResult(eventId, id1, id2, id3){
-    // clear
-    this.layerGroup.clearLayers()
-
     var res = await this.ajax.getResult({eventid: eventId})
     var line1 = await this.ajax.getLinePos({lineid: id1})
     let line2 = {data: []}
@@ -53,6 +50,9 @@ export class HistoryItemComponent implements OnInit {
     if(this.resultList.length > 0){
       setTimeout(() => {
         this.mapInit()
+        // clear
+        this.layerGroup.clearLayers()
+
         this.addLinePosToMap(this.toLineLatLng(line1.data), 0)
         if(id2 !== 0) this.addLinePosToMap(this.toLineLatLng(line2.data), 1)
         if(id3 !== 0) this.addLinePosToMap(this.toLineLatLng(line3.data), 2)
