@@ -46,16 +46,16 @@ export class HistoryItemComponent implements OnInit {
     var line1 = await this.ajax.getLinePos({lineid: id1})
     let line2 = {data: []}
     let line3 = {data: []}
-    if(id2 == 0) line2 = await this.ajax.getLinePos({lineid: id2})
-    if(id3 == 0) line3 = await this.ajax.getLinePos({lineid: id3})
+    if(id2 !== 0) line2 = await this.ajax.getLinePos({lineid: id2})
+    if(id3 !== 0) line3 = await this.ajax.getLinePos({lineid: id3})
     this.resultList = res.data
 
     if(this.resultList.length > 0){
       setTimeout(() => {
         this.mapInit()
         this.addLinePosToMap(this.toLineLatLng(line1.data), 0)
-        if(id2 == 0) this.addLinePosToMap(this.toLineLatLng(line2.data), 1)
-        if(id3 == 0) this.addLinePosToMap(this.toLineLatLng(line3.data), 2)
+        if(id2 !== 0) this.addLinePosToMap(this.toLineLatLng(line2.data), 1)
+        if(id3 !== 0) this.addLinePosToMap(this.toLineLatLng(line3.data), 2)
         this.addMarkerEvent(this.resultList[0].est_lati, this.resultList[0].est_long)
       }, 100);
     }

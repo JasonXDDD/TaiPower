@@ -117,8 +117,8 @@ export class ResultComponent implements OnInit {
     let line1 = await this.ajax.getLinePos({lineid: item.lineid})
     let line2 = {data: []}
     let line3 = {data: []}
-    if(item.lineid2 == 0) line2 = await this.ajax.getLinePos({lineid: item.lineid2})
-    if(item.lineid3 == 0) line3 = await this.ajax.getLinePos({lineid: item.lineid3})
+    if(item.lineid2 !== 0) line2 = await this.ajax.getLinePos({lineid: item.lineid2})
+    if(item.lineid3 !== 0) line3 = await this.ajax.getLinePos({lineid: item.lineid3})
 
     await this.doGetPhoto(item.eventid)
     // do VIEW
@@ -130,8 +130,8 @@ export class ResultComponent implements OnInit {
       this.layerGroup.clearLayers()
       this.addMarkerEvent(this.eventResult.est_lati, this.eventResult.est_long)
       this.addLinePosToMap(this.toLineLatLng(line1.data), 0)
-      if(item.lineid2 == 0) this.addLinePosToMap(this.toLineLatLng(line2.data), 1)
-      if(item.lineid3 == 0) this.addLinePosToMap(this.toLineLatLng(line3.data), 2)
+      if(item.lineid2 !== 0) this.addLinePosToMap(this.toLineLatLng(line2.data), 1)
+      if(item.lineid3 !== 0) this.addLinePosToMap(this.toLineLatLng(line3.data), 2)
       this.eventList[index].map.fitBounds(this.layerGroup.getBounds())
     }
   }
