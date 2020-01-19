@@ -20,7 +20,8 @@ export class AppComponent implements OnInit {
   deviceInfo: any;
   openHeader: boolean = true;
 
-  constructor(private swPush: SwPush, private http: HttpClient, private deviceService: DeviceDetectorService, private router: Router) { }
+  constructor(private swPush: SwPush, private http: HttpClient, private deviceService: DeviceDetectorService, private router: Router) {
+  }
   ngOnInit() {
     let self = this;
 
@@ -51,7 +52,7 @@ export class AppComponent implements OnInit {
           .requestPermission()
           .then(() => messaging.getToken())
           .then(token => {
-            // console.log('Permission granted!', token)
+            console.log('Permission granted!', token)
             self.token = token
             self.addToTopic(token)
           });
@@ -63,7 +64,14 @@ export class AppComponent implements OnInit {
     });
 
     this.swPush.messages.subscribe(msg => {
-      // console.log(msg);
+      console.log(msg);
+      window.location.href = msg['data']['url']
+    });
+
+    this.swPush.notificationClicks.subscribe( event => {
+      console.log('Received notification: ', event);
+      const url = event.notification.data.url;
+      window.open(url, '_blank');
     });
   }
 

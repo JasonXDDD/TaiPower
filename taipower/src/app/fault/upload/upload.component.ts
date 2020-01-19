@@ -249,17 +249,19 @@ export class UploadComponent implements OnInit {
     // console.log(res)
   }
 
-  async doSendNotification(){
-    let eventid = 1
-    let lineid = 2
-    let create_date = "2020-01-13"
-    let linename = "東林-蘆洲(山)"
-    let report = [1]
+  async doSendNotification(event){
+    let eventid = event
+    let lineid = this.lineInfo[0].lineid
+    let lineid2 = this.lineInfo[1]?this.lineInfo[1].lineid: 0
+    let lineid3 = this.lineInfo[2]?this.lineInfo[2].lineid: 0
+    let create_date = ""
+    let linename = this.selectLine
+    let report = []
 
     await this.ajax.postNotification(
       "故障通知",
       `${create_date} ${linename} 有故障發生`,
-      `/mobile/history/${eventid}_${lineid}_${create_date}_${linename}_${report.length}`
+      `/mobile/history/${eventid}_${lineid},${lineid2},${lineid3}_${create_date}_${linename}_${report.length}`
     )
   }
 
@@ -267,7 +269,7 @@ export class UploadComponent implements OnInit {
     let event = await this.doPostEvent()
     await this.doPostResult(event.eventid)
 
-    await this.doSendNotification()
+    await this.doSendNotification(event.eventid)
     this.router.navigate(['/fault/result'])
   }
 
@@ -432,8 +434,12 @@ export class UploadComponent implements OnInit {
     return new Array(Math.round(Number(num)))
   }
 
-  show (item) {
-    // console.log(JSON.stringify(item))
+  async show () {
+    await this.ajax.postNotification(
+      "測試測試",
+      `爽拉`,
+      `/mobile/history`
+    )
   }
 
   // MAP

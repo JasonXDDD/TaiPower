@@ -27,9 +27,9 @@ export class HistoryItemComponent implements OnInit {
 
     this.route.params.forEach(params => {
       self.eventId = params["id"].split("_")[0];
-      self.lineId1 = params["id"].split("_")[1].split(',')[0];
-      self.lineId2 = params["id"].split("_")[1].split(',')[1];
-      self.lineId3 = params["id"].split("_")[1].split(',')[2];
+      self.lineId1 = Number(params["id"].split("_")[1].split(',')[0]);
+      self.lineId2 = Number(params["id"].split("_")[1].split(',')[1]);
+      self.lineId3 = Number(params["id"].split("_")[1].split(',')[2]);
       self.eventDate = params["id"].split("_")[2];
       self.eventLine = decodeURI(params["id"].split("_")[3]);
 
