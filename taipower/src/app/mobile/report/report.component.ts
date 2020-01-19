@@ -98,7 +98,7 @@ export class ReportComponent implements OnInit {
   }
 
   async doPostReport(){
-    console.log(this.report, this.eventId)
+    // console.log(this.report, this.eventId)
     let reportData = _.cloneDeep(this.report)
     let photoList = _.cloneDeep(this.report.photo)
     delete(reportData.photo)

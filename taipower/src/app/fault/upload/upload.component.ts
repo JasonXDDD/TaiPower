@@ -92,7 +92,7 @@ export class UploadComponent implements OnInit {
     formData.append('description', this.uploadForm.get('description').value)
 
     let res = await this.ajax.postFile(formData)
-    console.log(res.status)
+    // console.log(res.status)
 
     if(res.status == 200){
       this.subList[subId].file[fileId].isUpload = 'success'
@@ -124,7 +124,7 @@ export class UploadComponent implements OnInit {
         return arr.indexOf(ele) === id
       })
 
-    console.log(this.lineList)
+    // console.log(this.lineList)
   }
 
   async doGetLineByLineName (name) {
@@ -150,7 +150,7 @@ export class UploadComponent implements OnInit {
 
   async doGetLineInfo (name) {
     let self = this
-    console.log(name)
+    // console.log(name)
 
     // reset
     this.layerGroup.clearLayers() // clear map
@@ -222,14 +222,14 @@ export class UploadComponent implements OnInit {
       // }
 
       self.result = self.toAnsResult(res.data)
-      console.log(self.result)
+      // console.log(self.result)
       self.addMarkerEvent(self.result.est_lati, self.result.est_long)
 
       Swal.close()
     }
 
     catch (error) {
-      console.log(error)
+      // console.log(error)
       Swal.fire({
         title: 'Error',
         icon: 'error'
@@ -246,7 +246,7 @@ export class UploadComponent implements OnInit {
 
   async doPostResult(eventid){
     let res = await this.ajax.postResult(_.assign({eventid: eventid}, this.result))
-    console.log(res)
+    // console.log(res)
   }
 
   async doSendNotification(){
@@ -433,7 +433,7 @@ export class UploadComponent implements OnInit {
   }
 
   show (item) {
-    console.log(JSON.stringify(item))
+    // console.log(JSON.stringify(item))
   }
 
   // MAP

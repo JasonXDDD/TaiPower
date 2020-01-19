@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
           .requestPermission()
           .then(() => messaging.getToken())
           .then(token => {
-            console.log('Permission granted!', token)
+            // console.log('Permission granted!', token)
             self.token = token
             self.addToTopic(token)
           });
@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
     });
 
     this.swPush.messages.subscribe(msg => {
-      console.log(msg);
+      // console.log(msg);
     });
   }
 
@@ -97,11 +97,11 @@ export class AppComponent implements OnInit {
       }),
       { headers }).subscribe(
         res => {
-          console.log(res)
+          // console.log(res)
         },
 
         error => {
-          console.log(error)
+          // console.log(error)
         }
       )
   }

@@ -177,7 +177,7 @@ export class ResultComponent implements OnInit {
       ele['report'] = reportRes.data.filter(report => report.eventid === ele.eventid)
     })
 
-    console.log(this.eventList)
+    // console.log(this.eventList)
   }
 
   async doGetEventResult(id){

@@ -64,7 +64,7 @@ export class ServerService {
       _.forEach(header, (value, key) => {
         headers = headers.append(key, value);
       });
-      console.log(headers)
+      // console.log(headers)
     }
 
     try {
@@ -86,7 +86,7 @@ export class ServerService {
       _.forEach(header, (value, key) => {
         headers = headers.append(key, value);
       });
-      console.log(headers)
+      // console.log(headers)
     }
 
     try {
