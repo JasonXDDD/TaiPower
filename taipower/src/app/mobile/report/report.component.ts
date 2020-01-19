@@ -28,7 +28,7 @@ export class ReportComponent implements OnInit {
       self.eventId = params["id"].split("_")[0];
       self.eventLine = decodeURI(params["id"].split("_")[1]);
       self.report.eventid = Number(self.eventId)
-      self.report.user_id = Number(sessionStorage.getIem('user_id'))
+      self.report.user_id = Number(sessionStorage.getItem('user_id'))
 
       await self.doGetReport(self.eventId);
       await self.doGetPhoto(self.eventId)
