@@ -396,13 +396,14 @@ export class UploadComponent implements OnInit {
 
   toAnsResult(ans){
     return {
-      ref_sub: this.subList[ans.SRT-1].name,
-      ref_length: ans.SR,
-      dis_to_sub: ans.Dist,
-      est_long: ans.towerE,
-      est_lati: ans.towerN,
-      towerN: ans.tower_num1,
-      towerN_2: ans.tower_num2
+      ref_sub: ans.SRT?this.subList[ans.SRT-1].name: '不知',
+      ref_length: ans.SR?ans.SR: 0,
+      dis_to_sub: ans.Dist?ans.Dist: 0,
+      est_long: ans.towerE?ans.towerE: 0,
+      est_lati: ans.towerN?ans.towerN: 0,
+      towerN: ans.tower_num1?ans.tower_num1: 0,
+      towerN_2: ans.tower_num2?ans.tower_num2: 0,
+      faulttime: ans.faulttime?ans.faulttime: "",
     }
   }
 

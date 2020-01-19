@@ -25,6 +25,13 @@
               </div>
               <ul class="malfunction">
                 <li class="malfunction_information">
+                  <p class="tittle">發生時間</p>
+                  <p class="context">
+                    {{ eventResult.faulttime }}
+                  </p>
+                </li>
+                <div class="line"></div>
+                <li class="malfunction_information">
                   <p class="tittle">故障座標</p>
                   <p class="context">
                     經度：{{ eventResult.est_long }},<br>
@@ -35,7 +42,7 @@
                 <li class="malfunction_information">
                   <p class="tittle">故障位置</p>
                   <p class="context">
-                    距{{ eventResult.ref_sub }} {{ eventResult.ref_length }} 公里處
+                    距{{ eventResult.ref_sub }} {{ eventResult.dis_to_sub }} 公里處
                   </p>
                 </li>
                 <!-- <div class="line"></div>

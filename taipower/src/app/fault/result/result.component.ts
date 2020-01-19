@@ -20,7 +20,8 @@ export class ResultComponent implements OnInit {
     est_lati: "",
     towerN: 0,
     towerN_2: 0,
-    photo: []
+    photo: [],
+    faulttime: ""
   }
 
   constructor(private ajax: ResultAjaxService) { }
@@ -147,7 +148,8 @@ export class ResultComponent implements OnInit {
       est_lati: "",
       towerN: 0,
       towerN_2: 0,
-      photo: []
+      photo: [],
+      faulttime: ""
     }
   }
 
