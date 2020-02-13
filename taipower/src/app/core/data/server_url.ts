@@ -18,6 +18,10 @@ export class server_url{
   private upload = "/api/uploadfile/";
   private token = "/token/";
 
+  private uploadLinePar = "/api/test_upload_linepar/";
+  private uploadTowerPos = "/api/test_upload_towerpos/";
+  private uploadLineInfo = "/api/test_upload_lineinfo/";
+
   readonly lineAPI = {
     info: this.base + this.lineInfo,
     pos: this.base + this.linePos,
@@ -37,7 +41,10 @@ export class server_url{
   }
 
   readonly uploadAPI = {
-    post: this.base + this.upload
+    post: this.base + this.upload,
+    linePar: this.base + this.uploadLinePar,
+    towerPos: this.base + this.uploadTowerPos,
+    lineInfo: this.base + this.uploadLineInfo
   }
 
   readonly fsmAPI = 'https://fcm.googleapis.com/fcm/send'
