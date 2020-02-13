@@ -89,6 +89,8 @@ export class ArgumentComponent implements OnInit {
           break
 
         default:
+          self.isCalc =  false
+          return
           break
       }
 

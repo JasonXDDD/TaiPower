@@ -24,14 +24,16 @@
           <div class="speed-hover">上傳檔案</div>
         </a>
       </li>
-      <!-- <li>
-        <a [routerLink]="[ '/wire/argument' ]" class="">
-          <div class="speed-hover">查看線路</div>
-        </a>
-      </li> -->
+
       <li>
         <a [routerLink]="[ '/fault/result' ]"  [ngClass]="{'active': url === '/fault/result'}">
           <div class="speed-hover">歷史資料</div>
+        </a>
+      </li>
+
+      <li>
+        <a [routerLink]="[ '/wire/argument' ]" class="">
+          <div class="speed-hover">匯入線路</div>
         </a>
       </li>
     </ul>
