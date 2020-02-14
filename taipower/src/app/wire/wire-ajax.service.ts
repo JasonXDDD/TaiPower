@@ -28,7 +28,7 @@ export class WireAjaxService {
   }
 
   async postLineInfo(data){
-    let a = await this.server.doPostRequest(this.url.uploadAPI.linePar, data)
+    let a = await this.server.doPostRequest(this.url.uploadAPI.lineInfo, data)
     return a
   }
 }

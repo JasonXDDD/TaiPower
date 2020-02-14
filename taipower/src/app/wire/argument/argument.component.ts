@@ -10,9 +10,9 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 export class ArgumentComponent implements OnInit {
   select: string = ''
   lineList: any[] = [
+    { name: '線路資訊', type: 'lineInfo' },
     { name: '線路參數', type: 'linePar' },
     { name: '鐵塔座標', type: 'towerPos' },
-    { name: '線路資訊', type: 'lineInfo' }
   ]
   userid: number = 0
   uploadForm: FormGroup
@@ -66,45 +66,50 @@ export class ArgumentComponent implements OnInit {
   }
 
   async postData () {
-    let self = this
     let data = {
       userid: this.userid,
       filename: this.file.name
     }
 
     this.isCalc = true
+    let res
 
-    try {
-      switch (this.select) {
-        case 'linePar':
-          await this.ajax.postLinePar(data)
-          break
+    switch (this.select) {
+      case 'linePar':
+        res = await this.ajax.postLinePar(data)
+        break
 
-        case 'towerPos':
-          await this.ajax.postTowerPos(data)
-          break
+      case 'towerPos':
+        res = await this.ajax.postTowerPos(data)
+        break
 
-        case 'lineInfo':
-          await this.ajax.postLineInfo(data)
-          break
+      case 'lineInfo':
+        res = await this.ajax.postLineInfo(data)
+        break
 
-        default:
-          self.isCalc =  false
-          return
-          break
-      }
+      default:
+        this.isCalc = false
+        return
+    }
 
+    if (res.status == 200) {
       Swal.fire({
         title: '上傳成功',
         icon: 'success'
       })
-      self.isCalc = false
-    } catch (error) {
+
+      this.file = {
+        type: '.csv',
+        isUpload: 'none',
+        name: ''
+      }
+      this.isCalc = false
+    } else {
       Swal.fire({
         title: 'Error',
         icon: 'error'
       })
-      self.isCalc = false
+      this.isCalc = false
     }
   }
 }
