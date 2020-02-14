@@ -28,7 +28,7 @@ export class ReportComponent implements OnInit {
       self.eventId = params["id"].split("_")[0];
       self.eventLine = decodeURI(params["id"].split("_")[1]);
       self.report.eventid = Number(self.eventId)
-      self.report.user_id = Number(sessionStorage.getIem('user_id'))
+      self.report.user_id = Number(sessionStorage.getItem('user_id'))
 
       await self.doGetReport(self.eventId);
       await self.doGetPhoto(self.eventId)
@@ -98,7 +98,7 @@ export class ReportComponent implements OnInit {
   }
 
   async doPostReport(){
-    console.log(this.report, this.eventId)
+    // console.log(this.report, this.eventId)
     let reportData = _.cloneDeep(this.report)
     let photoList = _.cloneDeep(this.report.photo)
     delete(reportData.photo)

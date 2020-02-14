@@ -26,7 +26,7 @@ export class IndexComponent implements OnInit {
     (function() {
       window.setTimeout(function() {
         $("#loading").remove();
-        console.log("test");
+        // console.log("test");
       }, 3000);
     })();
   }

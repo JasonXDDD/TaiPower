@@ -55,7 +55,7 @@ export class UploadAjaxService {
       notification: {
         title: title,
         body: body?body:"",
-        icon: "",
+        icon: environment.domain + "/assets/images/icon/icon-512.png",
         sound: "default"
       },
       data: {

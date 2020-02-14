@@ -72,7 +72,7 @@ export class ResultComponent implements OnInit {
     var marker = L.marker([lat, lng]).addTo(this.layerGroup)
   }
 
-  addLinePosToMap(line){
+  addLinePosToMap(line, id){
     var myIcon = L.icon({
       iconUrl: 'assets/images/tower.png',
       iconSize: [12, 16],
@@ -81,6 +81,7 @@ export class ResultComponent implements OnInit {
       // shadowSize: [68, 95],
       // shadowAnchor: [22, 94]
     });
+    let color1 = ['red', 'green', 'blue']
 
     line.forEach(ele => {
       // L.circle(ele, {
@@ -91,7 +92,7 @@ export class ResultComponent implements OnInit {
       //   }).addTo(this.layerGroup)
       L.marker(ele, {icon: myIcon}).addTo(this.layerGroup);
     })
-    var polyline = L.polyline(line, { color: 'red' }).addTo(this.layerGroup)
+    var polyline = L.polyline(line, { color: color1[id%3] }).addTo(this.layerGroup)
   }
 
   // FORMATTER
@@ -113,7 +114,12 @@ export class ResultComponent implements OnInit {
 
     // do AJAX
     let isResult = await this.doGetEventResult(item.eventid)
-    let line = await this.ajax.getLinePos({lineid: item.lineid})
+    let line1 = await this.ajax.getLinePos({lineid: item.lineid})
+    let line2 = {data: []}
+    let line3 = {data: []}
+    if(item.lineid2 !== 0) line2 = await this.ajax.getLinePos({lineid: item.lineid2})
+    if(item.lineid3 !== 0) line3 = await this.ajax.getLinePos({lineid: item.lineid3})
+
     await this.doGetPhoto(item.eventid)
     // do VIEW
 
@@ -123,7 +129,9 @@ export class ResultComponent implements OnInit {
       // clear
       this.layerGroup.clearLayers()
       this.addMarkerEvent(this.eventResult.est_lati, this.eventResult.est_long)
-      this.addLinePosToMap(this.toLineLatLng(line.data))
+      this.addLinePosToMap(this.toLineLatLng(line1.data), 0)
+      if(item.lineid2 !== 0) this.addLinePosToMap(this.toLineLatLng(line2.data), 1)
+      if(item.lineid3 !== 0) this.addLinePosToMap(this.toLineLatLng(line3.data), 2)
       this.eventList[index].map.fitBounds(this.layerGroup.getBounds())
     }
   }
@@ -169,7 +177,7 @@ export class ResultComponent implements OnInit {
       ele['report'] = reportRes.data.filter(report => report.eventid === ele.eventid)
     })
 
-    console.log(this.eventList)
+    // console.log(this.eventList)
   }
 
   async doGetEventResult(id){
