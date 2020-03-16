@@ -3,7 +3,7 @@
     <div class="white_logo"><img src="assets/images/logo-white.png" /></div>
     <div class="current_state">供電線路智慧故障定位系統</div>
     <div class="user_information">
-      <button class="sign_out">
+      <button class="sign_out" *ngIf="role === '管理員'">
         <a target="_blank" [href]="env.apiServer + '/admin'" style="color: white;">管理後台</a>
       </button>
 
@@ -31,7 +31,7 @@
         </a>
       </li>
 
-      <li>
+      <li *ngIf="role === '管理員'">
         <a [routerLink]="[ '/wire/argument' ]" class="">
           <div class="speed-hover">匯入線路</div>
         </a>
