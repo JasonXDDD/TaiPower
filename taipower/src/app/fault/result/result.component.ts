@@ -13,15 +13,35 @@ export class ResultComponent implements OnInit {
 
   eventResult = {
     eventid: 0,
+    photo: [],
+
     ref_sub: "",
-    ref_length: "",
     dis_to_sub: "",
-    est_long: "",
     est_lati: "",
+    est_long: "",
     towerN: 0,
     towerN_2: 0,
-    photo: [],
-    faulttime: ""
+    faulttime: "",
+    ref_length: "",
+
+    dis_to_sub_it: '',
+    est_lati_it: "",
+    est_long_it: "",
+    towerN_it: 0,
+    towerN_2_it: 0,
+
+    dis_to_sub_taiS: "",
+    dis_to_sub_taiR: "",
+    dis_to_sub_taiT: "",
+    est_lati_tai: "",
+    est_long_tai: "",
+    towerN_tai: 0,
+    towerN_2_tai: 0,
+    ref_sub_for_tai_tower: "",
+    dis_to_sub_tai: "",
+    dis_to_sub_taiS_original: "",
+    dis_to_sub_taiR_original: "",
+    dis_to_sub_taiT_original: "",
   }
 
   constructor(private ajax: ResultAjaxService) { }
@@ -149,15 +169,36 @@ export class ResultComponent implements OnInit {
   resetResult(){
     this.eventResult = {
       eventid: 0,
+      photo: [],
+
       ref_sub: "",
-      ref_length: "",
       dis_to_sub: "",
-      est_long: "",
       est_lati: "",
+      est_long: "",
       towerN: 0,
       towerN_2: 0,
-      photo: [],
-      faulttime: ""
+      faulttime: "",
+      ref_length: "",
+
+      dis_to_sub_it: '',
+      est_lati_it: "",
+      est_long_it: "",
+      towerN_it: 0,
+      towerN_2_it: 0,
+
+      dis_to_sub_taiS: "",
+      dis_to_sub_taiR: "",
+      dis_to_sub_taiT: "",
+      est_lati_tai: "",
+      est_long_tai: "",
+      towerN_tai: 0,
+      towerN_2_tai: 0,
+      ref_sub_for_tai_tower: "",
+      dis_to_sub_tai: "",
+      dis_to_sub_taiS_original: "",
+      dis_to_sub_taiR_original: "",
+      dis_to_sub_taiT_original: "",
+
     }
   }
 
