@@ -30,7 +30,7 @@ button { width: 87px; height: 34px; outline: none; -webkit-box-align: start; -ms
 button:hover { border: 2px solid #35B7FC; background-color: #fff; color: #35B7FC; -webkit-transition: 0.3s all; -o-transition: 0.3s all; transition: 0.3s all; }
 button:disabled { background-color: #F0F1F5; color: rgb(170, 170, 170); box-shadow: none; border: none;}
 
-input { display: inline-block; outline: none; -webkit-box-sizing: border-box; box-sizing: border-box; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; background-color: rgba(255, 255, 255, 0); -webkit-appearance: none; cursor: text; }
+input { font-size: 1rem; display: inline-block; outline: none; -webkit-box-sizing: border-box; box-sizing: border-box; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; background-color: rgba(255, 255, 255, 0); -webkit-appearance: none; cursor: text; padding: 5px 0; border: none; border-bottom: 1px solid #777; }
 
 select { background: url(../images/selectBG.png) no-repeat 100% 100%; background-size: contain; background-color: #f0f1f5; border-color: #f0f1f5; border-radius: 0px; width: 100px; height: 25px; -moz-appearance: none; -webkit-appearance: none; appearance: none; outline: none; cursor: pointer; padding-left: 5px; }
 @media (max-width: 1260px) { select { margin-bottom: 12px; } }
@@ -94,11 +94,13 @@ select { background: url(../images/selectBG.png) no-repeat 100% 100%; background
 .step_box .stepBar p.stepIcon { margin-left: 12px; margin-right: 5px; color: #fff; width: 20px; font-size: 15px; height: 20px; text-align: center; border-radius: 100%; background-color: #35b7fc; }
 .step_box .stepBar span.stepTittle { font-size: 15px; }
 .step_box .stepFormBox:nth-child(1) { height: 69.5px; }
-.step_box .stepFormBox:nth-child(2) { padding-top: 38px; }
-.step_box .stepFormBox { margin: 12px; border: 1px solid #DBDFE5; padding: 0px 30px; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; position: relative; }
+/* .step_box .stepFormBox:nth-child(2) { padding-top: 38px; } */
+.step_box .stepFormBox { margin: 12px; border-left: 1px solid #DBDFE5; padding: 0px 30px; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; position: relative; }
 .step_box .stepFormBox span.little_title { color: #ACACAC; font-size: 15px; font-weight: 300; padding-left: 13px; width: 112px; position: relative; }
+.step_box .stepFormBox span.little_title_2 { color: #ACACAC; font-size: 15px; font-weight: 300; width: 112px; position: relative; margin-left: 2rem; margin-right: 1rem; text-align: right; height: fit-content;}
 .step_box .stepFormBox span.little_title:before { content: " "; position: absolute; top: -0.5px; width: 10px; height: 10px; background-color: #35b7fc; border-radius: 100%; margin: 5px 0px 0px -13px; }
-@media (max-width: 1260px) { .step_box .stepFormBox span.little_title { display: none; } }
+/* @media (max-width: 1260px) { .step_box .stepFormBox span.little_title { display: none; } } */
+@media (max-width: 1260px) { .step_box .stepFormBox span.little_title_2 { margin: 0; padding: 0 10px 0 0} }
 .step_box .stepFormBox .switch { position: relative; display: inline-block; }
 .step_box .stepFormBox .switch-input { display: none; }
 .step_box .stepFormBox .switch-label { display: block; -webkit-transform: translateY(5px); -ms-transform: translateY(5px); transform: translateY(5px); width: 38px; height: 17px; text-indent: -150%; clip: rect(0 0 0 0); color: transparent; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
@@ -196,7 +198,7 @@ form.uploadData span.loading-file:before { content: "上傳中..."; position: ab
 @media (max-width: 1260px) { .mapBox { -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; } }
 .mapBox .map { margin-right: 12px; }
 @media (max-width: 1260px) { .mapBox .map { margin-right: 0px; } }
-.mapBox .map .idMap { width: 468px; height: 400px; }
+.mapBox .map .idMap { width: 400px; height: 400px; }
 @media (max-width: 1260px) { .mapBox .map .idMap { width: 100%; height: 300px; } }
 .mapBox .map_information { margin: 0px; width: 57%; overflow: hidden; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; }
 @media (max-width: 1260px) { .mapBox .map_information { width: 100%; margin: 12px 0px 0px 0px; height: auto; padding: 38px 0px 0px 0px; } }
@@ -254,7 +256,7 @@ button.push { position: absolute; bottom: 30px; right: 30px; }
 @media (max-width: 1260px) { .faqanswer .mapBox .map { margin-right: 0px; } }
 .faqanswer .mapBox .map .idMap { width: 468px; height: 400px; }
 @media (max-width: 1260px) { .faqanswer .mapBox .map .idMap { width: 100%; height: 300px; } }
-.faqanswer .mapBox .map_information { margin: 0px; width: 100%; overflow: hidden; border: 1px solid #DBDFE5; padding: 30px 30px 0px 30px; position: relative; }
+.faqanswer .mapBox .map_information { margin: 0px; width: 100%; overflow: hidden; border-left: 1px solid #DBDFE5; padding: 30px 30px 0px 30px; position: relative; }
 @media (max-width: 1260px) { .faqanswer .mapBox .map_information { width: 100%; margin: 12px 0px 0px 0px; height: auto; padding: 38px 0px 0px 0px; } }
 .faqanswer .mapBox .map_information .little_bar { position: absolute; top: 0; left: 0px; width: 100%; height: 38px; background-color: #F0F1F5; color: #ACACAC; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
 @media (max-width: 1260px) { .faqanswer .mapBox .map_information .little_bar { display: -webkit-box; display: -ms-flexbox; display: flex; } }

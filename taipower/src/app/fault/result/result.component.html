@@ -19,7 +19,7 @@
           </div>
 
           <div style="width: 57%;">
-            <div class="map_information stepFormBox">
+            <!-- <div class="map_information stepFormBox">
               <div class="little_bar">
                 <p>故障資訊</p>
               </div>
@@ -45,7 +45,7 @@
                     距{{ eventResult.ref_sub }} {{ eventResult.dis_to_sub }} 公里處
                   </p>
                 </li>
-                <!-- <div class="line"></div>
+                <div class="line"></div>
                 <li class="malfunction_information">
                   <p class="tittle">故障狀況</p>
                   <p class="context">供電時常短路</p>
@@ -54,7 +54,7 @@
                 <li class="malfunction_information">
                   <p class="tittle">故障原因</p>
                   <p class="context">不明</p>
-                </li> -->
+                </li>
                 <div class="line"></div>
                 <li class="malfunction_information">
                   <p class="tittle">電塔距離</p>
@@ -63,6 +63,187 @@
                   </p>
                 </li>
               </ul>
+            </div> -->
+
+            <div style="display: flex;">
+              <div class="map_information stepFormBox" style="padding: 3rem 1rem; text-align: right; width: 380px;">
+                <div class="little_bar">
+                  <p style="text-align: right; width: 100%; padding-right: 1rem;">欄位</p>
+                </div>
+                <ul class="malfunction">
+                  <li class="malfunction_information">
+                    <p class="tittle">故障時間</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="tittle">參考變電站</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="tittle">故障至變電站距離</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="tittle">故障位置</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="tittle">故障座標</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="tittle">參考線路總長</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="tittle">原始輸入</p>
+                  </li>
+
+                </ul>
+              </div>
+
+              <div class="map_information stepFormBox" style="padding-top: 3rem;">
+                <div class="little_bar">
+                  <p>新型視窗定位方法</p>
+                </div>
+                <ul class="malfunction">
+                  <li class="malfunction_information">
+                    <p class="context">{{ eventResult.faulttime }}</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">{{ eventResult.ref_sub }}</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">{{ eventResult.dis_to_sub | number: '0.0-3' }}</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">
+                      第 {{ eventResult.towerN }} 與 {{ eventResult.towerN_2 }} 電塔之間
+                    </p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">
+                      {{ eventResult.est_long }},
+                      {{ eventResult.est_lati }}
+                    </p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">
+                      {{ eventResult.ref_length }}
+                    </p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">
+                      X
+                    </p>
+                  </li>
+
+                </ul>
+              </div>
+
+              <div class="map_information stepFormBox" style="padding-top: 3rem;">
+                <div class="little_bar">
+                  <p>疊加法</p>
+                </div>
+
+                <ul class="malfunction">
+                  <li class="malfunction_information">
+                    <p class="context">{{ eventResult.faulttime }}</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">{{ eventResult.ref_sub }}</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">{{ eventResult.dis_to_sub_it | number: '0.0-3' }}</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">
+                      第 {{ eventResult.towerN_it }} 與 {{ eventResult.towerN_2_it }} 電塔之間
+                    </p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">
+                      {{ eventResult.est_long_it }},
+                      {{ eventResult.est_lati_it }}
+                    </p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">
+                      {{ eventResult.ref_length }}
+                    </p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">
+                      X
+                    </p>
+                  </li>
+
+                </ul>
+              </div>
+
+
+              <div class="map_information stepFormBox" style="padding-top: 3rem;">
+                <div class="little_bar">
+                  <p>台電定位方法</p>
+                </div>
+                <ul class="malfunction">
+                  <li class="malfunction_information">
+                    <p class="context">{{ eventResult.faulttime }}</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">{{ eventResult.ref_sub_for_tai_tower | number: '0.0-3' }}</p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">
+                      S: {{ eventResult.dis_to_sub_taiS | number: '0.0-3' }},&nbsp;&nbsp;
+                      R: {{ eventResult.dis_to_sub_taiR | number: '0.0-3' }},&nbsp;&nbsp;
+                      T: {{ eventResult.dis_to_sub_taiT | number: '0.0-3' }}
+                    </p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">
+                      第 {{ eventResult.towerN_tai }} 與 {{ eventResult.towerN_2_tai }} 電塔之間
+                    </p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">
+                      {{ eventResult.est_long_tai }},
+                      {{ eventResult.est_lati_tai }}
+                    </p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">
+                      {{ eventResult.ref_length }}
+                    </p>
+                  </li>
+                  <div class="line"></div>
+                  <li class="malfunction_information">
+                    <p class="context">
+                      S: {{ eventResult.dis_to_sub_taiS_original }},&nbsp;&nbsp;
+                      R: {{ eventResult.dis_to_sub_taiR_original }},&nbsp;&nbsp;
+                      T: {{ eventResult.dis_to_sub_taiT_original }}
+                    </p>
+                  </li>
+
+                </ul>
+              </div>
             </div>
 
             <div class="map_information" style="margin-top: 15px;" *ngIf="item.report.length > 0">

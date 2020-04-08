@@ -24,18 +24,23 @@
             </div>
             <span class="dortText" [ngClass]="{'disabled': isCalc}">3端</span>
           </div>
-          <button class="research" (click)="doGetLineByTerminal()" [disabled]="isCalc">搜尋</button>
+          <button
+            class="research"
+            (click)="doGetLineByTerminal()"
+            [disabled]="isCalc"
+          >
+            搜尋
+          </button>
 
-          <div *ngIf="lineList.length > 0">
+          <div style="display: flex; align-items: center; margin-left: 10px" *ngIf="lineList.length > 0">
             <span
-              class="little_title"
-              style="margin-left: 3rem; margin-right: 1rem; text-align: center; height: fit-content;"
+              class="little_title_2"
               >選擇電驛站</span
             >
             <select
               class="Vendor"
               name="selectLine"
-              style="width: fit-content; padding-right: 20px;"
+              style="width: fit-content; padding-right: 20px; margin: 0;"
               [(ngModel)]="selectLine"
               (change)="doGetLineInfo(selectLine)"
               [disabled]="isCalc"
@@ -61,7 +66,9 @@
             *ngFor="let sub of subList; let subId = index; let start = first; let last = last"
           >
             <li class="upload_information">
-              <p class="name" [ngClass]="{'disabled': isCalc}">{{ sub.name }}</p>
+              <p class="name" [ngClass]="{'disabled': isCalc}">
+                {{ sub.name }}
+              </p>
               <select
                 class="Vendor"
                 name="brand"
@@ -97,7 +104,11 @@
                       (change)="onSubmit($event, subId, fileId);"
                       [disabled]="isCalc"
                     />
-                    <input type="hidden" name="description" [disabled]="isCalc"/>
+                    <input
+                      type="hidden"
+                      name="description"
+                      [disabled]="isCalc"
+                    />
                   </label>
                   <!-- <input type="submit" value="Go" /> -->
                 </form>
@@ -107,60 +118,243 @@
           </ng-container>
         </ul>
       </div>
+
+      <form enctype="multipart/form-data" action="">
+        <div class="stepFormBox">
+          <div class="dortNumer" style="align-items: center;">
+
+            <div>
+              <span
+                class="little_title_2"
+              >
+                S端電驛的定位距離
+              </span>
+              <input type="number" name="dis_to_sub_taiS_original" [(ngModel)]="dis_to_sub_taiS_original" />
+            </div>
+            <div>
+              <span
+                class="little_title_2"
+              >
+                R端電驛的定位距離
+              </span>
+              <input type="number" name="dis_to_sub_taiR_original" [(ngModel)]="dis_to_sub_taiR_original" />
+            </div>
+            <div>
+              <span
+                class="little_title_2"
+              >
+                T端電驛的定位距離
+              </span>
+              <input type="number" name="dis_to_sub_taiT_original" [(ngModel)]="dis_to_sub_taiT_original" />
+            </div>
+
+          </div>
+        </div>
+      </form>
+
       <div class="calculationBox">
-        <button class="calculation" (click)="isCalc = !isCalc; doPostCalc()" [disabled]="isCalc || !checkCanCalc()">
+        <button
+          class="calculation"
+          (click)="isCalc = !isCalc; doPostCalc()"
+          [disabled]="isCalc || !checkCanCalc()"
+        >
           計算
         </button>
       </div>
     </ng-container>
   </div>
 
-  <div class="step_box" [ngStyle]="{
+  <div
+    class="step_box"
+    [ngStyle]="{
     'height': result.ref_sub !== ''? 'fit-content': '0',
     'visibility': result.ref_sub !== ''? 'visible': 'hidden'
-    }">
+    }"
+  >
     <div class="stepBar">
       <p class="stepIcon">2</p>
       <span class="stepTittle">確認並推播</span>
     </div>
-    <div class="mapBox">
+    <div class="mapBox" style="padding-bottom: 3rem;">
       <div class="map">
         <div class="idMap" id="mapid"></div>
       </div>
-      <div class="map_information stepFormBox">
+      <div class="map_information stepFormBox" style="padding: 3rem 1rem; text-align: right; width: 380px;">
         <div class="little_bar">
-          <p>故障資訊</p>
+          <p style="text-align: right; width: 100%; padding-right: 1rem;">欄位</p>
         </div>
         <ul class="malfunction">
           <li class="malfunction_information">
-            <p class="tittle">發生時間</p>
-            <p class="context">{{ result.faulttime }}</p>
+            <p class="tittle">故障時間</p>
           </li>
           <div class="line"></div>
           <li class="malfunction_information">
-            <p class="tittle">故障線路</p>
-            <div class="distance">
-              <p class="context">{{ selectLine }}</p>
-            </div>
+            <p class="tittle">參考變電站</p>
           </li>
           <div class="line"></div>
           <li class="malfunction_information">
-            <p class="tittle">故障座標</p>
-            <p class="context">
-              經度：{{ result.est_long }},<br>
-              緯度：{{ result.est_lati }}
-            </p>
+            <p class="tittle">故障至變電站距離</p>
           </li>
           <div class="line"></div>
           <li class="malfunction_information">
             <p class="tittle">故障位置</p>
-            <p class="context">距{{ result.ref_sub }} {{ result.dis_to_sub }} 公里處</p>
           </li>
           <div class="line"></div>
           <li class="malfunction_information">
-            <p class="tittle">電塔距離</p>
-            <p class="context">從{{ result.ref_sub }}變電所，第 {{ result.towerN }} 與 {{ result.towerN_2 }} 電塔之間</p>
+            <p class="tittle">故障座標</p>
           </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">參考線路總長</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="tittle">原始輸入</p>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="map_information stepFormBox" style="padding-top: 3rem;">
+        <div class="little_bar">
+          <p>新型視窗定位方法</p>
+        </div>
+        <ul class="malfunction">
+          <li class="malfunction_information">
+            <p class="context">{{ result.faulttime }}</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">{{ result.ref_sub }}</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">{{ result.dis_to_sub | number: '0.0-3' }}</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">
+              第 {{ result.towerN }} 與 {{ result.towerN_2 }} 電塔之間
+            </p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">
+              {{ result.est_long }},
+              {{ result.est_lati }}
+            </p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">
+              {{ result.ref_length }}
+            </p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">
+              X
+            </p>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="map_information stepFormBox" style="padding-top: 3rem;">
+        <div class="little_bar">
+          <p>疊加法</p>
+        </div>
+
+        <ul class="malfunction">
+          <li class="malfunction_information">
+            <p class="context">{{ result.faulttime }}</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">{{ result.ref_sub }}</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">{{ result.dis_to_sub_it | number: '0.0-3' }}</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">
+              第 {{ result.towerN_it }} 與 {{ result.towerN_2_it }} 電塔之間
+            </p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">
+              {{ result.est_long_it }},
+              {{ result.est_lati_it }}
+            </p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">
+              {{ result.ref_length }}
+            </p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">
+              X
+            </p>
+          </li>
+
+        </ul>
+      </div>
+
+
+      <div class="map_information stepFormBox" style="padding-top: 3rem;">
+        <div class="little_bar">
+          <p>台電定位方法</p>
+        </div>
+        <ul class="malfunction">
+          <li class="malfunction_information">
+            <p class="context">{{ result.faulttime }}</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">{{ result.ref_sub_for_tai_tower | number: '0.0-3' }}</p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">
+              S: {{ result.dis_to_sub_taiS | number: '0.0-3' }},&nbsp;&nbsp;
+              R: {{ result.dis_to_sub_taiR | number: '0.0-3' }},&nbsp;&nbsp;
+              T: {{ result.dis_to_sub_taiT | number: '0.0-3' }}
+            </p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">
+              第 {{ result.towerN_tai }} 與 {{ result.towerN_2_tai }} 電塔之間
+            </p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">
+              {{ result.est_long_tai }},
+              {{ result.est_lati_tai }}
+            </p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">
+              {{ result.ref_length }}
+            </p>
+          </li>
+          <div class="line"></div>
+          <li class="malfunction_information">
+            <p class="context">
+              S: {{ result.dis_to_sub_taiS_original }},&nbsp;&nbsp;
+              R: {{ result.dis_to_sub_taiR_original }},&nbsp;&nbsp;
+              T: {{ result.dis_to_sub_taiT_original }}
+            </p>
+          </li>
+
         </ul>
       </div>
     </div>
