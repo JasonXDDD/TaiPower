@@ -55,7 +55,7 @@ export class UploadComponent implements OnInit {
   showResult = true;
   isCalc = false;
   result: any = {
-    ref_sub: 0,
+    ref_sub: '',
     dis_to_sub: 0,
     est_lati: 0,
     est_long: 0,
@@ -428,8 +428,8 @@ export class UploadComponent implements OnInit {
 
   toAnsResult(ans) {
     return {
-      ref_sub: ans.SRT ? this.subList[ans.SRT - 1].name : '不知',
-      ref_length: ans.SR ? ans.SR : 0,
+      ref_sub: ans.ref_sub ? this.subList[ans.ref_sub - 1].name : '不知',
+      ref_length: ans.ref_length ? ans.ref_length : 0,
       dis_to_sub: ans.dis_to_sub ? ans.dis_to_sub : 0,
       est_long: ans.est_long ? ans.est_long : 0,
       est_lati: ans.est_lati ? ans.est_lati : 0,
@@ -437,24 +437,24 @@ export class UploadComponent implements OnInit {
       towerN_2: ans.towerN_2 ? ans.towerN_2 : 0,
       faulttime: ans.faulttime ? ans.faulttime : '',
 
-      dis_to_sub_it: ans.dis_to_sub_it ? ans.dis_to_sub_it : '',
-      est_lati_it: ans.est_lati_it ? ans.est_lati_it : '',
-      est_long_it: ans.est_long_it ? ans.est_long_it : '',
+      dis_to_sub_it: ans.dis_to_sub_it ? ans.dis_to_sub_it : 0,
+      est_lati_it: ans.est_lati_it ? ans.est_lati_it : 0,
+      est_long_it: ans.est_long_it ? ans.est_long_it : 0,
       towerN_it: ans.towerN_it ? ans.towerN_it : 0,
       towerN_2_it: ans.towerN_2_it ? ans.towerN_2_it : 0,
 
-      dis_to_sub_taiS: ans.dis_to_sub_taiS ? ans.dis_to_sub_taiS : '',
-      dis_to_sub_taiR: ans.dis_to_sub_taiR ? ans.dis_to_sub_taiR : '',
-      dis_to_sub_taiT: ans.dis_to_sub_taiT ? ans.dis_to_sub_taiT : '',
-      est_lati_tai: ans.est_lati_tai ? ans.est_lati_tai : '',
-      est_long_tai: ans.est_long_tai ? ans.est_long_tai : '',
+      dis_to_sub_taiS: ans.dis_to_sub_taiS ? ans.dis_to_sub_taiS : 0,
+      dis_to_sub_taiR: ans.dis_to_sub_taiR ? ans.dis_to_sub_taiR : 0,
+      dis_to_sub_taiT: ans.dis_to_sub_taiT ? ans.dis_to_sub_taiT : 0,
+      est_lati_tai: ans.est_lati_tai ? ans.est_lati_tai : 0,
+      est_long_tai: ans.est_long_tai ? ans.est_long_tai : 0,
       towerN_tai: ans.towerN_tai ? ans.towerN_tai : 0,
       towerN_2_tai: ans.towerN_2_tai ? ans.towerN_2_tai : 0,
-      ref_sub_for_tai_tower: ans.ref_sub_for_tai_tower ? ans.ref_sub_for_tai_tower : '',
-      dis_to_sub_tai: ans.dis_to_sub_tai ? ans.dis_to_sub_tai : '',
-      dis_to_sub_taiS_original: ans.dis_to_sub_taiS_original ? ans.dis_to_sub_taiS_original : '',
-      dis_to_sub_taiR_original: ans.dis_to_sub_taiR_original ? ans.dis_to_sub_taiR_original : '',
-      dis_to_sub_taiT_original: ans.dis_to_sub_taiT_original ? ans.dis_to_sub_taiT_original : '',
+      ref_sub_for_tai_tower: ans.ref_sub_for_tai_tower ? this.subList[ans.ref_sub_for_tai_tower - 1].name : '不知',
+      dis_to_sub_tai: ans.dis_to_sub_tai ? ans.dis_to_sub_tai : 0,
+      dis_to_sub_taiS_original: ans.dis_to_sub_taiS_original ? ans.dis_to_sub_taiS_original : 0,
+      dis_to_sub_taiR_original: ans.dis_to_sub_taiR_original ? ans.dis_to_sub_taiR_original : 0,
+      dis_to_sub_taiT_original: ans.dis_to_sub_taiT_original ? ans.dis_to_sub_taiT_original : 0,
 
     };
   }

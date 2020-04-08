@@ -13,12 +13,12 @@
       </div>
 
       <div class="faqanswer">
-        <div class="mapBox">
+        <div class="mapBox" style="padding: 10px">
           <div class="map">
             <div class="idMap" [id]="'mapid' + id"></div>
           </div>
 
-          <div style="width: 57%;">
+          <div style="width: calc(100% - 400px); overflow: hidden;">
             <!-- <div class="map_information stepFormBox">
               <div class="little_bar">
                 <p>故障資訊</p>
@@ -193,7 +193,6 @@
                 </ul>
               </div>
 
-
               <div class="map_information stepFormBox" style="padding-top: 3rem;">
                 <div class="little_bar">
                   <p>台電定位方法</p>
@@ -204,7 +203,7 @@
                   </li>
                   <div class="line"></div>
                   <li class="malfunction_information">
-                    <p class="context">{{ eventResult.ref_sub_for_tai_tower | number: '0.0-3' }}</p>
+                    <p class="context">{{ eventResult.ref_sub_for_tai_tower }}</p>
                   </li>
                   <div class="line"></div>
                   <li class="malfunction_information">

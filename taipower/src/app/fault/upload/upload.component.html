@@ -127,7 +127,7 @@
               <span
                 class="little_title_2"
               >
-                S端電驛的定位距離
+                {{ subList[0].name }}端電驛的定位距離
               </span>
               <input type="number" name="dis_to_sub_taiS_original" [(ngModel)]="dis_to_sub_taiS_original" />
             </div>
@@ -135,15 +135,15 @@
               <span
                 class="little_title_2"
               >
-                R端電驛的定位距離
+                {{ subList[1].name }}端電驛的定位距離
               </span>
               <input type="number" name="dis_to_sub_taiR_original" [(ngModel)]="dis_to_sub_taiR_original" />
             </div>
-            <div>
+            <div *ngIf="subList[2]">
               <span
                 class="little_title_2"
               >
-                T端電驛的定位距離
+                {{ subList[2].name }}端電驛的定位距離
               </span>
               <input type="number" name="dis_to_sub_taiT_original" [(ngModel)]="dis_to_sub_taiT_original" />
             </div>
@@ -306,7 +306,6 @@
         </ul>
       </div>
 
-
       <div class="map_information stepFormBox" style="padding-top: 3rem;">
         <div class="little_bar">
           <p>台電定位方法</p>
@@ -317,14 +316,14 @@
           </li>
           <div class="line"></div>
           <li class="malfunction_information">
-            <p class="context">{{ result.ref_sub_for_tai_tower | number: '0.0-3' }}</p>
+            <p class="context">{{ result.ref_sub_for_tai_tower }}</p>
           </li>
           <div class="line"></div>
           <li class="malfunction_information">
             <p class="context">
-              S: {{ result.dis_to_sub_taiS | number: '0.0-3' }},&nbsp;&nbsp;
-              R: {{ result.dis_to_sub_taiR | number: '0.0-3' }},&nbsp;&nbsp;
-              T: {{ result.dis_to_sub_taiT | number: '0.0-3' }}
+              <ng-container *ngIf="subList[0]">{{ subList[0].name }}: {{ result.dis_to_sub_taiS | number: '0.0-3' }},&nbsp;&nbsp;</ng-container>
+              <ng-container *ngIf="subList[1]">{{ subList[1].name }}: {{ result.dis_to_sub_taiR | number: '0.0-3' }},&nbsp;&nbsp;</ng-container>
+              <ng-container *ngIf="subList[2]">{{ subList[2].name }}: {{ result.dis_to_sub_taiT | number: '0.0-3' }}</ng-container>
             </p>
           </li>
           <div class="line"></div>
@@ -349,9 +348,9 @@
           <div class="line"></div>
           <li class="malfunction_information">
             <p class="context">
-              S: {{ result.dis_to_sub_taiS_original }},&nbsp;&nbsp;
-              R: {{ result.dis_to_sub_taiR_original }},&nbsp;&nbsp;
-              T: {{ result.dis_to_sub_taiT_original }}
+              <ng-container *ngIf="subList[0]">{{ subList[0].name }}: {{ result.dis_to_sub_taiS_original }},&nbsp;&nbsp;</ng-container>
+              <ng-container *ngIf="subList[1]">{{ subList[1].name }}: {{ result.dis_to_sub_taiR_original }},&nbsp;&nbsp;</ng-container>
+              <ng-container *ngIf="subList[2]">{{ subList[2].name }}: {{ result.dis_to_sub_taiT_original }}</ng-container>
             </p>
           </li>
 
